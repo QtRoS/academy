@@ -1,0 +1,20 @@
+# Below are some example settings. You can access your scope's
+# settings by calling settings() from the Query::run() method.
+# E.g. auto location = settings().at("location").get_string();
+
+#[location]
+#type = string
+#defaultValue = London,uk
+#_displayName = Default Location
+
+#[units]
+#type = list
+#_displayName = Temperature Units
+#_displayValues = Metric;Imperial
+#defaultValue = 0
+
+#[forecast]
+#type = boolean
+#defaultValue = true
+#_displayName = Show Forecast
+

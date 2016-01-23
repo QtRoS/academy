@@ -1,0 +1,11 @@
+[ScopeConfig]
+_DisplayName=CourseExplorer Scope
+_Description=This is a CourseExplorer scope
+Art=screenshot.png
+Author=Firstname Lastname
+Icon=icon.png
+Keywords=weather
+
+[Appearance]
+PageHeader.Logo=logo.png
+

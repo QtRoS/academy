@@ -1,0 +1,15 @@
+{
+    "architecture": "@CLICK_ARCH@",
+    "description": "Faster way to explore all online courses",
+    "framework": "ubuntu-sdk-15.04",
+    "hooks": {
+        "courseexplorer": {
+            "apparmor": "courseexplorer.apparmor",
+            "scope": "courseexplorer"
+        }
+    },
+    "maintainer": "Roman Shchekin <mrqtros@gmail.com>",
+    "name": "courseexplorer.courseexplorer",
+    "title": "Course Explorer",
+    "version": "0.1"
+}
