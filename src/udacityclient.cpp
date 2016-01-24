@@ -1,4 +1,4 @@
-#include <courseraclient.h>
+#include <udacityclient.h>
 
 #include <core/net/error.h>
 #include <core/net/http/client.h>
@@ -11,15 +11,15 @@ namespace net = core::net;
 
 using namespace std;
 
-CourseraClient::CourseraClient(Config::Ptr config) :
+UdacityClient::UdacityClient(Config::Ptr config) :
     m_config(config), m_cancelled(false)
 {
 
 }
 
-QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
+QList<UdacityClient::Course> UdacityClient::courses(const QString &query)
 {
-    QList<CourseraClient::Course> list;
+    QList<UdacityClient::Course> list;
 
     QJsonDocument root;
     net::Uri::Path path;
@@ -54,7 +54,7 @@ QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
 }
 
 
-void CourseraClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters &parameters, QJsonDocument &root)
+void UdacityClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters &parameters, QJsonDocument &root)
 {
     // Create a new HTTP client
     auto client = http::make_client();
@@ -75,7 +75,7 @@ void CourseraClient::get(const net::Uri::Path &path, const net::Uri::QueryParame
     try {
         // Synchronously make the HTTP request
         // We bind the cancellable callback to #progress_report
-        auto response = request->execute(bind(&CourseraClient::progress_report, this, placeholders::_1));
+        auto response = request->execute(bind(&UdacityClient::progress_report, this, placeholders::_1));
 
         // Check that we got a sensible HTTP status code
         if (response.status != http::Status::ok) {
@@ -94,17 +94,17 @@ void CourseraClient::get(const net::Uri::Path &path, const net::Uri::QueryParame
     }
 }
 
-http::Request::Progress::Next CourseraClient::progress_report(const http::Request::Progress&)
+http::Request::Progress::Next UdacityClient::progress_report(const http::Request::Progress&)
 {
     return m_cancelled ? http::Request::Progress::Next::abort_operation : http::Request::Progress::Next::continue_operation;
 }
 
-void CourseraClient::cancel()
+void UdacityClient::cancel()
 {
     m_cancelled = true;
 }
 
-Config::Ptr CourseraClient::config()
+Config::Ptr UdacityClient::config()
 {
     return m_config;
 }

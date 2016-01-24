@@ -1,5 +1,5 @@
-#ifndef COURSERACLIENT_H_
-#define COURSERACLIENT_H_
+#ifndef BASECLIENT_H_
+#define BASECLIENT_H_
 
 #include <atomic>
 #include <deque>
@@ -21,7 +21,7 @@
  *
  * We don't want our scope's code to be mixed together with HTTP and JSON handling.
  */
-class CourseraClient
+class BaseClient
 {
 public:
 
@@ -36,11 +36,12 @@ public:
         QString source;
     };
 
-    CourseraClient(Config::Ptr config);
+    BaseClient(Config::Ptr config);
 
-    virtual ~CourseraClient() = default;
+    virtual ~BaseClient() = default;
 
-    virtual QList<Course> courses(const QString& query);
+    virtual QList<Course> courses(const QString& query) = 0;
+    virtual const QString baseApiUrl() const = 0;
 
     /**
      * Cancel any pending queries (this method can be called from a different thread)
@@ -67,5 +68,5 @@ protected:
     std::atomic<bool> m_cancelled;
 };
 
-#endif // COURSERACLIENT_H_
+#endif // BASECLIENT_H_
 

@@ -1,5 +1,7 @@
 src/scope.cpp
+src/udacityclient.cpp
 src/preview.cpp
+src/baseclient.cpp
 src/client.cpp
 src/courseraclient.cpp
 src/query.cpp
@@ -7,6 +9,8 @@ src/courseraclient.h
 src/scope.h
 src/config.h
 src/localization.h
+src/baseclient.h
 src/client.h
 src/query.h
 src/preview.h
+src/udacityclient.h

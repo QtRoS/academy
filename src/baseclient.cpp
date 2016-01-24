@@ -1,4 +1,4 @@
-#include <courseraclient.h>
+#include <baseclient.h>
 
 #include <core/net/error.h>
 #include <core/net/http/client.h>
@@ -11,50 +11,19 @@ namespace net = core::net;
 
 using namespace std;
 
-CourseraClient::CourseraClient(Config::Ptr config) :
+BaseClient::BaseClient(Config::Ptr config) :
     m_config(config), m_cancelled(false)
 {
 
 }
 
-QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
-{
-    QList<CourseraClient::Course> list;
-
-    QJsonDocument root;
-    net::Uri::Path path;
-
-    net::Uri::QueryParameters params;
-    params.push_back({"fields", "language,description,photoUrl"});
-    if (!query.isEmpty())
-    {
-        params.push_back({"q", "search"});
-        params.push_back({"query", query.toStdString()});
-    }
-    get( path, params, root);
-    QVariantMap variant = root.toVariant().toMap();
-    QList<QVariant> elems = variant["elements"].toList();
-
-    for (const QVariant &i : elems)
-    {
-        QVariantMap map = i.toMap();
-
-        Course course;
-        course.id = map["id"].toString();
-        course.name = map["name"].toString();
-        course.description = map["description"].toString();
-        course.art = map["photoUrl"].toString();
-
-        list.append(course);
-    }
-
-    // qDebug() << root.toJson();
-
-    return list;
-}
+//QList<BaseClient::Course> BaseClient::courses(const QString &query)
+//{
+//    return QList<BaseClient::Course>();
+//}
 
 
-void CourseraClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters &parameters, QJsonDocument &root)
+void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters &parameters, QJsonDocument &root)
 {
     // Create a new HTTP client
     auto client = http::make_client();
@@ -75,7 +44,7 @@ void CourseraClient::get(const net::Uri::Path &path, const net::Uri::QueryParame
     try {
         // Synchronously make the HTTP request
         // We bind the cancellable callback to #progress_report
-        auto response = request->execute(bind(&CourseraClient::progress_report, this, placeholders::_1));
+        auto response = request->execute(bind(&BaseClient::progress_report, this, placeholders::_1));
 
         // Check that we got a sensible HTTP status code
         if (response.status != http::Status::ok) {
@@ -94,17 +63,17 @@ void CourseraClient::get(const net::Uri::Path &path, const net::Uri::QueryParame
     }
 }
 
-http::Request::Progress::Next CourseraClient::progress_report(const http::Request::Progress&)
+http::Request::Progress::Next BaseClient::progress_report(const http::Request::Progress&)
 {
     return m_cancelled ? http::Request::Progress::Next::abort_operation : http::Request::Progress::Next::continue_operation;
 }
 
-void CourseraClient::cancel()
+void BaseClient::cancel()
 {
     m_cancelled = true;
 }
 
-Config::Ptr CourseraClient::config()
+Config::Ptr BaseClient::config()
 {
     return m_config;
 }

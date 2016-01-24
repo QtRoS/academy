@@ -1,5 +1,5 @@
-#ifndef COURSERACLIENT_H_
-#define COURSERACLIENT_H_
+#ifndef UDACITYCLIENT_H_
+#define UDACITYCLIENT_H_
 
 #include <atomic>
 #include <deque>
@@ -21,7 +21,7 @@
  *
  * We don't want our scope's code to be mixed together with HTTP and JSON handling.
  */
-class CourseraClient
+class UdacityClient
 {
 public:
 
@@ -36,9 +36,9 @@ public:
         QString source;
     };
 
-    CourseraClient(Config::Ptr config);
+    UdacityClient(Config::Ptr config);
 
-    virtual ~CourseraClient() = default;
+    virtual ~UdacityClient() = default;
 
     virtual QList<Course> courses(const QString& query);
 
@@ -67,5 +67,5 @@ protected:
     std::atomic<bool> m_cancelled;
 };
 
-#endif // COURSERACLIENT_H_
+#endif // UDACITYCLIENT_H_
 
