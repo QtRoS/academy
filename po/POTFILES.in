@@ -1,3 +1,4 @@
+src/searchengine.cpp
 src/scope.cpp
 src/udacityclient.cpp
 src/preview.cpp
@@ -7,6 +8,7 @@ src/edxclient.cpp
 src/courseraclient.cpp
 src/query.cpp
 src/courseraclient.h
+src/course.h
 src/scope.h
 src/config.h
 src/localization.h
@@ -16,3 +18,4 @@ src/client.h
 src/query.h
 src/preview.h
 src/udacityclient.h
+src/searchengine.h

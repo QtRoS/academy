@@ -11,7 +11,7 @@ struct Config {
     std::string apiroot { "http://api.openweathermap.org" };
 
     // The custom HTTP user agent string for this library
-    std::string user_agent { "example-network-scope 0.1; (foo)" };
+    std::string user_agent { "course-explorer-scope 0.1; (foo)" };
 };
 
 #endif // CONFIG_H_

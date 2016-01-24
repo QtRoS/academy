@@ -6,6 +6,8 @@
 #include <core/net/http/response.h>
 #include <QVariantMap>
 
+Q_LOGGING_CATEGORY(BaseCli, "BaseClient")
+
 namespace http = core::net::http;
 namespace net = core::net;
 
@@ -16,12 +18,6 @@ BaseClient::BaseClient(Config::Ptr config) :
 {
 
 }
-
-//QList<BaseClient::Course> BaseClient::courses(const QString &query)
-//{
-//    return QList<BaseClient::Course>();
-//}
-
 
 void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters &parameters, QByteArray &result)
 {
@@ -59,8 +55,9 @@ void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters
 //                || (cod.canConvert<unsigned int>() && cod.toUInt() != 200)) {
 //            throw domain_error(root.toVariant().toMap()["message"].toString().toStdString());
 //        }
+
     } catch (net::Error &e) {
-        qDebug() << "---- NETWORK ERROR" << e.what();
+        qCWarning(BaseCli) << "NetworkError:" << e.what();
     }
 }
 
@@ -72,6 +69,7 @@ http::Request::Progress::Next BaseClient::progress_report(const http::Request::P
 void BaseClient::cancel()
 {
     m_cancelled = true;
+    qCDebug(BaseCli) << "Cancelled";
 }
 
 Config::Ptr BaseClient::config()

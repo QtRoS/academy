@@ -17,9 +17,9 @@ UdacityClient::UdacityClient(Config::Ptr config) :
     BaseClient(config)
 { }
 
-QList<UdacityClient::Course> UdacityClient::courses(const QString &query)
+QList<Course> UdacityClient::courses(const QString &query)
 {
-    QList<UdacityClient::Course> list;
+    QList<Course> list;
 
     QByteArray data;
     net::Uri::Path path;
@@ -33,6 +33,8 @@ QList<UdacityClient::Course> UdacityClient::courses(const QString &query)
     QList<QVariant> courses = variant["courses"].toList();
     qCDebug(Udacity) << "Element count:" << courses.length();
 
+    SearchEngine se(query);
+
     for (const QVariant &i : courses)
     {
         QVariantMap map = i.toMap();
@@ -45,7 +47,8 @@ QList<UdacityClient::Course> UdacityClient::courses(const QString &query)
         course.shortDescription = map["short_summary"].toString();
         course.art = map["image"].toString();
 
-        list.append(course);
+        if (query.isEmpty() || se.isMatch(course))
+            list.append(course);
     }
 
     return list;

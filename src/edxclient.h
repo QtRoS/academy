@@ -19,6 +19,7 @@
 
 #include "config.h"
 #include "baseclient.h"
+#include "searchengine.h"
 
 Q_DECLARE_LOGGING_CATEGORY(Edx)
 

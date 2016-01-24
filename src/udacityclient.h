@@ -14,8 +14,10 @@
 #include <QList>
 #include <QDebug>
 
+
 #include "config.h"
 #include "baseclient.h"
+#include "searchengine.h"
 
 Q_DECLARE_LOGGING_CATEGORY(Udacity)
 
@@ -29,6 +31,7 @@ public:
     virtual QList<Course> courses(const QString& query) override;
     virtual const QString baseApiUrl() const override;
     virtual const QString name() const override;
+
 };
 
 #endif // UDACITYCLIENT_H_

@@ -17,6 +17,9 @@
 #include <QLoggingCategory>
 
 #include "config.h"
+#include "course.h"
+
+Q_DECLARE_LOGGING_CATEGORY(BaseCli)
 
 /**
  * Provide a nice way to access the HTTP API.
@@ -26,22 +29,6 @@
 class BaseClient
 {
 public:
-
-    struct Course
-    {
-        QString id;
-        QString slug;
-        QString art;
-        QString title;
-        QString subTitle;
-        QString description;
-        QString shortDescription;
-        // Unstable fields below.
-        QString university;
-        QString lector;
-        QString additionalInfo;
-    };
-
     BaseClient(Config::Ptr config);
 
     virtual ~BaseClient() = default;

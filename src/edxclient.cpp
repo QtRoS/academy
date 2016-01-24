@@ -17,9 +17,9 @@ EdxClient::EdxClient(Config::Ptr config) :
     BaseClient(config)
 { }
 
-QList<EdxClient::Course> EdxClient::courses(const QString &query)
+QList<Course> EdxClient::courses(const QString &query)
 {
-    QList<EdxClient::Course> list;
+    QList<Course> list;
 
     QByteArray data;
     net::Uri::Path path;
@@ -38,6 +38,8 @@ QList<EdxClient::Course> EdxClient::courses(const QString &query)
 
     QDomNodeList itemList = doc.elementsByTagName("item");
     qCDebug(Edx) << "Element count:" << itemList.length();
+
+    SearchEngine se(query);
 
     for (int i = 0; i < itemList.length(); i++)
     {
@@ -70,7 +72,8 @@ QList<EdxClient::Course> EdxClient::courses(const QString &query)
         if (!art.isNull())
             course.art = art.text();
 
-        list.append(course);
+        if (query.isEmpty() || se.isMatch(course))
+            list.append(course);
     }
 
     return list;

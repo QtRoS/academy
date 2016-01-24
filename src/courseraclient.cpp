@@ -17,9 +17,9 @@ CourseraClient::CourseraClient(Config::Ptr config) :
     BaseClient(config)
 { }
 
-QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
+QList<Course> CourseraClient::courses(const QString &query)
 {
-    QList<CourseraClient::Course> list;
+    QList<Course> list;
 
     QByteArray data;
     net::Uri::Path path;
