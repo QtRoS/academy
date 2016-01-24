@@ -8,6 +8,7 @@
 
 #include "config.h"
 #include "courseraclient.h"
+#include "udacityclient.h"
 
 /**
  * Represents an individual query.

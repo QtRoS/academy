@@ -86,21 +86,53 @@ void Query::run(sc::SearchReplyProxy const& reply)
         // Get the query string
         string query_string = query.query_string();
 
+        // ----------------------- Coursera
+
         CourseraClient coursera(m_config);
-        auto list = coursera.courses(QString::fromStdString(query_string));
+        QString courseraCatName = coursera.name();
+        auto courseraList = coursera.courses(QString::fromStdString(query_string));
 
         // Register a category for the current weather, with the title we just built
-        auto courseraCategory = reply->register_category("coursera", "Coursera", "",
-                                                     sc::CategoryRenderer(CURRENT_TEMPLATE));
+        auto courseraCategory = reply->register_category(courseraCatName.toLower().toStdString(),
+                                                         courseraCatName.toStdString(),
+                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
 
-        for (const auto &course : list)
+        for (const auto &course : courseraList)
         {
             // Create a single result for the current weather category
             sc::CategorisedResult res(courseraCategory);
 
             // We must have a URI
             res.set_uri(course.id.toStdString());
-            res.set_title(course.name.toStdString());
+            res.set_title(course.title.toStdString());
+            res.set_art(course.art.toStdString());
+            res["subtitle"] = course.description.toStdString();
+            res["description"] = course.description.toStdString();
+
+            // Push the result
+            if (!reply->push(res))
+                return;
+        }
+
+        // --------------------------------- Udacity
+
+        UdacityClient udacity(m_config);
+        QString udacityCatName = udacity.name();
+        auto udacityList = udacity.courses(QString::fromStdString(query_string));
+
+        // Register a category for the current weather, with the title we just built
+        auto udacityCategory = reply->register_category(udacityCatName.toLower().toStdString(),
+                                                         udacityCatName.toStdString(),
+                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
+
+        for (const auto &course : udacityList)
+        {
+            // Create a single result for the current weather category
+            sc::CategorisedResult res(udacityCategory);
+
+            // We must have a URI
+            res.set_uri(course.id.toStdString());
+            res.set_title(course.title.toStdString());
             res.set_art(course.art.toStdString());
             res["subtitle"] = course.description.toStdString();
             res["description"] = course.description.toStdString();

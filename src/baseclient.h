@@ -28,12 +28,16 @@ public:
     struct Course
     {
         QString id;
+        QString slug;
         QString art;
-        QString name;
+        QString title;
+        QString subTitle;
         QString description;
+        QString shortDescription;
         QString university;
         QString lector; // TODO
         QString source;
+        QString additionalInfo;
     };
 
     BaseClient(Config::Ptr config);
@@ -42,6 +46,7 @@ public:
 
     virtual QList<Course> courses(const QString& query) = 0;
     virtual const QString baseApiUrl() const = 0;
+    virtual const QString name() const = 0;
 
     /**
      * Cancel any pending queries (this method can be called from a different thread)
