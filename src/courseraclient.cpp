@@ -6,6 +6,8 @@
 #include <core/net/http/response.h>
 #include <QVariantMap>
 
+Q_LOGGING_CATEGORY(Coursera, "Coursera")
+
 namespace http = core::net::http;
 namespace net = core::net;
 
@@ -13,9 +15,7 @@ using namespace std;
 
 CourseraClient::CourseraClient(Config::Ptr config) :
     BaseClient(config)
-{
-
-}
+{ }
 
 QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
 {
@@ -23,7 +23,6 @@ QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
 
     QByteArray data;
     net::Uri::Path path;
-
     net::Uri::QueryParameters params;
     params.push_back({"fields", "language,description,photoUrl,slug"});
     if (!query.isEmpty())
@@ -31,11 +30,14 @@ QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
         params.push_back({"q", "search"});
         params.push_back({"query", query.toStdString()});
     }
+
     get( path, params, data);
+    qCDebug(Coursera) << "Data received:" << data.length() << "bytes";
     QJsonDocument root = QJsonDocument::fromJson(data);
 
     QVariantMap variant = root.toVariant().toMap();
     QList<QVariant> elems = variant["elements"].toList();
+    qCDebug(Coursera) << "Element count:" << elems.length();
 
     for (const QVariant &i : elems)
     {
@@ -50,8 +52,6 @@ QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
 
         list.append(course);
     }
-
-    // qDebug() << root.toJson();
 
     return list;
 }

@@ -17,6 +17,8 @@
 #include "config.h"
 #include "baseclient.h"
 
+Q_DECLARE_LOGGING_CATEGORY(Udacity)
+
 class UdacityClient : public BaseClient
 {
 public:

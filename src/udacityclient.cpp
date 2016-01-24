@@ -6,6 +6,8 @@
 #include <core/net/http/response.h>
 #include <QVariantMap>
 
+Q_LOGGING_CATEGORY(Udacity, "Udacity")
+
 namespace http = core::net::http;
 namespace net = core::net;
 
@@ -13,24 +15,23 @@ using namespace std;
 
 UdacityClient::UdacityClient(Config::Ptr config) :
     BaseClient(config)
-{
-
-}
+{ }
 
 QList<UdacityClient::Course> UdacityClient::courses(const QString &query)
 {
     QList<UdacityClient::Course> list;
-
 
     QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
 
     get( path, params, data);
+    qCDebug(Udacity) << "Data received:" << data.length() << "bytes";
     QJsonDocument root = QJsonDocument::fromJson(data);
 
     QVariantMap variant = root.toVariant().toMap();
     QList<QVariant> courses = variant["courses"].toList();
+    qCDebug(Udacity) << "Element count:" << courses.length();
 
     for (const QVariant &i : courses)
     {
@@ -46,8 +47,6 @@ QList<UdacityClient::Course> UdacityClient::courses(const QString &query)
 
         list.append(course);
     }
-
-    // qDebug() << root.toJson();
 
     return list;
 }

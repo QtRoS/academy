@@ -17,11 +17,8 @@
 #include "config.h"
 #include "baseclient.h"
 
-/**
- * Provide a nice way to access the HTTP API.
- *
- * We don't want our scope's code to be mixed together with HTTP and JSON handling.
- */
+Q_DECLARE_LOGGING_CATEGORY(Coursera)
+
 class CourseraClient : public BaseClient
 {
 public:

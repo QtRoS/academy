@@ -6,6 +6,8 @@
 #include <core/net/http/response.h>
 #include <QVariantMap>
 
+Q_LOGGING_CATEGORY(Edx, "Edx")
+
 namespace http = core::net::http;
 namespace net = core::net;
 
@@ -13,35 +15,29 @@ using namespace std;
 
 EdxClient::EdxClient(Config::Ptr config) :
     BaseClient(config)
-{
-
-}
+{ }
 
 QList<EdxClient::Course> EdxClient::courses(const QString &query)
 {
     QList<EdxClient::Course> list;
 
-
     QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
 
-    qDebug() << "Going to download edx data";
+    qCDebug(Edx) << "Download started...";
     get( path, params, data);
-    qDebug() << "Download finished" << data.length();
-
-    // qDebug() << "EDX" << data;
+    qCDebug(Edx) << "Data received:" << data.length() << "bytes";
 
     QDomDocument doc;
-
     if (!doc.setContent(data))
     {
-        // TODO LOG ERROR
+        qCWarning(Edx) << "Parse error, data was incorrect:" << data;
         return list;
     }
 
     QDomNodeList itemList = doc.elementsByTagName("item");
-    qDebug() << "ITEM COUNT" << itemList.size();
+    qCDebug(Edx) << "Element count:" << itemList.length();
 
     for (int i = 0; i < itemList.length(); i++)
     {

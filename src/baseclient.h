@@ -14,6 +14,8 @@
 #include <QList>
 #include <QDebug>
 
+#include <QLoggingCategory>
+
 #include "config.h"
 
 /**
@@ -34,9 +36,9 @@ public:
         QString subTitle;
         QString description;
         QString shortDescription;
+        // Unstable fields below.
         QString university;
-        QString lector; // TODO
-        QString source;
+        QString lector;
         QString additionalInfo;
     };
 
