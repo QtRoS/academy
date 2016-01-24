@@ -21,7 +21,7 @@ QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
 {
     QList<CourseraClient::Course> list;
 
-    QJsonDocument root;
+    QByteArray data;
     net::Uri::Path path;
 
     net::Uri::QueryParameters params;
@@ -31,7 +31,9 @@ QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
         params.push_back({"q", "search"});
         params.push_back({"query", query.toStdString()});
     }
-    get( path, params, root);
+    get( path, params, data);
+    QJsonDocument root = QJsonDocument::fromJson(data);
+
     QVariantMap variant = root.toVariant().toMap();
     QList<QVariant> elems = variant["elements"].toList();
 
@@ -43,6 +45,7 @@ QList<CourseraClient::Course> CourseraClient::courses(const QString &query)
         course.id = map["id"].toString();
         course.title = map["name"].toString();
         course.description = map["description"].toString();
+        course.shortDescription = map["short_summary"].toString().left(100) + QStringLiteral("...");
         course.art = map["photoUrl"].toString();
 
         list.append(course);

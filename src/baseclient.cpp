@@ -23,7 +23,7 @@ BaseClient::BaseClient(Config::Ptr config) :
 //}
 
 
-void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters &parameters, QJsonDocument &root)
+void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters &parameters, QByteArray &result)
 {
     // Create a new HTTP client
     auto client = http::make_client();
@@ -50,9 +50,9 @@ void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters
         if (response.status != http::Status::ok) {
             throw domain_error(response.body);
         }
-        // Parse the JSON from the response
-        root = QJsonDocument::fromJson(response.body.c_str());
-        qDebug() << response.body.c_str();
+
+        result = response.body.c_str();
+        //qDebug() << response.body.c_str();
 
 //        QVariant cod = root.toVariant().toMap()["cod"];
 //        if ((cod.canConvert<QString>() && cod.toString() != "200")

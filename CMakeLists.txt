@@ -25,6 +25,7 @@ include(GNUInstallDirs)
 find_package(PkgConfig)
 find_package(Intltool)
 find_package(Qt5Core REQUIRED)
+find_package(Qt5Xml REQUIRED)
 
 pkg_check_modules(
   SCOPE
@@ -96,4 +97,3 @@ add_custom_target(
   check
   ${CMAKE_CTEST_COMMAND} --force-new-ctest-process --output-on-failure
 )
-

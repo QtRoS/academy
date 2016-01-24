@@ -142,97 +142,32 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 return;
         }
 
-        /// Populate current weather category
+        // --------------------------------- edX
 
-        // the Client is the helper class that provides the results
-        // without mixing APIs and scopes code.
-        // Add your code to retreive xml, json, or any other kind of result
-        // in the client.
-        Client::Current current;
-        if (query_string.empty()) {
-            // If the string is empty, get the current weather for London
-            current = client_.weather("London,uk");
-        } else {
-            // otherwise, get the current weather for the search string
-            current = client_.weather(query_string);
-        }
-
-        // Build up the description for the city
-        stringstream ss(stringstream::in | stringstream::out);
-        ss << current.city.name << ", " << current.city.country;
+        EdxClient edx(m_config);
+        QString edxCatName = edx.name();
+        auto edxList = edx.courses(QString::fromStdString(query_string));
 
         // Register a category for the current weather, with the title we just built
-        auto location_cat = reply->register_category("current", ss.str(), "",
-                                                     sc::CategoryRenderer(CURRENT_TEMPLATE));
+        auto edxCategory = reply->register_category(edxCatName.toLower().toStdString(),
+                                                         edxCatName.toStdString(),
+                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
 
+        for (const auto &course : edxList)
         {
             // Create a single result for the current weather category
-            sc::CategorisedResult res(location_cat);
+            sc::CategorisedResult res(edxCategory);
 
             // We must have a URI
-            res.set_uri(to_string(current.city.id));
-
-            // Build up the description for the current weather
-            stringstream ss(stringstream::in | stringstream::out);
-            ss << setprecision(3) << current.weather.temp.cur;
-            ss << "°C";
-            res.set_title(ss.str());
-
-            // Set the rest of the attributes, art, description, etc
-            res.set_art(current.weather.icon);
-            res["subtitle"] = current.weather.description;
-            res["description"] = "A description of the result";
+            res.set_uri(course.id.toStdString());
+            res.set_title(course.title.toStdString());
+            res.set_art(course.art.toStdString());
+            res["subtitle"] = course.description.toStdString();
+            res["description"] = course.description.toStdString();
 
             // Push the result
-            if (!reply->push(res)) {
-                // If we fail to push, it means the query has been cancelled.
-                // So don't continue;
+            if (!reply->push(res))
                 return;
-            }
-        }
-
-        /// Populate weather forecast category
-
-        Client::Forecast forecast;
-        if (query_string.empty()) {
-            // If there is no search string, get the forecast for London
-            forecast = client_.forecast_daily("London,uk");
-        } else {
-            // otherwise, get the forecast for the search string
-            forecast = client_.forecast_daily(query_string);
-        }
-
-        // Register a category for the forecast
-        auto forecast_cat = reply->register_category("forecast", _("7 day forecast"), "",
-                                                     sc::CategoryRenderer(FORECAST_TEMPLATE));
-
-        // For each of the forecast days
-        for (const auto &weather : forecast.weather) {
-            // Create a result
-            sc::CategorisedResult res(forecast_cat);
-
-            // We must have a URI
-            res.set_uri(to_string(weather.id));
-
-            // Build the description for the result
-            stringstream ss(stringstream::in | stringstream::out);
-            ss << setprecision(3) << weather.temp.max;
-            ss << "°C to ";
-            ss << setprecision(3) << weather.temp.min;
-            ss << "°C";
-            res.set_title(ss.str());
-
-            // Set the rest of the attributes
-            res.set_art(weather.icon);
-            res["subtitle"] = weather.description;
-            res["description"] = "A description of the result";
-
-            // Push the result
-            if (!reply->push(res)) {
-                // If we fail to push, it means the query has been cancelled.
-                // So don't continue;
-                return;
-            }
         }
 
     } catch (domain_error &e) {

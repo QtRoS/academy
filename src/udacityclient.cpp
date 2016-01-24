@@ -21,11 +21,13 @@ QList<UdacityClient::Course> UdacityClient::courses(const QString &query)
 {
     QList<UdacityClient::Course> list;
 
-    QJsonDocument root;
+
+    QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
 
-    get( path, params, root);
+    get( path, params, data);
+    QJsonDocument root = QJsonDocument::fromJson(data);
 
     QVariantMap variant = root.toVariant().toMap();
     QList<QVariant> courses = variant["courses"].toList();

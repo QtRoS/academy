@@ -64,6 +64,7 @@ target_link_libraries(
 qt5_use_modules(
   scope
   Core
+  Xml
 )
 
 # Set the correct library output name to conform to the securiry policy 
@@ -78,4 +79,3 @@ install(
   TARGETS scope
   LIBRARY DESTINATION ${SCOPE_INSTALL_DIR}
 )
-
