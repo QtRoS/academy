@@ -10,6 +10,7 @@
 #include <core/net/uri.h>
 
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QString>
 #include <QList>
 #include <QDebug>

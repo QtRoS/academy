@@ -6,10 +6,14 @@
 #include <unity/scopes/SearchQueryBase.h>
 #include <unity/scopes/ReplyProxyFwd.h>
 
+#include <QLoggingCategory>
+
 #include "config.h"
 #include "courseraclient.h"
 #include "udacityclient.h"
 #include "edxclient.h"
+
+
 
 /**
  * Represents an individual query.

@@ -61,7 +61,7 @@ QList<Course> EdxClient::courses(const QString &query)
 
         QDomElement subTitle = courseElem.firstChildElement("course:subtitle");
         if (!subTitle.isNull())
-            course.subTitle = subTitle.text();
+            course.subTitle = subTitle.text(); // .remove(QRegExp("<[^>]*>"));
 
         QDomElement description = courseElem.firstChildElement("description");
         if (!description.isNull())
@@ -76,6 +76,10 @@ QList<Course> EdxClient::courses(const QString &query)
         QDomElement link = courseElem.firstChildElement("link");
         if (!link.isNull())
             course.link = link.text();
+
+        QDomElement video = courseElem.firstChildElement("course:video-youtube");
+        if (!video.isNull())
+            course.video = video.text();
 
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);

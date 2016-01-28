@@ -13,6 +13,7 @@ struct Course
     QString description;
     QString shortDescription;  // ?
     QString link;
+    QString video;
     // Unstable fields below.
     QString university;
     QString additionalInfo;

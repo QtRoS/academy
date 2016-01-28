@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+Q_LOGGING_CATEGORY(Prv, "Preview")
+
 namespace sc = unity::scopes;
 
 using namespace std;
@@ -27,16 +29,16 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     sc::ColumnLayout layout1col(1), layout2col(2), layout3col(3);
 
     // Single column layout
-    layout1col.add_column( { "image_widget", "header_widget", "summary_widget", "buttons_widget" } );
+    layout1col.add_column( { "image_widget", "header_widget", "summary_widget", "video_widget", "buttons_widget" } );
 
     // Two column layout
     layout2col.add_column( { "image_widget", "buttons_widget" } );
-    layout2col.add_column( { "header_widget", "summary_widget" } );
+    layout2col.add_column( { "header_widget", "summary_widget", "video_widget" } );
 
     // Three cokumn layout
     layout3col.add_column( { "image_widget", "buttons_widget" });
     layout3col.add_column( { "header_widget", "summary_widget" } );
-    layout3col.add_column( { } );
+    layout3col.add_column( { "video_widget"} );
 
     // Register the layouts we just created
     reply->register_layout( { layout1col, layout2col, layout3col } );
@@ -48,9 +50,8 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
 
     // Define the header section
     sc::PreviewWidget header("header_widget", "header");
-    // It has a "title" and a "subtitle" property
     header.add_attribute_mapping("title", "title");
-    header.add_attribute_mapping("subtitle", "subtitle");
+    // header.add_attribute_mapping("subtitle", "subtitle");
 
     // Define the summary section
     sc::PreviewWidget summary("summary_widget", "text");
@@ -67,7 +68,18 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
                       });
     buttons.add_attribute_value("actions", builder.end());
 
+    sc::PreviewWidget video("video_widget", "video");
+    video.add_attribute_mapping("source", "video_url"); // MUST WORK
+    video.add_attribute_mapping("screenshot", "art");
+
+    //video.add_attribute_value("source", sc::Variant("http://www.youtube.com/watch?v=BC4RcEulGU8"));
+    //video.add_attribute_value("screenshot", sc::Variant("http://img.youtube.com/vi/BC4RcEulGU8/2.jpg"));
+
+    // qCDebug(Prv) << "Video from map" << QString::fromStdString(result["video_url"].get_string());
+    //qCDebug(Prv) << " ---- title from map" << QString::fromStdString(result["title"].get_string());
+    //qCDebug(Prv) << " ---- subtitle from map" << QString::fromStdString(result["subtitle"].get_string());
+
     // Push each of the sections
-    reply->push( { image, header, summary, buttons } );
+    reply->push( { image, header, summary, video, buttons } );
 }
 

@@ -3,6 +3,10 @@
 
 #include <unity/scopes/PreviewQueryBase.h>
 
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(Prv)
+
 namespace unity {
 namespace scopes {
 class Result;
@@ -28,6 +32,9 @@ public:
      * Populates the reply object with preview information.
      */
     void run(unity::scopes::PreviewReplyProxy const& reply) override;
+
+private:
+
 };
 
 #endif // PREVIEW_H_
