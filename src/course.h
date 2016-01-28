@@ -9,13 +9,20 @@ struct Course
     QString slug;
     QString art;
     QString title;
-    QString subTitle;
+    QString subTitle; // ?
     QString description;
-    QString shortDescription;
+    QString shortDescription;  // ?
+    QString link;
     // Unstable fields below.
     QString university;
-    QString lector;
     QString additionalInfo;
+};
+
+struct Instructor
+{
+    QString name;
+    QString bio;
+    QString image;
 };
 
 #endif // COURSE_H_

@@ -36,6 +36,7 @@ public:
     virtual QList<Course> courses(const QString& query) = 0;
     virtual const QString baseApiUrl() const = 0;
     virtual const QString name() const = 0;
+    // TODO virtual const CourseDetails detailsForCourse();
 
     /**
      * Cancel any pending queries (this method can be called from a different thread)

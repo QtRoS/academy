@@ -31,6 +31,7 @@ QList<Course> CourseraClient::courses(const QString &query)
         params.push_back({"query", query.toStdString()});
     }
 
+    qCDebug(Coursera) << "Download started...";
     get( path, params, data);
     qCDebug(Coursera) << "Data received:" << data.length() << "bytes";
     QJsonDocument root = QJsonDocument::fromJson(data);
@@ -45,10 +46,12 @@ QList<Course> CourseraClient::courses(const QString &query)
 
         Course course;
         course.id = map["id"].toString();
+        course.slug = map["slug"].toString();
         course.title = map["name"].toString();
         course.description = map["description"].toString();
         course.shortDescription = map["short_summary"].toString().left(100) + QStringLiteral("...");
         course.art = map["photoUrl"].toString();
+        course.link = QStringLiteral("http://www.coursera.org/learn/") + map["slug"].toString();
 
         list.append(course);
     }

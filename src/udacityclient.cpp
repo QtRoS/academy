@@ -21,11 +21,13 @@ QList<Course> UdacityClient::courses(const QString &query)
 {
     QList<Course> list;
 
-    QByteArray data;
+    static QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
 
-    get( path, params, data);
+    qCDebug(Udacity) << "Download started...";
+    if (data.isNull())
+        get( path, params, data);
     qCDebug(Udacity) << "Data received:" << data.length() << "bytes";
     QJsonDocument root = QJsonDocument::fromJson(data);
 
@@ -41,11 +43,13 @@ QList<Course> UdacityClient::courses(const QString &query)
 
         Course course;
         course.id = map["key"].toString();
+        course.slug = map["slug"].toString();
         course.title = map["title"].toString();
         course.subTitle = map["subtitle"].toString();
         course.description = map["summary"].toString();
         course.shortDescription = map["short_summary"].toString();
         course.art = map["image"].toString();
+        course.link = map["homepage"].toString();
 
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);

@@ -103,7 +103,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
             sc::CategorisedResult res(courseraCategory);
 
             // We must have a URI
-            res.set_uri(course.id.toStdString());
+            res.set_uri(course.link.toStdString());
             res.set_title(course.title.toStdString());
             res.set_art(course.art.toStdString());
             res["subtitle"] = course.description.toStdString();
@@ -131,7 +131,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
             sc::CategorisedResult res(udacityCategory);
 
             // We must have a URI
-            res.set_uri(course.id.toStdString());
+            res.set_uri(course.link.toStdString());
             res.set_title(course.title.toStdString());
             res.set_art(course.art.toStdString());
             res["subtitle"] = course.description.toStdString();
@@ -159,7 +159,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
             sc::CategorisedResult res(edxCategory);
 
             // We must have a URI
-            res.set_uri(course.id.toStdString());
+            res.set_uri(course.link.toStdString());
             res.set_title(course.title.toStdString());
             res.set_art(course.art.toStdString());
             res["subtitle"] = course.description.toStdString();

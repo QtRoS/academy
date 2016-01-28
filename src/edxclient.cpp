@@ -21,12 +21,13 @@ QList<Course> EdxClient::courses(const QString &query)
 {
     QList<Course> list;
 
-    QByteArray data;
+    static QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
 
     qCDebug(Edx) << "Download started...";
-    get( path, params, data);
+    if (data.isNull())
+        get( path, params, data);
     qCDebug(Edx) << "Data received:" << data.length() << "bytes";
 
     QDomDocument doc;
@@ -71,6 +72,10 @@ QList<Course> EdxClient::courses(const QString &query)
         QDomElement art = courseElem.firstChildElement("course:image-thumbnail");
         if (!art.isNull())
             course.art = art.text();
+
+        QDomElement link = courseElem.firstChildElement("link");
+        if (!link.isNull())
+            course.link = link.text();
 
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);

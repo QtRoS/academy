@@ -20,25 +20,21 @@ void Preview::cancelled() {
 }
 
 void Preview::run(sc::PreviewReplyProxy const& reply) {
+
+    sc::Result result = PreviewQueryBase::result();
+
     // Support three different column layouts
     sc::ColumnLayout layout1col(1), layout2col(2), layout3col(3);
 
-    // We define 3 different layouts, that will be used depending on the
-    // device. The shell (view) will decide which layout fits best.
-    // If, for instance, we are executing in a tablet probably the view will use
-    // 2 or more columns.
-    // Column layout definitions are optional.
-    // However, we recommend that scopes define layouts for the best visual appearance.
-
     // Single column layout
-    layout1col.add_column( { "image_widget", "header_widget", "summary_widget" } );
+    layout1col.add_column( { "image_widget", "header_widget", "summary_widget", "buttons_widget" } );
 
     // Two column layout
-    layout2col.add_column( { "image_widget" } );
+    layout2col.add_column( { "image_widget", "buttons_widget" } );
     layout2col.add_column( { "header_widget", "summary_widget" } );
 
     // Three cokumn layout
-    layout3col.add_column( { "image_widget" });
+    layout3col.add_column( { "image_widget", "buttons_widget" });
     layout3col.add_column( { "header_widget", "summary_widget" } );
     layout3col.add_column( { } );
 
@@ -61,7 +57,17 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     // It has a "text" property, mapped to the result's "description" property
     summary.add_attribute_mapping("text", "description");
 
+    // Define the buttons section
+    sc::PreviewWidget buttons("buttons_widget", "actions");
+    sc::VariantBuilder builder;
+    builder.add_tuple({
+                          {"id", sc::Variant("open")},
+                          {"label", sc::Variant("Open")},
+                          {"uri", result["uri"]}
+                      });
+    buttons.add_attribute_value("actions", builder.end());
+
     // Push each of the sections
-    reply->push( { image, header, summary } );
+    reply->push( { image, header, summary, buttons } );
 }
 
