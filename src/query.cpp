@@ -108,7 +108,8 @@ void Query::run(sc::SearchReplyProxy const& reply)
             res.set_art(course.art.toStdString());
             res["subtitle"] = course.subTitle.toStdString();
             res["description"] = course.description.toStdString();
-            res["video_url"] = course.video.toStdString();
+            if (!course.video.isEmpty())
+                res["video_url"] = course.video.toStdString();
 
             // Push the result
             if (!reply->push(res))
@@ -137,7 +138,8 @@ void Query::run(sc::SearchReplyProxy const& reply)
             res.set_art(course.art.toStdString());
             res["subtitle"] = course.subTitle.toStdString();
             res["description"] = course.description.toStdString();
-            res["video_url"] = course.video.toStdString();
+            if (!course.video.isEmpty())
+                res["video_url"] = course.video.toStdString();
 
             // Push the result
             if (!reply->push(res))
@@ -166,7 +168,8 @@ void Query::run(sc::SearchReplyProxy const& reply)
             res.set_art(course.art.toStdString());
             res["subtitle"] = course.subTitle.toStdString();
             res["description"] = course.description.toStdString();
-            res["video_url"] = course.video.toStdString();
+            if (!course.video.isEmpty())
+                res["video_url"] = course.video.toStdString();
 
             // Push the result
             if (!reply->push(res))
