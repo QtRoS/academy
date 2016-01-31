@@ -55,6 +55,19 @@ QList<Course> UdemyClient::courses(const QString &query)
         course.link = QStringLiteral("https://www.udemy.com") + map["url"].toString();
         //course.video = map["teaser_video"].toMap()["youtube_url"].toString();
 
+        QList<QVariant> instructors = map["visible_instructors"].toList();
+        for (const QVariant& j : instructors)
+        {
+            QVariantMap imap = j.toMap();
+            Instructor instr;
+            instr.image = imap["image_100x100"].toString();
+            instr.bio = imap["job_title"].toString();
+            instr.name = imap["title"].toString();
+
+            course.instructors.append(instr);
+        }
+
+        qCDebug(Udemy) << "Instr count: " << course.instructors.size();
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);
     }
@@ -71,13 +84,6 @@ const QString UdemyClient::name() const
 {
     return QStringLiteral("Udemy");
 }
-
-//QMap<QByteArray, QByteArray> UdemyClient::customHeaders() const
-//{
-//    QMap<QByteArray, QByteArray> res;
-//    res.insert("Authorization", "Basic MlloUmZ1TXpUSjJLMjJmZWZoSldTeVoyanVtOWx0dkdoWFhFUWZQaTpiNGRIUXhmUDdsODVWa3RHQlM4dUFpdU5ZclpyOEZWY3E3cFpTaWRXbVNMSTBuNm5mWGFyRUxSQ2xqdEtDbjZPcTR3ZkZwWjlqM0RsdU13aUhDN0UxVW1zS1YyQzRtSUlvR2ZEYXpNYVhtbDZjRGtHcjJmOHVqVzVkQ2J5VThaaw==");
-//    return res;
-//}
 
 const QMap<QByteArray, QByteArray> UdemyClient::customHeaders() const
 {

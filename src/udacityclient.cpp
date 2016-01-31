@@ -53,6 +53,19 @@ QList<Course> UdacityClient::courses(const QString &query)
         course.video = map["teaser_video"].toMap()["youtube_url"].toString();
         // qCDebug(Udacity) << "VIDEO URL" << course.video;
 
+        QList<QVariant> instructors = map["instructors"].toList();
+        for (const QVariant& j : instructors)
+        {
+            QVariantMap imap = j.toMap();
+            Instructor instr;
+            instr.image = imap["image"].toString();
+            instr.bio = imap["bio"].toString();
+            instr.name = imap["name"].toString();
+
+            course.instructors.append(instr);
+        }
+
+        // qCDebug(Udacity) << "Instr count: " << course.instructors.size();
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);
     }

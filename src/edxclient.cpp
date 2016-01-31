@@ -81,6 +81,33 @@ QList<Course> EdxClient::courses(const QString &query)
         if (!video.isNull())
             course.video = video.text();
 
+        // Instructors.
+        QDomNodeList instrList = courseElem.elementsByTagName("course:staff");
+        for (int j = 0; j < instrList.count(); ++j)
+        {
+            QDomElement instrElem = instrList.at(j).toElement();
+
+            if (instrElem.isNull())
+                continue;
+
+            Instructor instr;
+
+            QDomElement name = courseElem.firstChildElement("staff:name");
+            if (!name.isNull())
+                instr.name = name.text();
+
+            QDomElement bio = courseElem.firstChildElement("staff:bio");
+            if (!bio.isNull())
+                instr.bio = bio.text();
+
+            QDomElement image = courseElem.firstChildElement("ctaff:image");
+            if (!image.isNull())
+                instr.image = image.text();
+
+            course.instructors.append(instr);
+        }
+
+        qCDebug(Edx) << "Instr count: " << course.instructors.size();
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);
     }

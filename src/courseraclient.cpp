@@ -24,7 +24,7 @@ QList<Course> CourseraClient::courses(const QString &query)
     QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
-    params.push_back({"fields", "language,description,photoUrl,slug"});
+    params.push_back({"fields", "instructors.v1(firstName,lastName,suffix,photo,photo150,bio),language,description,photoUrl,slug,instructorIds" }); //"language,description,photoUrl,slug"
     if (!query.isEmpty())
     {
         params.push_back({"q", "search"});
@@ -52,6 +52,18 @@ QList<Course> CourseraClient::courses(const QString &query)
         course.shortDescription = map["short_summary"].toString().left(100) + QStringLiteral("...");
         course.art = map["photoUrl"].toString();
         course.link = QStringLiteral("http://www.coursera.org/learn/") + map["slug"].toString();
+
+        QList<QVariant> instructors = map["instructors"].toList();
+        for (const QVariant& j : instructors)
+        {
+            QVariantMap imap = j.toMap();
+            Instructor instr;
+            instr.image = imap["image"].toString();
+            instr.bio = imap["bio"].toString();
+            instr.name = imap["name"].toString();
+
+            course.instructors.append(instr);
+        }
 
         list.append(course);
     }
