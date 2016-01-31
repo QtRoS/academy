@@ -7,6 +7,8 @@
 #include <unity/scopes/ReplyProxyFwd.h>
 
 #include <QLoggingCategory>
+#include <QPointer>
+#include <QSharedPointer>
 
 #include "config.h"
 #include "courseraclient.h"

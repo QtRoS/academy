@@ -86,125 +86,165 @@ void Query::run(sc::SearchReplyProxy const& reply)
         // Get the query string
         string query_string = query.query_string();
 
-        // ----------------------- Coursera
+        QList<QSharedPointer<BaseClient>> sources;
 
-        CourseraClient coursera(m_config);
-        QString courseraCatName = coursera.name();
-        auto courseraList = coursera.courses(QString::fromStdString(query_string));
+        if (settings().at("coursera").get_bool())
+            sources.append(QSharedPointer<BaseClient>(new CourseraClient(m_config)));
+        if (settings().at("edx").get_bool())
+            sources.append(QSharedPointer<BaseClient>(new EdxClient(m_config)));
+        if (settings().at("udacity").get_bool())
+            sources.append(QSharedPointer<BaseClient>(new UdacityClient(m_config)));
+        if (settings().at("udemy").get_bool())
+            sources.append(QSharedPointer<BaseClient>(new UdemyClient(m_config)));
 
-        // Register a category for the current weather, with the title we just built
-        auto courseraCategory = reply->register_category(courseraCatName.toLower().toStdString(),
-                                                         courseraCatName.toStdString(),
-                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
-
-        for (const auto &course : courseraList)
+        for(int i = 0; i < sources.count(); i++)
         {
-            // Create a single result for the current weather category
-            sc::CategorisedResult res(courseraCategory);
+            QString sourceCatName = sources[i]->name();
+            auto sourceList = sources[i]->courses(QString::fromStdString(query_string));
 
-            // We must have a URI
-            res.set_uri(course.link.toStdString());
-            res.set_title(course.title.toStdString());
-            res.set_art(course.art.toStdString());
-            res["subtitle"] = course.subTitle.toStdString();
-            res["description"] = course.description.toStdString();
-            if (!course.video.isEmpty())
-                res["video_url"] = course.video.toStdString();
+            auto sourceCategory = reply->register_category(sourceCatName.toLower().toStdString(),
+                                                             sourceCatName.toStdString(),
+                                                             "", sc::CategoryRenderer(CURRENT_TEMPLATE));
 
-            // Push the result
-            if (!reply->push(res))
-                return;
+            for (const auto &course : sourceList)
+            {
+                sc::CategorisedResult res(sourceCategory);
+
+                // We must have a URI
+                res.set_uri(course.link.toStdString());
+                res.set_title(course.title.toStdString());
+                res.set_art(course.art.toStdString());
+                res["subtitle"] = course.subTitle.toStdString();
+                res["description"] = course.description.toStdString();
+                if (!course.video.isEmpty())
+                    res["video_url"] = course.video.toStdString();
+
+                // Push the result
+                if (!reply->push(res))
+                    return;
+            }
         }
 
-        // ----------------------- Udemy
 
-        UdemyClient udemy(m_config);
-        QString udemyCatName = udemy.name();
-        auto udemyList = udemy.courses(QString::fromStdString(query_string));
+//        // ----------------------- Coursera
 
-        // Register a category for the current weather, with the title we just built
-        auto udemyCategory = reply->register_category(udemyCatName.toLower().toStdString(),
-                                                         udemyCatName.toStdString(),
-                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
+//        CourseraClient coursera(m_config);
+//        QString courseraCatName = coursera.name();
+//        auto courseraList = coursera.courses(QString::fromStdString(query_string));
 
-        for (const auto &course : udemyList)
-        {
-            // Create a single result for the current weather category
-            sc::CategorisedResult res(udemyCategory);
+//        // Register a category for the current weather, with the title we just built
+//        auto courseraCategory = reply->register_category(courseraCatName.toLower().toStdString(),
+//                                                         courseraCatName.toStdString(),
+//                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
 
-            // We must have a URI
-            res.set_uri(course.link.toStdString());
-            res.set_title(course.title.toStdString());
-            res.set_art(course.art.toStdString());
-            res["subtitle"] = course.subTitle.toStdString();
-            res["description"] = course.description.toStdString();
-            if (!course.video.isEmpty())
-                res["video_url"] = course.video.toStdString();
+//        for (const auto &course : courseraList)
+//        {
+//            // Create a single result for the current weather category
+//            sc::CategorisedResult res(courseraCategory);
 
-            // Push the result
-            if (!reply->push(res))
-                return;
-        }
+//            // We must have a URI
+//            res.set_uri(course.link.toStdString());
+//            res.set_title(course.title.toStdString());
+//            res.set_art(course.art.toStdString());
+//            res["subtitle"] = course.subTitle.toStdString();
+//            res["description"] = course.description.toStdString();
+//            if (!course.video.isEmpty())
+//                res["video_url"] = course.video.toStdString();
 
-        // --------------------------------- Udacity
+//            // Push the result
+//            if (!reply->push(res))
+//                return;
+//        }
 
-        UdacityClient udacity(m_config);
-        QString udacityCatName = udacity.name();
-        auto udacityList = udacity.courses(QString::fromStdString(query_string));
+//        // ----------------------- Udemy
 
-        // Register a category for the current weather, with the title we just built
-        auto udacityCategory = reply->register_category(udacityCatName.toLower().toStdString(),
-                                                         udacityCatName.toStdString(),
-                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
+//        UdemyClient udemy(m_config);
+//        QString udemyCatName = udemy.name();
+//        auto udemyList = udemy.courses(QString::fromStdString(query_string));
 
-        for (const auto &course : udacityList)
-        {
-            // Create a single result for the current weather category
-            sc::CategorisedResult res(udacityCategory);
+//        // Register a category for the current weather, with the title we just built
+//        auto udemyCategory = reply->register_category(udemyCatName.toLower().toStdString(),
+//                                                         udemyCatName.toStdString(),
+//                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
 
-            // We must have a URI
-            res.set_uri(course.link.toStdString());
-            res.set_title(course.title.toStdString());
-            res.set_art(course.art.toStdString());
-            res["subtitle"] = course.subTitle.toStdString();
-            res["description"] = course.description.toStdString();
-            if (!course.video.isEmpty())
-                res["video_url"] = course.video.toStdString();
+//        for (const auto &course : udemyList)
+//        {
+//            // Create a single result for the current weather category
+//            sc::CategorisedResult res(udemyCategory);
 
-            // Push the result
-            if (!reply->push(res))
-                return;
-        }
+//            // We must have a URI
+//            res.set_uri(course.link.toStdString());
+//            res.set_title(course.title.toStdString());
+//            res.set_art(course.art.toStdString());
+//            res["subtitle"] = course.subTitle.toStdString();
+//            res["description"] = course.description.toStdString();
+//            if (!course.video.isEmpty())
+//                res["video_url"] = course.video.toStdString();
 
-        // --------------------------------- edX
+//            // Push the result
+//            if (!reply->push(res))
+//                return;
+//        }
 
-        EdxClient edx(m_config);
-        QString edxCatName = edx.name();
-        auto edxList = edx.courses(QString::fromStdString(query_string));
+//        // --------------------------------- Udacity
 
-        // Register a category for the current weather, with the title we just built
-        auto edxCategory = reply->register_category(edxCatName.toLower().toStdString(),
-                                                         edxCatName.toStdString(),
-                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
+//        UdacityClient udacity(m_config);
+//        QString udacityCatName = udacity.name();
+//        auto udacityList = udacity.courses(QString::fromStdString(query_string));
 
-        for (const auto &course : edxList)
-        {
-            // Create a single result for the current weather category
-            sc::CategorisedResult res(edxCategory);
+//        // Register a category for the current weather, with the title we just built
+//        auto udacityCategory = reply->register_category(udacityCatName.toLower().toStdString(),
+//                                                         udacityCatName.toStdString(),
+//                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
 
-            // We must have a URI
-            res.set_uri(course.link.toStdString());
-            res.set_title(course.title.toStdString());
-            res.set_art(course.art.toStdString());
-            res["subtitle"] = course.subTitle.toStdString();
-            res["description"] = course.description.toStdString();
-            if (!course.video.isEmpty())
-                res["video_url"] = course.video.toStdString();
+//        for (const auto &course : udacityList)
+//        {
+//            // Create a single result for the current weather category
+//            sc::CategorisedResult res(udacityCategory);
 
-            // Push the result
-            if (!reply->push(res))
-                return;
-        }
+//            // We must have a URI
+//            res.set_uri(course.link.toStdString());
+//            res.set_title(course.title.toStdString());
+//            res.set_art(course.art.toStdString());
+//            res["subtitle"] = course.subTitle.toStdString();
+//            res["description"] = course.description.toStdString();
+//            if (!course.video.isEmpty())
+//                res["video_url"] = course.video.toStdString();
+
+//            // Push the result
+//            if (!reply->push(res))
+//                return;
+//        }
+
+//        // --------------------------------- edX
+
+//        EdxClient edx(m_config);
+//        QString edxCatName = edx.name();
+//        auto edxList = edx.courses(QString::fromStdString(query_string));
+
+//        // Register a category for the current weather, with the title we just built
+//        auto edxCategory = reply->register_category(edxCatName.toLower().toStdString(),
+//                                                         edxCatName.toStdString(),
+//                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
+
+//        for (const auto &course : edxList)
+//        {
+//            // Create a single result for the current weather category
+//            sc::CategorisedResult res(edxCategory);
+
+//            // We must have a URI
+//            res.set_uri(course.link.toStdString());
+//            res.set_title(course.title.toStdString());
+//            res.set_art(course.art.toStdString());
+//            res["subtitle"] = course.subTitle.toStdString();
+//            res["description"] = course.description.toStdString();
+//            if (!course.video.isEmpty())
+//                res["video_url"] = course.video.toStdString();
+
+//            // Push the result
+//            if (!reply->push(res))
+//                return;
+//        }
 
     } catch (domain_error &e) {
         // Handle exceptions being thrown by the client API
