@@ -13,6 +13,8 @@
 #include <QString>
 #include <QList>
 #include <QDebug>
+#include <QMap>
+#include <QByteArray>
 
 #include <QLoggingCategory>
 
@@ -36,7 +38,7 @@ public:
     virtual QList<Course> courses(const QString& query) = 0;
     virtual const QString baseApiUrl() const = 0;
     virtual const QString name() const = 0;
-    // TODO virtual const CourseDetails detailsForCourse();
+    virtual const QMap<QByteArray, QByteArray> customHeaders() const;
 
     /**
      * Cancel any pending queries (this method can be called from a different thread)

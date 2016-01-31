@@ -1,4 +1,4 @@
-#include <udemycient.h>
+#include <udemyclient.h>
 
 #include <core/net/error.h>
 #include <core/net/http/client.h>
@@ -72,7 +72,14 @@ const QString UdemyClient::name() const
     return QStringLiteral("Udemy");
 }
 
-QMap<QByteArray, QByteArray> UdemyClient::customHeaders() const
+//QMap<QByteArray, QByteArray> UdemyClient::customHeaders() const
+//{
+//    QMap<QByteArray, QByteArray> res;
+//    res.insert("Authorization", "Basic MlloUmZ1TXpUSjJLMjJmZWZoSldTeVoyanVtOWx0dkdoWFhFUWZQaTpiNGRIUXhmUDdsODVWa3RHQlM4dUFpdU5ZclpyOEZWY3E3cFpTaWRXbVNMSTBuNm5mWGFyRUxSQ2xqdEtDbjZPcTR3ZkZwWjlqM0RsdU13aUhDN0UxVW1zS1YyQzRtSUlvR2ZEYXpNYVhtbDZjRGtHcjJmOHVqVzVkQ2J5VThaaw==");
+//    return res;
+//}
+
+const QMap<QByteArray, QByteArray> UdemyClient::customHeaders() const
 {
     QMap<QByteArray, QByteArray> res;
     res.insert("Authorization", "Basic MlloUmZ1TXpUSjJLMjJmZWZoSldTeVoyanVtOWx0dkdoWFhFUWZQaTpiNGRIUXhmUDdsODVWa3RHQlM4dUFpdU5ZclpyOEZWY3E3cFpTaWRXbVNMSTBuNm5mWGFyRUxSQ2xqdEtDbjZPcTR3ZkZwWjlqM0RsdU13aUhDN0UxVW1zS1YyQzRtSUlvR2ZEYXpNYVhtbDZjRGtHcjJmOHVqVzVkQ2J5VThaaw==");

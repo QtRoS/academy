@@ -18,3 +18,23 @@
 #defaultValue = true
 #_displayName = Show Forecast
 
+[coursera]
+type = boolean
+defaultValue = true
+displayName = Coursera
+
+[edx]
+type = boolean
+defaultValue = true
+displayName = edX
+
+[udacity]
+type = boolean
+defaultValue = true
+displayName = Udacity
+
+[udemy]
+type = boolean
+defaultValue = true
+displayName = Udemy
+

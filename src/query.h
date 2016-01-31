@@ -12,6 +12,7 @@
 #include "courseraclient.h"
 #include "udacityclient.h"
 #include "edxclient.h"
+#include "udemyclient.h"
 
 
 

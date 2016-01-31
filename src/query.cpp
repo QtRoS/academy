@@ -116,6 +116,36 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 return;
         }
 
+        // ----------------------- Udemy
+
+        UdemyClient udemy(m_config);
+        QString udemyCatName = udemy.name();
+        auto udemyList = udemy.courses(QString::fromStdString(query_string));
+
+        // Register a category for the current weather, with the title we just built
+        auto udemyCategory = reply->register_category(udemyCatName.toLower().toStdString(),
+                                                         udemyCatName.toStdString(),
+                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
+
+        for (const auto &course : udemyList)
+        {
+            // Create a single result for the current weather category
+            sc::CategorisedResult res(udemyCategory);
+
+            // We must have a URI
+            res.set_uri(course.link.toStdString());
+            res.set_title(course.title.toStdString());
+            res.set_art(course.art.toStdString());
+            res["subtitle"] = course.subTitle.toStdString();
+            res["description"] = course.description.toStdString();
+            if (!course.video.isEmpty())
+                res["video_url"] = course.video.toStdString();
+
+            // Push the result
+            if (!reply->push(res))
+                return;
+        }
+
         // --------------------------------- Udacity
 
         UdacityClient udacity(m_config);
