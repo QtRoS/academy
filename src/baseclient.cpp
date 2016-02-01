@@ -57,13 +57,7 @@ void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters
         }
 
         result = response.body.c_str();
-        //qDebug() << response.body.c_str();
-
-//        QVariant cod = root.toVariant().toMap()["cod"];
-//        if ((cod.canConvert<QString>() && cod.toString() != "200")
-//                || (cod.canConvert<unsigned int>() && cod.toUInt() != 200)) {
-//            throw domain_error(root.toVariant().toMap()["message"].toString().toStdString());
-//        }
+        // qDebug() << response.body.c_str();
 
     } catch (net::Error &e) {
         qCWarning(BaseCli) << "NetworkError:" << e.what();

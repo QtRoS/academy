@@ -13,6 +13,7 @@
 #include <QString>
 #include <QList>
 #include <QDebug>
+#include <QMap>
 
 #include "config.h"
 #include "baseclient.h"
