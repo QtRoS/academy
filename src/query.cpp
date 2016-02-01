@@ -119,6 +119,21 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 if (!course.video.isEmpty())
                     res["video_url"] = course.video.toStdString();
 
+                // Add instructors to map.
+                if (course.instructors.count() > 0)
+                {
+                    std::vector<sc::Variant> images, names, bios;
+                    for (auto j = course.instructors.begin(); j != course.instructors.end(); ++j)
+                    {
+                        images.push_back(sc::Variant(j->image.toStdString()));
+                        names.push_back(sc::Variant(j->name.toStdString()));
+                        bios.push_back(sc::Variant(j->bio.toStdString()));
+                    }
+                    res["instr_images"] = images;
+                    res["instr_names"] = names;
+                    res["instr_bios"] = bios;
+                }
+
                 // Push the result
                 if (!reply->push(res))
                     return;

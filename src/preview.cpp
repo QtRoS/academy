@@ -29,20 +29,21 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     sc::ColumnLayout layout1col(1), layout2col(2), layout3col(3);
 
     // Single column layout
-    layout1col.add_column( { "image_widget", "header_widget", "summary_widget", "buttons_widget" } );
+    layout1col.add_column( { "image_widget", "header_widget", "summary_widget", "instr_widget_0", "instr_widget_1", "instr_widget_2", "buttons_widget" } );
 
     // Two column layout
     layout2col.add_column( { "image_widget", "buttons_widget" } );
-    layout2col.add_column( { "header_widget", "summary_widget" } );
+    layout2col.add_column( { "header_widget", "summary_widget", "instr_widget_0", "instr_widget_1", "instr_widget_2" } );
 
     // Three cokumn layout
     layout3col.add_column( { "image_widget", "buttons_widget" });
     layout3col.add_column( { "header_widget", "summary_widget" } );
-    layout3col.add_column( { } );
+    layout3col.add_column( { "instr_widget_0", "instr_widget_1", "instr_widget_2"} );
 
     // Register the layouts we just created
     reply->register_layout( { layout1col, layout2col, layout3col } );
 
+    // Main visual - video or image.
     if (result.contains("video_url"))
     {
         sc::PreviewWidget image("image_widget", "video");
@@ -76,5 +77,25 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     buttons.add_attribute_value("actions", builder.end());
 
     reply->push( { header, summary, buttons } );
+
+    // Instructors section.
+    if (result.contains("instr_names"))
+    {
+        qCDebug(Prv) << "Instrs found:";
+        sc::VariantArray images = result["instr_images"].get_array();
+        sc::VariantArray names = result["instr_names"].get_array();
+        sc::VariantArray bios = result["instr_bios"].get_array();
+
+        qCDebug(Prv) << "images" << images.size() << "names" << names.size() << "bios" << bios.size();
+
+        for (int k = 0; k < images.size(); k++)
+        {
+            sc::PreviewWidget comment("instr_widget_" + std::to_string(k), "comment");
+            comment.add_attribute_value("source", sc::Variant(images[k].get_string()));
+            comment.add_attribute_value("author", sc::Variant(names[k].get_string()));
+            comment.add_attribute_value("comment", sc::Variant(bios[k].get_string()));
+            reply->push( { comment } );
+        }
+    }
 }
 
