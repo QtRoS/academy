@@ -92,17 +92,19 @@ QList<Course> EdxClient::courses(const QString &query)
 
             Instructor instr;
 
-            QDomElement name = courseElem.firstChildElement("staff:name");
+            QDomElement name = instrElem.firstChildElement("staff:name");
             if (!name.isNull())
                 instr.name = name.text();
 
-            QDomElement bio = courseElem.firstChildElement("staff:bio");
+            QDomElement bio = instrElem.firstChildElement("staff:bio");
             if (!bio.isNull())
                 instr.bio = bio.text();
 
-            QDomElement image = courseElem.firstChildElement("ctaff:image");
+            QDomElement image = instrElem.firstChildElement("staff:image");
             if (!image.isNull())
                 instr.image = image.text();
+
+            // qCDebug(Edx) << "Instr details:" << instr.name << instr.image;
 
             course.instructors.append(instr);
         }

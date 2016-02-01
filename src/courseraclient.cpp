@@ -50,9 +50,11 @@ QList<Course> CourseraClient::courses(const QString &query)
     {
         QVariantMap imap = j.toMap();
         Instructor instr;
-        instr.image = imap["image"].toString();
+        instr.image = imap["photo"].toString();
         instr.bio = imap["bio"].toString();
-        instr.name = imap["name"].toString();
+        instr.name = imap["firstName"].toString() + " " + imap["lastName"].toString();
+
+        // qCDebug(Coursera) << "Instr details:" << instr.image << instr.name;
 
         instructorsMap.insert(imap["id"].toString(), instr);
     }
@@ -82,7 +84,7 @@ QList<Course> CourseraClient::courses(const QString &query)
                 course.instructors.append(instructorsMap.value(j.toString()));
         }
 
-        qCDebug(Coursera) << "Instr count: " << course.instructors.size();
+        // qCDebug(Coursera) << "Instr count: " << course.instructors.size();
         list.append(course);
     }
 
