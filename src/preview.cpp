@@ -29,15 +29,15 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     sc::ColumnLayout layout1col(1), layout2col(2), layout3col(3);
 
     // Single column layout
-    layout1col.add_column( { "image_widget", "header_widget", "summary_widget", "intitle_widget", "instr_widget_0", "instr_widget_1", "instr_widget_2", "buttons_widget" } );
+    layout1col.add_column( { "image_widget", "header_widget", "headline_widget", "exp", "intitle_widget", "instr_widget_0", "instr_widget_1", "instr_widget_2", "buttons_widget" } );
 
     // Two column layout
     layout2col.add_column( { "image_widget", "intitle_widget", "instr_widget_0", "instr_widget_1", "instr_widget_2" } );
-    layout2col.add_column( { "header_widget", "summary_widget", "buttons_widget" } );
+    layout2col.add_column( { "header_widget", "headline_widget", "exp", "buttons_widget" } );
 
     // Three cokumn layout
     layout3col.add_column( { "image_widget", "buttons_widget" });
-    layout3col.add_column( { "header_widget", "summary_widget" } );
+    layout3col.add_column( { "header_widget", "headline_widget", "exp" } );
     layout3col.add_column( { "intitle_widget", "instr_widget_0", "instr_widget_1", "instr_widget_2"} );
 
     // Register the layouts we just created
@@ -63,8 +63,17 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     header.add_attribute_mapping("title", "title");
     // header.add_attribute_mapping("subtitle", "subtitle");
 
+    sc::PreviewWidget headline("headline_widget", "text");
+    headline.add_attribute_mapping("text", "headline");
+
+    // Expandable area.
+    sc::PreviewWidget exp("exp", "expandable");
+    exp.add_attribute_value("title", sc::Variant("Details"));
+
     sc::PreviewWidget summary("summary_widget", "text");
     summary.add_attribute_mapping("text", "description");
+
+    exp.add_widget(summary);
 
     // Define the buttons section
     sc::PreviewWidget buttons("buttons_widget", "actions");
@@ -76,7 +85,7 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
                       });
     buttons.add_attribute_value("actions", builder.end());
 
-    reply->push( { header, summary, buttons } );
+    reply->push( { header, headline, exp, buttons } );
 
     // Instructors section.
     if (result.contains("instr_names"))

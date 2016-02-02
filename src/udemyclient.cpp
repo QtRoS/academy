@@ -50,7 +50,7 @@ QList<Course> UdemyClient::courses(const QString &query)
         course.title = map["title"].toString();
         course.subTitle = map["headline"].toString(); // .remove(QRegExp("<[^>]*>"));
         course.description = map["description"].toString();
-        //course.shortDescription = map["short_summary"].toString();
+        course.shortDescription = map["headline"].toString();
         course.art = map["image_480x270"].toString();
         course.link = QStringLiteral("https://www.udemy.com") + map["url"].toString();
         //course.video = map["teaser_video"].toMap()["youtube_url"].toString();

@@ -54,7 +54,7 @@ QList<Course> CourseraClient::courses(const QString &query)
         instr.bio = imap["bio"].toString();
         instr.name = imap["firstName"].toString() + " " + imap["lastName"].toString();
 
-        // qCDebug(Coursera) << "Instr details:" << instr.image << instr.name;
+        //qCDebug(Coursera) << "Instr details:" << instr.image << instr.name;
 
         instructorsMap.insert(imap["id"].toString(), instr);
     }
@@ -73,7 +73,7 @@ QList<Course> CourseraClient::courses(const QString &query)
         course.slug = map["slug"].toString();
         course.title = map["name"].toString();
         course.description = map["description"].toString();
-        course.shortDescription = map["short_summary"].toString().left(100) + QStringLiteral("...");
+        course.shortDescription = course.description.left(120) + QStringLiteral("...");
         course.art = map["photoUrl"].toString();
         course.link = QStringLiteral("http://www.coursera.org/learn/") + map["slug"].toString();
 
@@ -84,7 +84,7 @@ QList<Course> CourseraClient::courses(const QString &query)
                 course.instructors.append(instructorsMap.value(j.toString()));
         }
 
-        // qCDebug(Coursera) << "Instr count: " << course.instructors.size();
+        //qCDebug(Coursera) << "Instr count: " << course.instructors.size();
         list.append(course);
     }
 

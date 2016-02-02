@@ -67,7 +67,9 @@ QList<Course> EdxClient::courses(const QString &query)
         if (!description.isNull())
             course.description = description.text();
 
-        course.shortDescription = course.description.left(100) + QStringLiteral("...");
+        QDomElement subtitle = courseElem.firstChildElement("course:subtitle");
+        if (!subtitle.isNull())
+            course.shortDescription = subtitle.text();
 
         QDomElement art = courseElem.firstChildElement("course:image-thumbnail");
         if (!art.isNull())
@@ -104,12 +106,12 @@ QList<Course> EdxClient::courses(const QString &query)
             if (!image.isNull())
                 instr.image = image.text();
 
-            // qCDebug(Edx) << "Instr details:" << instr.name << instr.image;
+            //qCDebug(Edx) << "Instr details:" << instr.name << instr.image;
 
             course.instructors.append(instr);
         }
 
-        qCDebug(Edx) << "Instr count: " << course.instructors.size();
+        //qCDebug(Edx) << "Instr count: " << course.instructors.size();
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);
     }
