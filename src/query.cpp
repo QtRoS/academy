@@ -127,7 +127,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                     {
                         images.push_back(sc::Variant(j->image.toStdString()));
                         names.push_back(sc::Variant(j->name.toStdString()));
-                        bios.push_back(sc::Variant(j->bio.toStdString()));
+                        bios.push_back(sc::Variant((j->bio.length() < 150 ? j->bio : j->bio.left(150) + "...").toStdString()));
                     }
                     res["instr_images"] = images;
                     res["instr_names"] = names;
