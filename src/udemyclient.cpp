@@ -21,12 +21,18 @@ QList<Course> UdemyClient::courses(const QString &query)
 {
     QList<Course> list;
 
-    static QByteArray data;
+    QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
 
     params.push_back({"fields[course]", "@default,description,headline,slug"});
     params.push_back({"page_size", "100"});
+    params.push_back({"ordering", "trending"});
+
+    if (!query.isEmpty())
+    {
+        params.push_back({"search", query.toStdString()});
+    }
 
     qCDebug(Udemy) << "Download started...";
     if (data.isNull())
@@ -37,8 +43,6 @@ QList<Course> UdemyClient::courses(const QString &query)
     QVariantMap variant = root.toVariant().toMap();
     QList<QVariant> courses = variant["results"].toList();
     qCDebug(Udemy) << "Element count:" << courses.length();
-
-    SearchEngine se(query);
 
     for (const QVariant &i : courses)
     {
@@ -67,9 +71,8 @@ QList<Course> UdemyClient::courses(const QString &query)
             course.instructors.append(instr);
         }
 
-        qCDebug(Udemy) << "Instr count: " << course.instructors.size();
-        if (query.isEmpty() || se.isMatch(course))
-            list.append(course);
+        // qCDebug(Udemy) << "Instr count: " << course.instructors.size();
+        list.append(course);
     }
 
     return list;

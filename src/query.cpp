@@ -90,12 +90,12 @@ void Query::run(sc::SearchReplyProxy const& reply)
 
         if (settings().at("coursera").get_bool())
             sources.append(QSharedPointer<BaseClient>(new CourseraClient(m_config)));
+        if (settings().at("udemy").get_bool())
+            sources.append(QSharedPointer<BaseClient>(new UdemyClient(m_config)));
         if (settings().at("edx").get_bool())
             sources.append(QSharedPointer<BaseClient>(new EdxClient(m_config)));
         if (settings().at("udacity").get_bool())
             sources.append(QSharedPointer<BaseClient>(new UdacityClient(m_config)));
-        if (settings().at("udemy").get_bool())
-            sources.append(QSharedPointer<BaseClient>(new UdemyClient(m_config)));
 
         for(int i = 0; i < sources.count(); i++)
         {

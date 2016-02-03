@@ -23,6 +23,11 @@ type = boolean
 defaultValue = true
 displayName = Coursera
 
+[udemy]
+type = boolean
+defaultValue = true
+displayName = Udemy
+
 [edx]
 type = boolean
 defaultValue = true
@@ -32,9 +37,4 @@ displayName = edX
 type = boolean
 defaultValue = true
 displayName = Udacity
-
-[udemy]
-type = boolean
-defaultValue = true
-displayName = Udemy
 

@@ -1,10 +1,10 @@
 [ScopeConfig]
-_DisplayName=CourseExplorer Scope
+_DisplayName=Courses Scope
 _Description=This is a CourseExplorer scope
 Art=screenshot.png
-Author=Firstname Lastname
+Author=Roman Shchekin
 Icon=icon.png
-Keywords=weather
+Keywords=course,courses,online,education
 
 [Appearance]
 PageHeader.Logo=logo.png
