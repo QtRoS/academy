@@ -6,8 +6,13 @@
 #include <QByteArray>
 #include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QTextStream>
 #include <QCryptographicHash>
+#include <QDateTime>
+#include <QLoggingCategory>
+
+Q_DECLARE_LOGGING_CATEGORY(LoCache)
 
 class LocalCache
 {
@@ -20,6 +25,7 @@ public:
 
 private:
     QString m_cacheDirectory;
+    qint64 m_expireTime;
 
 private:
     QString fileNameByKey(const QString& key) const;

@@ -1,8 +1,10 @@
 #include "localcache.h"
 
+Q_LOGGING_CATEGORY(LoCache, "LocalCache")
 
 LocalCache::LocalCache(const QString &cacheDir):
-    m_cacheDirectory(cacheDir)
+    m_cacheDirectory(cacheDir),
+    m_expireTime(60 * 60 *24)
 {
 
 }
@@ -10,7 +12,14 @@ LocalCache::LocalCache(const QString &cacheDir):
 bool LocalCache::containsData(const QString &key) const
 {
     QString filePath = fileNameByKey(key);
-    return QFile::exists(filePath);
+    QFileInfo fi(filePath);
+
+    if (!fi.exists())
+        return false;
+
+    QDateTime now = QDateTime::currentDateTime();
+    // qCDebug(LoCache) << now << fi.lastModified() << fi.lastModified().secsTo(now);
+    return fi.lastModified().secsTo(now) < m_expireTime;
 }
 
 QByteArray LocalCache::data(const QString &key) const
@@ -20,7 +29,7 @@ QByteArray LocalCache::data(const QString &key) const
     QFile file(filePath);
     if (!file.open(QFile::ReadOnly))
     {
-        // TODO Log
+        qCDebug(LoCache) << "Can't read data file: " << filePath;
         return QByteArray();
     }
 
@@ -34,7 +43,7 @@ bool LocalCache::setData(const QString &key, QByteArray data)
     QFile file(filePath);
     if (!file.open(QFile::WriteOnly))
     {
-        // TODO Log
+        qCDebug(LoCache) << "Can't write data file: " << filePath;
         return false;
     }
 
