@@ -18,11 +18,12 @@
 
 #include "config.h"
 #include "baseclient.h"
+#include "cachedclient.h"
 #include "searchengine.h"
 
 Q_DECLARE_LOGGING_CATEGORY(Udacity)
 
-class UdacityClient : public BaseClient
+class UdacityClient : public CachedClient
 {
 public:
 

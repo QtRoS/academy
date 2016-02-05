@@ -14,7 +14,7 @@ namespace net = core::net;
 using namespace std;
 
 UdacityClient::UdacityClient(Config::Ptr config) :
-    BaseClient(config)
+    CachedClient(config)
 { }
 
 QList<Course> UdacityClient::courses(const QString &query)

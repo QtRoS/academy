@@ -14,8 +14,7 @@ namespace net = core::net;
 using namespace std;
 
 EdxClient::EdxClient(Config::Ptr config) :
-    BaseClient(config),
-    m_cache(QString::fromStdString(config->cache_dir))
+    CachedClient(config)
 {
     qCDebug(Edx) << "Cache dir:" << QString::fromStdString(config->cache_dir);
 }
@@ -29,15 +28,8 @@ QList<Course> EdxClient::courses(const QString &query)
     net::Uri::QueryParameters params;
 
     qCDebug(Edx) << "Download started...";
-    if (!m_cache.containsData(name()))
-    {
-        get(path, params, data);
-        m_cache.setData(name(), data);
-    }
-
     if (data.isNull())
-        data = m_cache.data(name());
-
+        get( path, params, data);
     qCDebug(Edx) << "Data received:" << data.length() << "bytes";
 
     QDomDocument doc;

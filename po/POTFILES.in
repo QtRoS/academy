@@ -7,6 +7,7 @@ src/baseclient.cpp
 src/localcache.cpp
 src/client.cpp
 src/edxclient.cpp
+src/cachedclient.cpp
 src/courseraclient.cpp
 src/query.cpp
 src/courseraclient.h
@@ -21,5 +22,6 @@ src/edxclient.h
 src/client.h
 src/query.h
 src/preview.h
+src/cachedclient.h
 src/udacityclient.h
 src/searchengine.h

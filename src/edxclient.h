@@ -19,12 +19,13 @@
 
 #include "config.h"
 #include "baseclient.h"
+#include "cachedclient.h"
 #include "searchengine.h"
 #include "localcache.h"
 
 Q_DECLARE_LOGGING_CATEGORY(Edx)
 
-class EdxClient : public BaseClient
+class EdxClient : public CachedClient
 {
 public:
 
@@ -35,8 +36,6 @@ public:
     virtual const QString baseApiUrl() const override;
     virtual const QString name() const override;
 
-private:
-    LocalCache m_cache;
 };
 
 #endif // EDXCLIENT_H_

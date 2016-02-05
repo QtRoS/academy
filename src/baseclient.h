@@ -48,7 +48,7 @@ public:
     virtual Config::Ptr config();
 
 protected:
-    void get(const core::net::Uri::Path &path, const core::net::Uri::QueryParameters &parameters, QByteArray &result);
+    virtual void get(const core::net::Uri::Path &path, const core::net::Uri::QueryParameters &parameters, QByteArray &result);
     /**
      * Progress callback that allows the query to cancel pending HTTP requests.
      */
