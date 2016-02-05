@@ -12,7 +12,7 @@ public:
     {
         QStringList parts = query.split(' ');
         for (int i = 0; i < parts.size(); ++i)
-            parts[i] = "(" + parts[i].toLower() + ")";
+            parts[i] = "(" + parts[i].toLower().replace("+", "\\+") + ")";
         QString regex = parts.join('|');
         m_regex = QRegExp(regex, Qt::CaseInsensitive);
     }

@@ -24,6 +24,8 @@ void Scope::start(string const&)
     if (apiroot) {
         //config_->apiroot = apiroot;
     }
+
+    config_->cache_dir = cache_directory();
 }
 
 void Scope::stop()

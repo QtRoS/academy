@@ -83,6 +83,11 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
                           {"label", sc::Variant("Open")},
                           {"uri", result["uri"]}
                       });
+//    builder.add_tuple({
+//                          {"id", sc::Variant("share")},
+//                          {"label", sc::Variant("Share")},
+//                          {"uri", result["uri"]}
+//                      });
     buttons.add_attribute_value("actions", builder.end());
 
     reply->push( { header, headline, exp, buttons } );

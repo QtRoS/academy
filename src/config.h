@@ -12,6 +12,9 @@ struct Config {
 
     // The custom HTTP user agent string for this library
     std::string user_agent { "course-explorer-scope 0.1; (foo)" };
+
+    // Cache dir.
+    std::string cache_dir { "." };
 };
 
 #endif // CONFIG_H_

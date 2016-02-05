@@ -20,6 +20,7 @@
 #include "config.h"
 #include "baseclient.h"
 #include "searchengine.h"
+#include "localcache.h"
 
 Q_DECLARE_LOGGING_CATEGORY(Edx)
 
@@ -33,6 +34,9 @@ public:
     virtual QList<Course> courses(const QString& query) override;
     virtual const QString baseApiUrl() const override;
     virtual const QString name() const override;
+
+private:
+    LocalCache m_cache;
 };
 
 #endif // EDXCLIENT_H_
