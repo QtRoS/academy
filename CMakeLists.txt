@@ -1,4 +1,4 @@
-project(courseexplorer CXX)
+project(academy CXX)
 cmake_minimum_required(VERSION 2.8.10)
 
 # We require at least g++ 4.9, to avoid ABI breakage with earlier versions.
@@ -47,10 +47,10 @@ set(UBUNTU_PROJECT_TYPE "Scope" CACHE INTERNAL "Tells QtCreator this is a Scope 
 
 # Important project paths
 set(CMAKE_INSTALL_PREFIX /)
-set(SCOPE_INSTALL_DIR "/courseexplorer")
-set(GETTEXT_PACKAGE "courseexplorer")
-set(PACKAGE_NAME "courseexplorer.courseexplorer")
-set(SCOPE_NAME "${PACKAGE_NAME}_courseexplorer")
+set(SCOPE_INSTALL_DIR "/academy")
+set(GETTEXT_PACKAGE "academy")
+set(PACKAGE_NAME "academy.mrqtros")
+set(SCOPE_NAME "${PACKAGE_NAME}_academy")
 
 # If we need to refer to the scope's name or package in code, these definitions will help
 add_definitions(-DPACKAGE_NAME="${PACKAGE_NAME}")
@@ -67,7 +67,7 @@ execute_process(
 # Configure and install the click manifest and apparmor files
 configure_file(manifest.json.in ${CMAKE_CURRENT_BINARY_DIR}/manifest.json)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/manifest.json DESTINATION "/")
-install(FILES "courseexplorer.apparmor" DESTINATION "/")
+install(FILES "academy.apparmor" DESTINATION "/")
 
 # Make these files show up in QtCreator
 file(GLOB_RECURSE
@@ -78,9 +78,9 @@ add_custom_target(hidden_files
   ALL
   SOURCES
     manifest.json.in
-    courseexplorer.apparmor
-    src/data/courseexplorer.ini.in
-    src/data/courseexplorer-settings.ini.in
+    academy.apparmor
+    src/data/academy.ini.in
+    src/data/academy-settings.ini.in
     po/POTFILES.in
     po/${GETTEXT_PACKAGE}.pot
     ${_PO_FILES}
