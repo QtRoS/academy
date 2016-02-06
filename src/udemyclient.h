@@ -20,10 +20,11 @@
 #include "config.h"
 #include "baseclient.h"
 #include "searchengine.h"
+#include "cachedclient.h"
 
 Q_DECLARE_LOGGING_CATEGORY(Udemy)
 
-class UdemyClient : public BaseClient
+class UdemyClient : public CachedClient
 {
 public:
 

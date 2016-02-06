@@ -17,10 +17,11 @@
 
 #include "config.h"
 #include "baseclient.h"
+#include "cachedclient.h"
 
 Q_DECLARE_LOGGING_CATEGORY(Coursera)
 
-class CourseraClient : public BaseClient
+class CourseraClient : public CachedClient
 {
 public:
     CourseraClient(Config::Ptr config);

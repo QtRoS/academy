@@ -23,6 +23,9 @@ public:
     QByteArray data(const QString& key) const;
     bool setData(const QString& key, QByteArray data);
 
+    qint64 expireTime() const { return m_expireTime; }
+    void setExpireTime(qint64 t) { m_expireTime = t; }
+
 private:
     QString m_cacheDirectory;
     qint64 m_expireTime;

@@ -14,7 +14,7 @@ namespace net = core::net;
 using namespace std;
 
 UdemyClient::UdemyClient(Config::Ptr config) :
-    BaseClient(config)
+    CachedClient(config)
 { }
 
 QList<Course> UdemyClient::courses(const QString &query)
@@ -26,12 +26,13 @@ QList<Course> UdemyClient::courses(const QString &query)
     net::Uri::QueryParameters params;
 
     params.push_back({"fields[course]", "@default,description,headline,slug"});
-    params.push_back({"page_size", "100"});
+    params.push_back({"page_size", "80"});
     params.push_back({"ordering", "trending"});
 
     if (!query.isEmpty())
     {
         params.push_back({"search", query.toStdString()});
+        setCacheEnabled(false);
     }
 
     qCDebug(Udemy) << "Download started...";

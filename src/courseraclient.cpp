@@ -14,7 +14,7 @@ namespace net = core::net;
 using namespace std;
 
 CourseraClient::CourseraClient(Config::Ptr config) :
-    BaseClient(config)
+    CachedClient(config)
 { }
 
 QList<Course> CourseraClient::courses(const QString &query)
@@ -25,11 +25,13 @@ QList<Course> CourseraClient::courses(const QString &query)
     net::Uri::Path path;
     net::Uri::QueryParameters params;
     params.push_back({"includes", "instructorIds"});
+    params.push_back({"limit", "80"});
     params.push_back({"fields", "instructors.v1(firstName,lastName,suffix,photo,photo150,bio),language,description,photoUrl,slug,instructorIds" }); //"language,description,photoUrl,slug"
     if (!query.isEmpty())
     {
         params.push_back({"q", "search"});
         params.push_back({"query", query.toStdString()});
+        setCacheEnabled(false);
     }
 
     qCDebug(Coursera) << "Download started...";
