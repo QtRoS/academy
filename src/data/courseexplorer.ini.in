@@ -1,10 +1,10 @@
 [ScopeConfig]
-_DisplayName=Courses Scope
-_Description=This is a CourseExplorer scope
+_DisplayName=Academy
+_Description=This is a Academy scope
 Art=screenshot.png
 Author=Roman Shchekin
 Icon=icon.png
-Keywords=course,courses,online,education
+Keywords=course,courses,online,education,academy
 
 [Appearance]
 PageHeader.Logo=logo.png
