@@ -67,7 +67,7 @@ QList<Course> EdxClient::courses(const QString &query)
 
         QDomElement subtitle = courseElem.firstChildElement("course:subtitle");
         if (!subtitle.isNull())
-            course.shortDescription = subtitle.text();
+            course.headline = subtitle.text();
 
         QDomElement art = courseElem.firstChildElement("course:image-thumbnail");
         if (!art.isNull())

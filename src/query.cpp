@@ -114,7 +114,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 res.set_uri(course.link.toStdString());
                 res.set_title(course.title.toStdString());
                 res.set_art(course.art.toStdString());
-                res["headline"] = course.shortDescription.toStdString(); // course.subTitle.toStdString();
+                res["headline"] = course.headline.toStdString();
                 res["description"] = course.description.toStdString();
                 if (!course.video.isEmpty())
                     res["video_url"] = course.video.toStdString();

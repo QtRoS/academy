@@ -75,7 +75,7 @@ QList<Course> CourseraClient::courses(const QString &query)
         course.slug = map["slug"].toString();
         course.title = map["name"].toString();
         course.description = map["description"].toString();
-        course.shortDescription = course.description.left(120) + QStringLiteral("...");
+        course.headline = course.description.left(120) + QStringLiteral("...");
         course.art = map["photoUrl"].toString();
         course.link = QStringLiteral("http://www.coursera.org/learn/") + map["slug"].toString();
 
