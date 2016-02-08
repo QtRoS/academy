@@ -18,7 +18,7 @@ struct Course
     QString slug;
     QString art;
     QString title;
-    QString subTitle; // ?
+    //QString subTitle;
     QString description;
     QString shortDescription;  // ?
     QString link;

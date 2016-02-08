@@ -61,10 +61,6 @@ QList<Course> EdxClient::courses(const QString &query)
         if (!title.isNull())
             course.title = title.text();
 
-        QDomElement subTitle = courseElem.firstChildElement("course:subtitle");
-        if (!subTitle.isNull())
-            course.subTitle = subTitle.text(); // .remove(QRegExp("<[^>]*>"));
-
         QDomElement description = courseElem.firstChildElement("description");
         if (!description.isNull())
             course.description = description.text();

@@ -45,7 +45,6 @@ QList<Course> UdacityClient::courses(const QString &query)
         course.id = map["key"].toString();
         course.slug = map["slug"].toString();
         course.title = map["title"].toString();
-        course.subTitle = map["subtitle"].toString(); // .remove(QRegExp("<[^>]*>"));
         course.description = map["summary"].toString();
         course.shortDescription = map["short_summary"].toString();
         course.art = map["image"].toString();

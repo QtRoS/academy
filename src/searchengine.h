@@ -20,7 +20,7 @@ public:
     bool isMatch(const Course& course)
     {
         return m_regex.indexIn(course.title) != -1 ||
-                m_regex.indexIn(course.subTitle) != -1 ||
+                m_regex.indexIn(course.shortDescription) != -1 ||
                 m_regex.indexIn(course.description) != -1;
     }
 
