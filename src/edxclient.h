@@ -36,6 +36,8 @@ public:
     virtual const QString baseApiUrl() const override;
     virtual const QString name() const override;
 
+private:
+    QString grabExtra(const QDomElement& courseElem);
 };
 
 #endif // EDXCLIENT_H_

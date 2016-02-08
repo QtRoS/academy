@@ -36,6 +36,8 @@ public:
     virtual const QString name() const override;
     virtual const QMap<QByteArray, QByteArray> customHeaders() const override;
 
+private:
+    QString grabExtra(const QVariantMap& map);
 };
 
 #endif // UDEMYCLIENT_H_

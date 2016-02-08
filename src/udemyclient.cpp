@@ -57,6 +57,7 @@ QList<Course> UdemyClient::courses(const QString &query)
         course.headline = map["headline"].toString();
         course.art = map["image_480x270"].toString();
         course.link = QStringLiteral("https://www.udemy.com") + map["url"].toString();
+        course.extra = grabExtra(map);
         //course.video = map["teaser_video"].toMap()["youtube_url"].toString();
 
         QList<QVariant> instructors = map["visible_instructors"].toList();
@@ -93,4 +94,12 @@ const QMap<QByteArray, QByteArray> UdemyClient::customHeaders() const
     QMap<QByteArray, QByteArray> res;
     res.insert("Authorization", "Basic MlloUmZ1TXpUSjJLMjJmZWZoSldTeVoyanVtOWx0dkdoWFhFUWZQaTpiNGRIUXhmUDdsODVWa3RHQlM4dUFpdU5ZclpyOEZWY3E3cFpTaWRXbVNMSTBuNm5mWGFyRUxSQ2xqdEtDbjZPcTR3ZkZwWjlqM0RsdU13aUhDN0UxVW1zS1YyQzRtSUlvR2ZEYXpNYVhtbDZjRGtHcjJmOHVqVzVkQ2J5VThaaw==");
     return res;
+}
+
+QString UdemyClient::grabExtra(const QVariantMap &map)
+{
+//    QStringList extra;
+//    extra << QStringLiteral("price - ") + map["price"].toString();
+//    return extra.join(", ");
+    return QStringLiteral("price - ") + map["price"].toString();
 }

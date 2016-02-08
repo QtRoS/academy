@@ -81,6 +81,8 @@ QList<Course> EdxClient::courses(const QString &query)
         if (!video.isNull())
             course.video = video.text();
 
+        course.extra = grabExtra(courseElem);
+
         // Instructors.
         QDomNodeList instrList = courseElem.elementsByTagName("course:staff");
         for (int j = 0; j < instrList.count(); ++j)
@@ -125,4 +127,19 @@ const QString EdxClient::baseApiUrl() const
 const QString EdxClient::name() const
 {
     return QStringLiteral("edX");
+}
+
+QString EdxClient::grabExtra(const QDomElement &courseElem)
+{
+    QStringList extra;
+
+    QDomElement effort = courseElem.firstChildElement("course:effort");
+    if (!effort.isNull())
+        extra << QStringLiteral("workload - ") + effort.text();
+
+    QDomElement length = courseElem.firstChildElement("course:length");
+    if (!length.isNull())
+        extra << QStringLiteral("duration - ") + length.text();
+
+    return extra.join(", ");
 }

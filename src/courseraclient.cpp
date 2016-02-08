@@ -26,7 +26,7 @@ QList<Course> CourseraClient::courses(const QString &query)
     net::Uri::QueryParameters params;
     params.push_back({"includes", "instructorIds"});
     params.push_back({"limit", "80"});
-    params.push_back({"fields", "instructors.v1(firstName,lastName,suffix,photo,photo150,bio),language,description,photoUrl,slug,instructorIds" }); //"language,description,photoUrl,slug"
+    params.push_back({"fields", "instructors.v1(firstName,lastName,suffix,photo,photo150,bio),description,photoUrl,slug,workload,instructorIds" });
     if (!query.isEmpty())
     {
         params.push_back({"q", "search"});
@@ -78,6 +78,7 @@ QList<Course> CourseraClient::courses(const QString &query)
         course.headline = course.description.left(120) + QStringLiteral("...");
         course.art = map["photoUrl"].toString();
         course.link = QStringLiteral("http://www.coursera.org/learn/") + map["slug"].toString();
+        course.extra = grabExtra(map);
 
         QList<QVariant> instructorsIds = map["instructorIds"].toList();
         for (const QVariant& j : instructorsIds)
@@ -101,5 +102,10 @@ const QString CourseraClient::baseApiUrl() const
 const QString CourseraClient::name() const
 {
     return QStringLiteral("Coursera");
+}
+
+QString CourseraClient::grabExtra(const QVariantMap &map)
+{
+    return QStringLiteral("workload ") + map["workload"].toString();
 }
 

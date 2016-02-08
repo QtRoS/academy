@@ -50,6 +50,7 @@ QList<Course> UdacityClient::courses(const QString &query)
         course.art = map["image"].toString();
         course.link = map["homepage"].toString();
         course.video = map["teaser_video"].toMap()["youtube_url"].toString();
+        course.extra = grabExtra(map);
         //qCDebug(Udacity) << "VIDEO URL" << course.video;
 
         QList<QVariant> instructors = map["instructors"].toList();
@@ -80,4 +81,12 @@ const QString UdacityClient::baseApiUrl() const
 const QString UdacityClient::name() const
 {
     return QStringLiteral("Udacity");
+}
+
+QString UdacityClient::grabExtra(const QVariantMap &map)
+{
+    QStringList extra;
+    extra << QStringLiteral("level - ") + map["level"].toString();
+    extra << QStringLiteral("duration - ") + map["expected_duration"].toString() + " " + map["expected_duration_unit"].toString();
+    return extra.join(", ");
 }

@@ -30,6 +30,9 @@ public:
     virtual QList<Course> courses(const QString& query) override;
     virtual const QString baseApiUrl() const override;
     virtual const QString name() const override;
+
+private:
+    QString grabExtra(const QVariantMap& map);
 };
 
 #endif // COURSERACLIENT_H_

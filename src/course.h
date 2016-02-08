@@ -22,6 +22,7 @@ struct Course
     QString headline;
     QString link;
     QString video;
+    QString extra;
     QList<Instructor> instructors;
 };
 

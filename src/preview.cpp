@@ -29,15 +29,15 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     sc::ColumnLayout layout1col(1), layout2col(2), layout3col(3);
 
     // Single column layout
-    layout1col.add_column( { "image_widget", "header_widget", "headline_widget", "exp", "intitle_widget", "instr_widget_0", "instr_widget_1", "instr_widget_2", "buttons_widget" } );
+    layout1col.add_column( { "image_widget", "header_widget", "headline_widget", "exp_widget", "intitle_widget", "instr_widget_0", "instr_widget_1", "instr_widget_2", "buttons_widget" } );
 
     // Two column layout
     layout2col.add_column( { "image_widget", "intitle_widget", "instr_widget_0", "instr_widget_1", "instr_widget_2" } );
-    layout2col.add_column( { "header_widget", "headline_widget", "exp", "buttons_widget" } );
+    layout2col.add_column( { "header_widget", "headline_widget", "exp_widget", "buttons_widget" } );
 
     // Three cokumn layout
     layout3col.add_column( { "image_widget", "buttons_widget" });
-    layout3col.add_column( { "header_widget", "headline_widget", "exp" } );
+    layout3col.add_column( { "header_widget", "headline_widget", "exp_widget" } );
     layout3col.add_column( { "intitle_widget", "instr_widget_0", "instr_widget_1", "instr_widget_2"} );
 
     // Register the layouts we just created
@@ -61,19 +61,22 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     // Define the header section
     sc::PreviewWidget header("header_widget", "header");
     header.add_attribute_mapping("title", "title");
-    // header.add_attribute_mapping("subtitle", "subtitle");
 
     sc::PreviewWidget headline("headline_widget", "text");
     headline.add_attribute_mapping("text", "headline");
 
     // Expandable area.
-    sc::PreviewWidget exp("exp", "expandable");
+    sc::PreviewWidget exp("exp_widget", "expandable");
     exp.add_attribute_value("title", sc::Variant("Details"));
 
     sc::PreviewWidget summary("summary_widget", "text");
     summary.add_attribute_mapping("text", "description");
 
+    sc::PreviewWidget extra("extra_widget", "text");
+    extra.add_attribute_value("text", sc::Variant("<b>Extra:</b> " + result["extra"].get_string()));
+
     exp.add_widget(summary);
+    exp.add_widget(extra);
 
     // Define the buttons section
     sc::PreviewWidget buttons("buttons_widget", "actions");
@@ -106,7 +109,7 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
 
         qCDebug(Prv) << "images" << images.size() << "names" << names.size() << "bios" << bios.size();
 
-        for (int k = 0; k < names.size(); k++)
+        for (int k = 0; k < names.size(); ++k)
         {
             sc::PreviewWidget comment("instr_widget_" + std::to_string(k), "comment");
             comment.add_attribute_value("source", sc::Variant(images[k].get_string()));
