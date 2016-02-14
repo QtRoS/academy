@@ -75,8 +75,12 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     sc::PreviewWidget extra("extra_widget", "text");
     extra.add_attribute_value("text", sc::Variant("<b>Extra:</b> " + result["extra"].get_string()));
 
+    sc::PreviewWidget source("source_widget", "text");
+    source.add_attribute_value("text", sc::Variant("<b>Source:</b> " + result["source"].get_string()));
+
     exp.add_widget(summary);
     exp.add_widget(extra);
+    exp.add_widget(source);
 
     // Define the buttons section
     sc::PreviewWidget buttons("buttons_widget", "actions");
