@@ -33,7 +33,7 @@ void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters
     http::Request::Configuration configuration;
 
     // Build the URI from its components
-    net::Uri uri = net::make_uri(/*m_config->apiroot*/ baseApiUrl().toStdString(), path, parameters); // TODO
+    net::Uri uri = net::make_uri(baseApiUrl().toStdString(), path, parameters);
     configuration.uri = client->uri_to_string(uri);
 
     // Give out a user agent string

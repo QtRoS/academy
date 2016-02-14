@@ -1,10 +1,11 @@
 [ScopeConfig]
 _DisplayName=Academy
-_Description=This is a Academy scope
+_Description=Fast way to find online courses from multiple sources
 Art=screenshot.png
 Author=Roman Shchekin
 Icon=icon.png
-Keywords=course,courses,online,education,academy
+Keywords=course;courses;online;education;academy
+SearchHint=course name or keyword
 
 [Appearance]
 PageHeader.Logo=logo.png
