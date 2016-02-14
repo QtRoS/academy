@@ -113,7 +113,7 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
 
         qCDebug(Prv) << "images" << images.size() << "names" << names.size() << "bios" << bios.size();
 
-        for (int k = 0; k < names.size(); ++k)
+        for (uint k = 0; k < names.size(); ++k)
         {
             sc::PreviewWidget comment("instr_widget_" + std::to_string(k), "comment");
             comment.add_attribute_value("source", sc::Variant(images[k].get_string()));

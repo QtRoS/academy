@@ -11,6 +11,8 @@
 #include <iostream>
 #include <sstream>
 
+Q_LOGGING_CATEGORY(Qry, "Query")
+
 namespace sc = unity::scopes;
 
 using namespace std;
@@ -85,6 +87,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
 
         // Get the query string
         string query_string = query.query_string();
+        qCDebug(Qry) << "Query string is:" << QString::fromStdString(query_string);
 
         QList<QSharedPointer<BaseClient>> sources;
 
@@ -97,6 +100,8 @@ void Query::run(sc::SearchReplyProxy const& reply)
         if (settings().at("udacity").get_bool())
             sources.append(QSharedPointer<BaseClient>(new UdacityClient(m_config)));
 
+        qCDebug(Qry) << "Source count:" << sources.count();
+
         for(int i = 0; i < sources.count(); i++)
         {
             QString sourceCatName = sources[i]->name();
@@ -105,6 +110,8 @@ void Query::run(sc::SearchReplyProxy const& reply)
             auto sourceCategory = reply->register_category(sourceCatName.toLower().toStdString(),
                                                              sourceCatName.toStdString(),
                                                              "", sc::CategoryRenderer(CURRENT_TEMPLATE));
+
+            qCDebug(Qry) << "Processing source:" << sourceCatName;
 
             for (const auto &course : sourceList)
             {
@@ -140,128 +147,9 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 if (!reply->push(res))
                     return;
             }
+
+            qCDebug(Qry) << "Finished with source:" << sourceCatName;
         }
-
-
-//        // ----------------------- Coursera
-
-//        CourseraClient coursera(m_config);
-//        QString courseraCatName = coursera.name();
-//        auto courseraList = coursera.courses(QString::fromStdString(query_string));
-
-//        // Register a category for the current weather, with the title we just built
-//        auto courseraCategory = reply->register_category(courseraCatName.toLower().toStdString(),
-//                                                         courseraCatName.toStdString(),
-//                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
-
-//        for (const auto &course : courseraList)
-//        {
-//            // Create a single result for the current weather category
-//            sc::CategorisedResult res(courseraCategory);
-
-//            // We must have a URI
-//            res.set_uri(course.link.toStdString());
-//            res.set_title(course.title.toStdString());
-//            res.set_art(course.art.toStdString());
-//            res["subtitle"] = course.subTitle.toStdString();
-//            res["description"] = course.description.toStdString();
-//            if (!course.video.isEmpty())
-//                res["video_url"] = course.video.toStdString();
-
-//            // Push the result
-//            if (!reply->push(res))
-//                return;
-//        }
-
-//        // ----------------------- Udemy
-
-//        UdemyClient udemy(m_config);
-//        QString udemyCatName = udemy.name();
-//        auto udemyList = udemy.courses(QString::fromStdString(query_string));
-
-//        // Register a category for the current weather, with the title we just built
-//        auto udemyCategory = reply->register_category(udemyCatName.toLower().toStdString(),
-//                                                         udemyCatName.toStdString(),
-//                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
-
-//        for (const auto &course : udemyList)
-//        {
-//            // Create a single result for the current weather category
-//            sc::CategorisedResult res(udemyCategory);
-
-//            // We must have a URI
-//            res.set_uri(course.link.toStdString());
-//            res.set_title(course.title.toStdString());
-//            res.set_art(course.art.toStdString());
-//            res["subtitle"] = course.subTitle.toStdString();
-//            res["description"] = course.description.toStdString();
-//            if (!course.video.isEmpty())
-//                res["video_url"] = course.video.toStdString();
-
-//            // Push the result
-//            if (!reply->push(res))
-//                return;
-//        }
-
-//        // --------------------------------- Udacity
-
-//        UdacityClient udacity(m_config);
-//        QString udacityCatName = udacity.name();
-//        auto udacityList = udacity.courses(QString::fromStdString(query_string));
-
-//        // Register a category for the current weather, with the title we just built
-//        auto udacityCategory = reply->register_category(udacityCatName.toLower().toStdString(),
-//                                                         udacityCatName.toStdString(),
-//                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
-
-//        for (const auto &course : udacityList)
-//        {
-//            // Create a single result for the current weather category
-//            sc::CategorisedResult res(udacityCategory);
-
-//            // We must have a URI
-//            res.set_uri(course.link.toStdString());
-//            res.set_title(course.title.toStdString());
-//            res.set_art(course.art.toStdString());
-//            res["subtitle"] = course.subTitle.toStdString();
-//            res["description"] = course.description.toStdString();
-//            if (!course.video.isEmpty())
-//                res["video_url"] = course.video.toStdString();
-
-//            // Push the result
-//            if (!reply->push(res))
-//                return;
-//        }
-
-//        // --------------------------------- edX
-
-//        EdxClient edx(m_config);
-//        QString edxCatName = edx.name();
-//        auto edxList = edx.courses(QString::fromStdString(query_string));
-
-//        // Register a category for the current weather, with the title we just built
-//        auto edxCategory = reply->register_category(edxCatName.toLower().toStdString(),
-//                                                         edxCatName.toStdString(),
-//                                                         "", sc::CategoryRenderer(CURRENT_TEMPLATE));
-
-//        for (const auto &course : edxList)
-//        {
-//            // Create a single result for the current weather category
-//            sc::CategorisedResult res(edxCategory);
-
-//            // We must have a URI
-//            res.set_uri(course.link.toStdString());
-//            res.set_title(course.title.toStdString());
-//            res.set_art(course.art.toStdString());
-//            res["subtitle"] = course.subTitle.toStdString();
-//            res["description"] = course.description.toStdString();
-//            if (!course.video.isEmpty())
-//                res["video_url"] = course.video.toStdString();
-
-//            // Push the result
-//            if (!reply->push(res))
-//                return;
-//        }
 
     } catch (domain_error &e) {
         // Handle exceptions being thrown by the client API

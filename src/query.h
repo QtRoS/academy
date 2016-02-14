@@ -16,7 +16,7 @@
 #include "edxclient.h"
 #include "udemyclient.h"
 
-
+Q_DECLARE_LOGGING_CATEGORY(Qry)
 
 /**
  * Represents an individual query.
