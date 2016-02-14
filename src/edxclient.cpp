@@ -16,7 +16,7 @@ using namespace std;
 EdxClient::EdxClient(Config::Ptr config) :
     CachedClient(config)
 {
-    qCDebug(Edx) << "Cache dir:" << QString::fromStdString(config->cache_dir);
+    //qCDebug(Edx) << "Cache dir:" << QString::fromStdString(config->cache_dir);
 }
 
 QList<Course> EdxClient::courses(const QString &query)

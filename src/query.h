@@ -37,7 +37,7 @@ public:
     void run(const unity::scopes::SearchReplyProxy &reply) override;
 
 private:
-    Client client_;
+    //Client client_;
     Config::Ptr m_config;
 };
 

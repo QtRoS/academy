@@ -68,14 +68,16 @@ const static string FORECAST_TEMPLATE =
         )";
 
 Query::Query(const sc::CannedQuery &query, const sc::SearchMetadata &metadata, Config::Ptr config) :
-    sc::SearchQueryBase(query, metadata), client_(config), m_config(config)
+    sc::SearchQueryBase(query, metadata),
+    //client_(config),
+    m_config(config)
 {
 
 }
 
 void Query::cancelled()
 {
-    client_.cancel();
+    //client_.cancel();
 }
 
 
