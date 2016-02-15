@@ -15,7 +15,8 @@ void CachedClient::get(const core::net::Uri::Path &path, const core::net::Uri::Q
         if (!m_cache.containsData(name()))
         {
             BaseClient::get(path, parameters, result);
-            m_cache.setData(name(), result);
+            if (!m_cancelled)
+                m_cache.setData(name(), result);
         }
         else result = m_cache.data(name());
     }

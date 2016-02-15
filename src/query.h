@@ -9,6 +9,7 @@
 #include <QLoggingCategory>
 #include <QPointer>
 #include <QSharedPointer>
+#include <QSet>
 
 #include "config.h"
 #include "courseraclient.h"
@@ -39,6 +40,10 @@ public:
 private:
     //Client client_;
     Config::Ptr m_config;
+    CourseraClient m_coursera;
+    UdemyClient m_udemy;
+    EdxClient m_edx;
+    UdacityClient m_udacity;
 };
 
 #endif // QUERY_H_

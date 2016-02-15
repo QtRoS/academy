@@ -72,7 +72,7 @@ http::Request::Progress::Next BaseClient::progress_report(const http::Request::P
 void BaseClient::cancel()
 {
     m_cancelled = true;
-    qCDebug(BaseCli) << "Cancelled";
+    qCDebug(BaseCli) << name() << "cancelled";
 }
 
 Config::Ptr BaseClient::config()

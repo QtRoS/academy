@@ -35,8 +35,7 @@ const static string CURRENT_TEMPLATE =
         "title": "title",
         "art" : {
         "field": "art"
-        },
-        "subtitle": "subtitle"
+        }
         }
         }
         )";
@@ -70,14 +69,23 @@ const static string FORECAST_TEMPLATE =
 Query::Query(const sc::CannedQuery &query, const sc::SearchMetadata &metadata, Config::Ptr config) :
     sc::SearchQueryBase(query, metadata),
     //client_(config),
-    m_config(config)
+    m_config(config),
+    m_coursera(config),
+    m_udemy(config),
+    m_edx(config),
+    m_udacity(config)
 {
 
 }
 
 void Query::cancelled()
 {
+    qCDebug(Qry) << "Cancelled";
     //client_.cancel();
+    m_coursera.cancel();
+    m_udemy.cancel();
+    m_edx.cancel();
+    m_udacity.cancel();
 }
 
 
@@ -91,18 +99,30 @@ void Query::run(sc::SearchReplyProxy const& reply)
         string query_string = query.query_string();
         qCDebug(Qry) << "Query string is:" << QString::fromStdString(query_string);
 
-        QList<QSharedPointer<BaseClient>> sources;
+        // Shared ptr way.
+//        QList<QSharedPointer<BaseClient>> sources;
+//        if (settings().at("coursera").get_bool())
+//            sources.append(QSharedPointer<BaseClient>(new CourseraClient(m_config)));
+//        if (settings().at("udemy").get_bool())
+//            sources.append(QSharedPointer<BaseClient>(new UdemyClient(m_config)));
+//        if (settings().at("edx").get_bool())
+//            sources.append(QSharedPointer<BaseClient>(new EdxClient(m_config)));
+//        if (settings().at("udacity").get_bool())
+//            sources.append(QSharedPointer<BaseClient>(new UdacityClient(m_config)));
 
+        QList<BaseClient*> sources;
         if (settings().at("coursera").get_bool())
-            sources.append(QSharedPointer<BaseClient>(new CourseraClient(m_config)));
+            sources.append(&m_coursera);
         if (settings().at("udemy").get_bool())
-            sources.append(QSharedPointer<BaseClient>(new UdemyClient(m_config)));
+            sources.append(&m_udemy);
         if (settings().at("edx").get_bool())
-            sources.append(QSharedPointer<BaseClient>(new EdxClient(m_config)));
+            sources.append(&m_edx);
         if (settings().at("udacity").get_bool())
-            sources.append(QSharedPointer<BaseClient>(new UdacityClient(m_config)));
+            sources.append(&m_udacity);
 
         qCDebug(Qry) << "Source count:" << sources.count();
+
+        QSet<QString> uniqueSet;
 
         for(int i = 0; i < sources.count(); i++)
         {
@@ -113,10 +133,19 @@ void Query::run(sc::SearchReplyProxy const& reply)
                                                              sourceCatName.toStdString(),
                                                              "", sc::CategoryRenderer(CURRENT_TEMPLATE));
 
-            qCDebug(Qry) << "Processing source:" << sourceCatName;
+            //qCDebug(Qry) << "Processing source:" << sourceCatName;
 
             for (const auto &course : sourceList)
             {
+                // Duplicate results cause Dash to crash.
+                if (uniqueSet.contains(course.link))
+                {
+                    qCDebug(Qry) << "Duplicate:" << course.link;
+                    continue;
+                }
+                uniqueSet.insert(course.link);
+
+
                 sc::CategorisedResult res(sourceCategory);
 
                 // We must have a URI

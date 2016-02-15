@@ -44,7 +44,7 @@ QList<Course> CourseraClient::courses(const QString &query)
     // Instructors.
 
     QList<QVariant> instrs = variant["linked"].toMap()["instructors.v1"].toList();
-    qCDebug(Coursera) << "Instructor count:" << instrs.length();
+    //qCDebug(Coursera) << "Instructor count:" << instrs.length();
 
     QMap<QString, Instructor> instructorsMap;
 
