@@ -1,11 +1,19 @@
 [ScopeConfig]
 _DisplayName=Academy
-_Description=Fast way to find online courses from multiple sources
+Description=Fast way to find online courses from multiple sources
+Description[ru]=Быстрый и удобный инструмент поиска онлайн курсов из нескольких источников
+Description[it]=Un modo veloce per trovare corsi online da diversi provider
+Description[zh_CN]=快速查找多个在线课程
+Description[zh_TW]=快速查找多個在線課程
 Art=screenshot.png
 Author=Roman Shchekin
 Icon=icon.png
 Keywords=course;courses;online;education;academy
 SearchHint=course name or keyword
+SearchHint[ru]=название или ключевое слово
+SearchHint[it]=nome del corso o keyword
+SearchHint[zh_CN]=课程名字或关键字
+SearchHint[zh_TW]=課程名字或關鍵字
 
 [Appearance]
 PageHeader.Logo=logo.png
