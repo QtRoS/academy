@@ -38,3 +38,10 @@ type = boolean
 defaultValue = true
 displayName = Udacity
 
+[textPosition]
+type = list
+defaultValue = 1
+displayName = Text position
+displayName[ru] = Расположение текста
+displayValues = Bottom;Overlay
+displayValues[ru] = Снизу;Поверх

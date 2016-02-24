@@ -18,12 +18,7 @@ namespace sc = unity::scopes;
 using namespace std;
 
 
-/**
- * Define the larger "current weather" layout.
- *
- * The icons are larger.
- */
-const static string CURRENT_TEMPLATE =
+const static string CURRENT_TEMPLATE_OV =
         R"(
 {
         "schema-version": 1,
@@ -41,28 +36,20 @@ const static string CURRENT_TEMPLATE =
         }
         )";
 
-/**
- * Define the layout for the forecast results.
- *
- * The icon size is small, and ask for the card layout
- * itself to be horizontal. I.e. the text will be placed
- * next to the image.
- */
-const static string FORECAST_TEMPLATE =
+
+const static string CURRENT_TEMPLATE =
         R"(
 {
         "schema-version": 1,
         "template": {
         "category-layout": "grid",
-        "card-layout": "horizontal",
-        "card-size": "small"
+        "card-size": "medium"
         },
         "components": {
         "title": "title",
         "art" : {
         "field": "art"
-        },
-        "subtitle": "subtitle"
+        }
         }
         }
         )";
@@ -130,9 +117,10 @@ void Query::run(sc::SearchReplyProxy const& reply)
             QString sourceCatName = sources[i]->name();
             auto sourceList = sources[i]->courses(QString::fromStdString(query_string));
 
+            auto templ = settings().at("textPosition").get_int() ? CURRENT_TEMPLATE_OV : CURRENT_TEMPLATE;
             auto sourceCategory = reply->register_category(sourceCatName.toLower().toStdString(),
                                                              sourceCatName.toStdString(),
-                                                             "", sc::CategoryRenderer(CURRENT_TEMPLATE));
+                                                             "", sc::CategoryRenderer(templ));
 
             //qCDebug(Qry) << "Processing source:" << sourceCatName;
 
