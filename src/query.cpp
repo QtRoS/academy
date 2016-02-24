@@ -29,7 +29,8 @@ const static string CURRENT_TEMPLATE =
         "schema-version": 1,
         "template": {
         "category-layout": "grid",
-        "card-size": "medium"
+        "card-size": "medium",
+        "overlay": true
         },
         "components": {
         "title": "title",
