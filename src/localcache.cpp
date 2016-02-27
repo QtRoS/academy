@@ -55,5 +55,5 @@ bool LocalCache::setData(const QString &key, QByteArray data)
 QString LocalCache::fileNameByKey(const QString &key) const
 {
     QString md5 = QCryptographicHash::hash(key.toLatin1(), QCryptographicHash::Md5).toHex();
-    return QDir::cleanPath(m_cacheDirectory + QDir::separator() + md5);
+    return QDir::cleanPath(m_cacheDirectory + QDir::separator() + md5 + FileNameSuffix);
 }

@@ -25,6 +25,7 @@ public:
 
     qint64 expireTime() const { return m_expireTime; }
     void setExpireTime(qint64 t) { m_expireTime = t; }
+    const QString FileNameSuffix = ".v1";
 
 private:
     QString m_cacheDirectory;
