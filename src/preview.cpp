@@ -72,6 +72,9 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     sc::PreviewWidget summary("summary_widget", "text");
     summary.add_attribute_mapping("text", "description");
 
+    sc::PreviewWidget departments("departments_widget", "text");
+    departments.add_attribute_value("text", sc::Variant("<b>Departments:</b> " + decorate_departments(result["departments"].get_string())));
+
     sc::PreviewWidget extra("extra_widget", "text");
     extra.add_attribute_value("text", sc::Variant("<b>Extra:</b> " + result["extra"].get_string()));
 
@@ -79,6 +82,7 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     source.add_attribute_value("text", sc::Variant("<b>Source:</b> " + result["source"].get_string()));
 
     exp.add_widget(summary);
+    exp.add_widget(departments);
     exp.add_widget(extra);
     exp.add_widget(source);
 
@@ -122,5 +126,12 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
             reply->push( { comment } );
         }
     }
+}
+
+string Preview::decorate_departments(const string &deps)
+{
+    QString semicolonSeparatedDeps = QString::fromStdString(deps);
+    QString decoratedDeps = DepartmentManager::flatDescription(semicolonSeparatedDeps);
+    return decoratedDeps.toStdString();
 }
 

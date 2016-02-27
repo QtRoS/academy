@@ -7,23 +7,25 @@ DepartmentManager::DepartmentManager()
 
 QList<Department> DepartmentManager::departments()
 {
-    QList<Department> list;
+    static QList<Department> list;
 
-    // list << Department("", "All");
-    list << Department("art", "Art & Design");
-    list << Department("business", "Business");
-    list << Department("music", "Music");
-    list << Department("languages", "Languages");
-    list << Department("it", "IT & Tech");
-    list << Department("science", "Science");
-    list << Department("humanities", "Humanities");
-    list << Department("personal", "Personal");
-    list << Department("other", "Other");
+    if (list.empty())
+    {
+        list << Department("art", "Art and Design");
+        list << Department("business", "Business");
+        list << Department("music", "Music");
+        list << Department("languages", "Languages");
+        list << Department("it", "IT and Tech");
+        list << Department("science", "Science");
+        list << Department("humanities", "Humanities");
+        list << Department("personal", "Personal");
+        list << Department("other", "Other");
+    }
 
     return list;
 }
 
-bool DepartmentManager::isMatch(const Course &course, const QString &department)
+QHash<QString, QString> DepartmentManager::mapping()
 {
     static QHash<QString, QString> hash;
 
@@ -101,6 +103,13 @@ bool DepartmentManager::isMatch(const Course &course, const QString &department)
         hash.insert("Test-Prep", "it");
     }
 
+    return hash;
+}
+
+bool DepartmentManager::isMatch(const Course &course, const QString &department)
+{
+    QHash<QString, QString> hash = mapping();
+
     for(int i = 0; i < course.departments.length(); i++)
     {
         // Some departments are mapped to multiple categories.
@@ -119,5 +128,26 @@ bool DepartmentManager::isMatch(const Course &course, const QString &department)
 
     }
     return false;
+}
+
+QString DepartmentManager::flatDescription(const QString& deps)
+{
+    QList<Department> list = departments();
+    QHash<QString, QString> hash = mapping();
+
+    QStringList names;
+    QStringList courseDeps = deps.split(';');
+    for(int i = 0; i < courseDeps.length(); i++)
+    {
+        QString dep = courseDeps[i];
+        QList<QString> intCat = hash.values(dep);
+
+        for (int j = 0; j < list.size(); ++j)
+            for (int k = 0; k < intCat.size(); ++k)
+                if (list[j].id == intCat[k])
+                    names << list[j].label;
+    }
+
+    return names.join(", ");
 }
 

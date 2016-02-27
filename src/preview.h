@@ -4,6 +4,7 @@
 #include <unity/scopes/PreviewQueryBase.h>
 
 #include <QLoggingCategory>
+#include "departmentmanager.h"
 
 Q_DECLARE_LOGGING_CATEGORY(Prv)
 
@@ -34,7 +35,7 @@ public:
     void run(unity::scopes::PreviewReplyProxy const& reply) override;
 
 private:
-
+    std::string decorate_departments(const std::string& deps);
 };
 
 #endif // PREVIEW_H_

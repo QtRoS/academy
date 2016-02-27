@@ -154,6 +154,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 res["extra"] = course.extra.toStdString();
                 if (!course.video.isEmpty())
                     res["video_url"] = course.video.toStdString();
+                res["departments"] = course.departments.join(';').toStdString();
 
                 // Add instructors to map.
                 if (course.instructors.count() > 0)

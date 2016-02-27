@@ -4,6 +4,7 @@
 #include <QString>
 #include <QList>
 #include <QHash>
+#include <QStringList>
 
 #include "course.h"
 
@@ -23,7 +24,9 @@ class DepartmentManager
 public:
     DepartmentManager();
     static QList<Department> departments();
+    static QHash<QString, QString> mapping();
     static bool isMatch(const Course& course, const QString& department);
+    static QString flatDescription(const QString& deps);
 };
 
 #endif // DEPARTMENTMANAGER_H

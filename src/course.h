@@ -2,6 +2,7 @@
 #define COURSE_H_
 
 #include <QList>
+#include <QStringList>
 
 class QString;
 
@@ -24,7 +25,7 @@ struct Course
     QString video;
     QString extra;
     QList<Instructor> instructors;
-    QList<QString> departments;
+    QStringList departments;
 };
 
 #endif // COURSE_H_
