@@ -31,6 +31,7 @@ bool DepartmentManager::isMatch(const Course &course, const QString &department)
     {
         // Coursera.
         hash.insert("arts-and-humanities", "art");
+        hash.insert("arts-and-humanities", "humanities");
         hash.insert("business", "business");
         hash.insert("computer-science", "it");
         hash.insert("data-science", "it");
