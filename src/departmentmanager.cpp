@@ -30,8 +30,8 @@ bool DepartmentManager::isMatch(const Course &course, const QString &department)
     if (!hash.count())
     {
         // Coursera.
-        hash.insert("arts-and-humanities", "art");
-        hash.insert("arts-and-humanities", "humanities");
+        hash.insertMulti("arts-and-humanities", "art");
+        hash.insertMulti("arts-and-humanities", "humanities");
         hash.insert("business", "business");
         hash.insert("computer-science", "it");
         hash.insert("data-science", "it");
@@ -102,9 +102,22 @@ bool DepartmentManager::isMatch(const Course &course, const QString &department)
     }
 
     for(int i = 0; i < course.departments.length(); i++)
-        if (hash[course.departments[i]] == department)
-            return true;
+    {
+        // Some departments are mapped to multiple categories.
+        if (department == "art" || department == "humanities")
+        {
+            QList<QString> values = hash.values(course.departments[i]);
+            for (int j = 0; j < values.size(); ++j)
+                if (values.at(j) == department)
+                    return true;
+        }
+        else
+        {
+            if (hash[course.departments[i]] == department)
+                return true;
+        }
 
+    }
     return false;
 }
 
