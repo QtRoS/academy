@@ -144,7 +144,7 @@ QString DepartmentManager::flatDescription(const QString& deps)
 
         for (int j = 0; j < list.size(); ++j)
             for (int k = 0; k < intCat.size(); ++k)
-                if (list[j].id == intCat[k])
+                if (list[j].id == intCat[k] && !names.contains(list[j].label))
                     names << list[j].label;
     }
 
