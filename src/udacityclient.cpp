@@ -65,6 +65,11 @@ QList<Course> UdacityClient::courses(const QString &query)
             course.instructors.append(instr);
         }
 
+        QList<QVariant> tracks = map["tracks"].toList();
+        for (const QVariant& k : tracks)
+            course.departments.append(k.toString());
+
+        //qCDebug(Udacity) << "Track count: " << course.departments.size();
         //qCDebug(Udacity) << "Instr count: " << course.instructors.size();
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);

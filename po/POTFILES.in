@@ -5,6 +5,7 @@ src/udemyclient.cpp
 src/preview.cpp
 src/baseclient.cpp
 src/localcache.cpp
+src/departmentmanager.cpp
 src/client.cpp
 src/edxclient.cpp
 src/cachedclient.cpp
@@ -17,6 +18,7 @@ src/udemyclient.h
 src/config.h
 src/localization.h
 src/baseclient.h
+src/departmentmanager.h
 src/localcache.h
 src/edxclient.h
 src/client.h

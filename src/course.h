@@ -24,6 +24,7 @@ struct Course
     QString video;
     QString extra;
     QList<Instructor> instructors;
+    QList<QString> departments;
 };
 
 #endif // COURSE_H_

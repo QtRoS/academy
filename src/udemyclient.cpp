@@ -25,7 +25,7 @@ QList<Course> UdemyClient::courses(const QString &query)
     net::Uri::Path path;
     net::Uri::QueryParameters params;
 
-    params.push_back({"fields[course]", "@default,description,headline,slug"});
+    params.push_back({"fields[course]", "@default,description,headline,slug,primary_category"});
     params.push_back({"page_size", "80"});
     params.push_back({"ordering", "trending"});
 
@@ -72,7 +72,11 @@ QList<Course> UdemyClient::courses(const QString &query)
             course.instructors.append(instr);
         }
 
-        // qCDebug(Udemy) << "Instr count: " << course.instructors.size();
+        QVariantMap kmap = map["primary_category"].toMap();
+        course.departments.append(kmap["title"].toString());
+
+        //qCDebug(Udemy) << "Category count: " << course.departments.size();
+        //qCDebug(Udemy) << "Instr count: " << course.instructors.size();
         list.append(course);
     }
 

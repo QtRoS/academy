@@ -26,7 +26,7 @@ QList<Course> CourseraClient::courses(const QString &query)
     net::Uri::QueryParameters params;
     params.push_back({"includes", "instructorIds"});
     params.push_back({"limit", "80"});
-    params.push_back({"fields", "instructors.v1(firstName,lastName,suffix,photo,photo150,bio),description,photoUrl,slug,workload,instructorIds" });
+    params.push_back({"fields", "instructors.v1(firstName,lastName,suffix,photo,photo150,bio),description,photoUrl,slug,workload,instructorIds,domainTypes" });
     if (!query.isEmpty())
     {
         params.push_back({"q", "search"});
@@ -87,6 +87,14 @@ QList<Course> CourseraClient::courses(const QString &query)
                 course.instructors.append(instructorsMap.value(j.toString()));
         }
 
+        QList<QVariant> domainTypes = map["domainTypes"].toList();
+        for (const QVariant& k : domainTypes)
+        {
+            QVariantMap kmap = k.toMap();
+            course.departments.append(kmap["domainId"].toString());
+        }
+
+        //qCDebug(Coursera) << "Domain count: " << course.departments.size();
         //qCDebug(Coursera) << "Instr count: " << course.instructors.size();
         list.append(course);
     }

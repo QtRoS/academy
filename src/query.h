@@ -5,6 +5,7 @@
 
 #include <unity/scopes/SearchQueryBase.h>
 #include <unity/scopes/ReplyProxyFwd.h>
+#include <unity/scopes/Department.h>
 
 #include <QLoggingCategory>
 #include <QPointer>
@@ -16,6 +17,8 @@
 #include "udacityclient.h"
 #include "edxclient.h"
 #include "udemyclient.h"
+
+#include "departmentmanager.h"
 
 Q_DECLARE_LOGGING_CATEGORY(Qry)
 

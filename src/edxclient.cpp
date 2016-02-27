@@ -111,6 +111,19 @@ QList<Course> EdxClient::courses(const QString &query)
             course.instructors.append(instr);
         }
 
+        // Departments.
+        QDomNodeList depList = courseElem.elementsByTagName("course:subject");
+        for (int k = 0; k < depList.count(); ++k)
+        {
+            QDomElement depElem = depList.at(k).toElement();
+
+            if (depElem.isNull())
+                continue;
+
+            course.departments.append(depElem.text());
+        }
+
+        //qCDebug(Edx) << "Subject count: " << course.departments.size();
         //qCDebug(Edx) << "Instr count: " << course.instructors.size();
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);

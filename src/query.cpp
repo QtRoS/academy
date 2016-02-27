@@ -87,17 +87,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
         string query_string = query.query_string();
         qCDebug(Qry) << "Query string is:" << QString::fromStdString(query_string);
 
-        // Shared ptr way.
-//        QList<QSharedPointer<BaseClient>> sources;
-//        if (settings().at("coursera").get_bool())
-//            sources.append(QSharedPointer<BaseClient>(new CourseraClient(m_config)));
-//        if (settings().at("udemy").get_bool())
-//            sources.append(QSharedPointer<BaseClient>(new UdemyClient(m_config)));
-//        if (settings().at("edx").get_bool())
-//            sources.append(QSharedPointer<BaseClient>(new EdxClient(m_config)));
-//        if (settings().at("udacity").get_bool())
-//            sources.append(QSharedPointer<BaseClient>(new UdacityClient(m_config)));
-
+        // Checking out which sources are enabled.
         QList<BaseClient*> sources;
         if (settings().at("coursera").get_bool())
             sources.append(&m_coursera);
@@ -107,12 +97,24 @@ void Query::run(sc::SearchReplyProxy const& reply)
             sources.append(&m_edx);
         if (settings().at("udacity").get_bool())
             sources.append(&m_udacity);
-
         qCDebug(Qry) << "Source count:" << sources.count();
 
-        QSet<QString> uniqueSet;
+        // Working with departments.
+        sc::Department::SPtr all_depts = sc::Department::create("", query, "All");
+        sc::DepartmentList depList;
+        QList<Department> list = DepartmentManager::departments();
+        for (int i = 0; i < list.length(); i++)
+            depList.push_back(sc::Department::create(list[i].id.toStdString(), query, list[i].label.toStdString()));
+        all_depts->set_subdepartments(depList);
 
-        for(int i = 0; i < sources.count(); i++)
+        // Register the root department on the reply
+        reply->register_departments(all_depts);
+
+        QString selectedDepartment = QString::fromStdString(query.department_id());
+        qCDebug(Qry) << "Selected department:" << selectedDepartment;
+
+        QSet<QString> uniqueSet;
+        for(int i = 0; i < sources.count(); ++i)
         {
             QString sourceCatName = sources[i]->name();
             auto sourceList = sources[i]->courses(QString::fromStdString(query_string));
@@ -126,6 +128,11 @@ void Query::run(sc::SearchReplyProxy const& reply)
 
             for (const auto &course : sourceList)
             {
+
+                // Department check.
+                if (!selectedDepartment.isEmpty() && !DepartmentManager::isMatch(course, selectedDepartment))
+                    continue;
+
                 // Duplicate results cause Dash to crash.
                 if (uniqueSet.contains(course.link))
                 {
