@@ -103,9 +103,8 @@ const QMap<QByteArray, QByteArray> UdemyClient::customHeaders() const
 
 QString UdemyClient::grabExtra(const QVariantMap &map)
 {
-//    QStringList extra;
-//    extra << QStringLiteral("price - ") + map["price"].toString();
-//    return extra.join(", ");
-
     return _("price - ") + map["price"].toString();
+    //    QStringList extra;
+    //    extra << QStringLiteral("price - ") + map["price"].toString();
+    //    return extra.join(", ");
 }

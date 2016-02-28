@@ -100,7 +100,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
         qCDebug(Qry) << "Source count:" << sources.count();
 
         // Working with departments.
-        sc::Department::SPtr all_depts = sc::Department::create("", query, "All");
+        sc::Department::SPtr all_depts = sc::Department::create("", query, _("All"));
         sc::DepartmentList depList;
         QList<Department> list = DepartmentManager::departments();
         for (int i = 0; i < list.length(); i++)

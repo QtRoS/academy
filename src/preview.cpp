@@ -1,4 +1,5 @@
 #include <preview.h>
+#include <localization.h>
 
 #include <unity/scopes/ColumnLayout.h>
 #include <unity/scopes/PreviewWidget.h>
@@ -67,19 +68,19 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
 
     // Expandable area.
     sc::PreviewWidget exp("exp_widget", "expandable");
-    exp.add_attribute_value("title", sc::Variant("Details"));
+    exp.add_attribute_value("title", sc::Variant(_("Details")));
 
     sc::PreviewWidget summary("summary_widget", "text");
     summary.add_attribute_mapping("text", "description");
 
     sc::PreviewWidget departments("departments_widget", "text");
-    departments.add_attribute_value("text", sc::Variant("<b>Departments:</b> " + decorate_departments(result["departments"].get_string())));
+    departments.add_attribute_value("text", sc::Variant(_("<b>Departments:</b> ") + decorate_departments(result["departments"].get_string())));
 
     sc::PreviewWidget extra("extra_widget", "text");
-    extra.add_attribute_value("text", sc::Variant("<b>Extra:</b> " + result["extra"].get_string()));
+    extra.add_attribute_value("text", sc::Variant(_("<b>Extra:</b> ") + result["extra"].get_string()));
 
     sc::PreviewWidget source("source_widget", "text");
-    source.add_attribute_value("text", sc::Variant("<b>Source:</b> " + result["source"].get_string()));
+    source.add_attribute_value("text", sc::Variant(_("<b>Source:</b> ") + result["source"].get_string()));
 
     exp.add_widget(summary);
     exp.add_widget(departments);
@@ -91,7 +92,7 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     sc::VariantBuilder builder;
     builder.add_tuple({
                           {"id", sc::Variant("open")},
-                          {"label", sc::Variant("Open")},
+                          {"label", sc::Variant(_("Open"))},
                           {"uri", result["uri"]}
                       });
 //    builder.add_tuple({
@@ -108,7 +109,7 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     {
 
         sc::PreviewWidget intitle("intitle_widget", "text");
-        intitle.add_attribute_value("text", sc::Variant("<b>Instructors:</b>"));
+        intitle.add_attribute_value("text", sc::Variant(_("<b>Instructors:</b>")));
         reply->push( { intitle } );
 
         sc::VariantArray images = result["instr_images"].get_array();
