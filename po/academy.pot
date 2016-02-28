@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-24 12:55+0300\n"
+"POT-Creation-Date: 2016-02-28 23:29+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,54 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. Register a category for the forecast
-#: ../src/query.cpp:206
-msgid "7 day forecast"
+#: ../src/udacityclient.cpp:95
+msgid "level - "
+msgstr ""
+
+#: ../src/udacityclient.cpp:96 ../src/edxclient.cpp:156
+msgid "duration - "
+msgstr ""
+
+#: ../src/udemyclient.cpp:110
+msgid "price - "
+msgstr ""
+
+#: ../src/departmentmanager.cpp:15
+msgid "Art and Design"
+msgstr ""
+
+#: ../src/departmentmanager.cpp:16
+msgid "Business"
+msgstr ""
+
+#: ../src/departmentmanager.cpp:17
+msgid "Music"
+msgstr ""
+
+#: ../src/departmentmanager.cpp:18
+msgid "Languages"
+msgstr ""
+
+#: ../src/departmentmanager.cpp:19
+msgid "IT and Tech"
+msgstr ""
+
+#: ../src/departmentmanager.cpp:20
+msgid "Science"
+msgstr ""
+
+#: ../src/departmentmanager.cpp:21
+msgid "Humanities"
+msgstr ""
+
+#: ../src/departmentmanager.cpp:22
+msgid "Personal"
+msgstr ""
+
+#: ../src/departmentmanager.cpp:23
+msgid "Other"
+msgstr ""
+
+#: ../src/edxclient.cpp:152 ../src/courseraclient.cpp:118
+msgid "workload - "
 msgstr ""

@@ -1,4 +1,5 @@
 #include "departmentmanager.h"
+#include <localization.h>
 
 DepartmentManager::DepartmentManager()
 {
@@ -11,15 +12,15 @@ QList<Department> DepartmentManager::departments()
 
     if (list.empty())
     {
-        list << Department("art", "Art and Design");
-        list << Department("business", "Business");
-        list << Department("music", "Music");
-        list << Department("languages", "Languages");
-        list << Department("it", "IT and Tech");
-        list << Department("science", "Science");
-        list << Department("humanities", "Humanities");
-        list << Department("personal", "Personal");
-        list << Department("other", "Other");
+        list << Department("art",       _("Art and Design"));
+        list << Department("business",  _("Business"));
+        list << Department("music",     _("Music"));
+        list << Department("languages", _("Languages"));
+        list << Department("it",        _("IT and Tech"));
+        list << Department("science",   _("Science"));
+        list << Department("humanities",_("Humanities"));
+        list << Department("personal",  _("Personal"));
+        list << Department("other",     _("Other"));
     }
 
     return list;

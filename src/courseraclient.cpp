@@ -1,4 +1,5 @@
 #include <courseraclient.h>
+#include <localization.h>
 
 #include <core/net/error.h>
 #include <core/net/http/client.h>
@@ -114,6 +115,6 @@ const QString CourseraClient::name() const
 
 QString CourseraClient::grabExtra(const QVariantMap &map)
 {
-    return QStringLiteral("workload ") + map["workload"].toString();
+    return _("workload - ") + map["workload"].toString();
 }
 

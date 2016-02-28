@@ -1,4 +1,5 @@
 #include <udemyclient.h>
+#include <localization.h>
 
 #include <core/net/error.h>
 #include <core/net/http/client.h>
@@ -105,5 +106,6 @@ QString UdemyClient::grabExtra(const QVariantMap &map)
 //    QStringList extra;
 //    extra << QStringLiteral("price - ") + map["price"].toString();
 //    return extra.join(", ");
-    return QStringLiteral("price - ") + map["price"].toString();
+
+    return _("price - ") + map["price"].toString();
 }

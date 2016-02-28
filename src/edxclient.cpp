@@ -1,4 +1,5 @@
 #include <edxclient.h>
+#include <localization.h>
 
 #include <core/net/error.h>
 #include <core/net/http/client.h>
@@ -148,11 +149,11 @@ QString EdxClient::grabExtra(const QDomElement &courseElem)
 
     QDomElement effort = courseElem.firstChildElement("course:effort");
     if (!effort.isNull())
-        extra << QStringLiteral("workload - ") + effort.text();
+        extra << _("workload - ") + effort.text();
 
     QDomElement length = courseElem.firstChildElement("course:length");
     if (!length.isNull())
-        extra << QStringLiteral("duration - ") + length.text();
+        extra << _("duration - ") + length.text();
 
     return extra.join(", ");
 }

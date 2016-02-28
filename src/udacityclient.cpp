@@ -1,4 +1,5 @@
 #include <udacityclient.h>
+#include <localization.h>
 
 #include <core/net/error.h>
 #include <core/net/http/client.h>
@@ -91,7 +92,7 @@ const QString UdacityClient::name() const
 QString UdacityClient::grabExtra(const QVariantMap &map)
 {
     QStringList extra;
-    extra << QStringLiteral("level - ") + map["level"].toString();
-    extra << QStringLiteral("duration - ") + map["expected_duration"].toString() + " " + map["expected_duration_unit"].toString();
+    extra << _("level - ") + map["level"].toString();
+    extra << _("duration - ") + map["expected_duration"].toString() + " " + map["expected_duration_unit"].toString();
     return extra.join(", ");
 }
