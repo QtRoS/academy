@@ -1,4 +1,29 @@
-Unity scope template
+## Academy
+
+Academy is Ubuntu Phone scope which allows you to find online courses from multiple sources
+
+## Motivation
+
+The popularity of online schools has grown over the past several years. Improvements in technology have made online schooling a more accessible option for traditional colleges and universities. Teachers and students alike are becoming more familiar how to navigate online courses, and programs continue to improve. The number of available online courses is growing constantly. To orientate in this vast diversity of courses you need a convenient search tool. Academy scope is created exactly for this purpose! With it you will be able to search relevant courses from multiple sources: 
+* Coursera 
+* Udemy 
+* edX 
+* Udacity 
+Search results contain full course description, information about the instructors and explaining videos (optional). Also you can use departments, but keep in mind that some of sources contain huge amount of courses (Coursera ~1500, Udemy ~25000) which are available only via search (traffic economy).
+
+## Installation
+
+You can find this scope in the Ubuntu Store (more details https://uappexplorer.com/app/academy.mrqtros)
+
+## Contributors
+
+Feel free to fork this project or create pull requests, I will be quite happy to see them.
+
+## License
+
+GNU LGPL v3
+
+## Other
 
 Building
 --------
