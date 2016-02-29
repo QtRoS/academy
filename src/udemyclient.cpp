@@ -76,7 +76,7 @@ QList<Course> UdemyClient::courses(const QString &query)
         QVariantMap kmap = map["primary_category"].toMap();
         course.departments.append(kmap["title"].toString());
 
-        //qCDebug(Udemy) << "Category count: " << course.departments.size();
+        qCDebug(Udemy) << "Category count: " << course.departments.size() << course.departments;
         //qCDebug(Udemy) << "Instr count: " << course.instructors.size();
         list.append(course);
     }

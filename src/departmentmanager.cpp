@@ -80,17 +80,17 @@ QHash<QString, QString> DepartmentManager::mapping()
         // Udemy
         hash.insert("Academics", "other");
         hash.insert("Business", "business");
-        hash.insert("Crafts-and-Hobbies", "other");
+        hash.insert("Crafts & Hobbies", "other");
         hash.insert("Design", "art");
         hash.insert("Development", "it");
         hash.insert("Games", "other");
-        hash.insert("Health-and-Fitness", "other");
+        hash.insert("Health & Fitness", "other");
         hash.insert("Humanities", "humanities");
-        hash.insert("IT-and-Software", "it");
+        hash.insert("IT & Software", "it");
         hash.insert("Language", "languages");
         hash.insert("Lifestyle", "other");
         hash.insert("Marketing", "business");
-        hash.insert("Math-and-Science", "science");
+        hash.insert("Math & Science", "science");
         hash.insert("Music", "music");
         hash.insert("Office-Productivity", "business");
         hash.insert("Other", "other");
