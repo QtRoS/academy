@@ -19,44 +19,44 @@ msgstr ""
 
 #: ../src/preview.cpp:77
 msgid "<b>Departments:</b> "
-msgstr ""
+msgstr "<b>Sezioni:</b> "
 
 #: ../src/preview.cpp:80
 msgid "<b>Extra:</b> "
-msgstr ""
+msgstr "<b>Extra:</b> "
 
 #: ../src/preview.cpp:112
 msgid "<b>Instructors:</b>"
-msgstr ""
+msgstr "<b>Docenti:</b>"
 
 #: ../src/preview.cpp:83
 msgid "<b>Source:</b> "
-msgstr ""
+msgstr "<b>Fonte:</b> "
 
 #. Working with departments.
 #: ../src/query.cpp:111
 msgid "All"
-msgstr ""
+msgstr "Tutte le categorie"
 
 #: ../src/departmentmanager.cpp:15
 msgid "Art and Design"
-msgstr ""
+msgstr "Arte e Design"
 
 #: ../src/departmentmanager.cpp:16
 msgid "Business"
-msgstr ""
+msgstr "Business"
 
 #: ../src/preview.cpp:71
 msgid "Details"
-msgstr ""
+msgstr "Dettagli"
 
 #: ../src/departmentmanager.cpp:21
 msgid "Humanities"
-msgstr ""
+msgstr "Discipline umanistiche"
 
 #: ../src/departmentmanager.cpp:19
 msgid "IT and Tech"
-msgstr ""
+msgstr "Tecnologia e informatica"
 
 #: ../src/departmentmanager.cpp:18
 msgid "Languages"
@@ -64,37 +64,37 @@ msgstr ""
 
 #: ../src/departmentmanager.cpp:17
 msgid "Music"
-msgstr ""
+msgstr "Lingue"
 
 #: ../src/preview.cpp:95
 msgid "Open"
-msgstr ""
+msgstr "Apri"
 
 #: ../src/departmentmanager.cpp:23
 msgid "Other"
-msgstr ""
+msgstr "Altro"
 
 #: ../src/departmentmanager.cpp:22
 msgid "Personal"
-msgstr ""
+msgstr "Personale"
 
 #: ../src/departmentmanager.cpp:20
 msgid "Science"
-msgstr ""
+msgstr "Scienze"
 
 #: ../src/udacityclient.cpp:96 ../src/openlearningclient.cpp:88
 #: ../src/edxclient.cpp:156
 msgid "duration - "
-msgstr ""
+msgstr "durata - "
 
 #: ../src/udacityclient.cpp:95 ../src/iversityclient.cpp:91
 msgid "level - "
-msgstr ""
+msgstr "livello - "
 
 #: ../src/udemyclient.cpp:106
 msgid "price - "
-msgstr ""
+msgstr "prezzo - "
 
 #: ../src/edxclient.cpp:152 ../src/courseraclient.cpp:118
 msgid "workload - "
-msgstr ""
+msgstr "carico di lavoro - "
