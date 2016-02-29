@@ -18,6 +18,7 @@
 #include "edxclient.h"
 #include "udemyclient.h"
 #include "iversityclient.h"
+#include "openlearningclient.h"
 
 #include "departmentmanager.h"
 
@@ -49,6 +50,7 @@ private:
     EdxClient m_edx;
     UdacityClient m_udacity;
     IversityClient m_iversity;
+    OpenLearningClient m_openLearning;
 };
 
 #endif // QUERY_H_

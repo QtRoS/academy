@@ -117,6 +117,23 @@ QHash<QString, QString> DepartmentManager::mapping()
         hash.insert("Medicine", "other");
         hash.insert("Philosophy", "humanities");
         hash.insert("Social Sciences & Humanities ", "humanities");
+        // openlearning
+        hash.insert("Arts and Design", "art");
+        hash.insert("Business and Economics", "business");
+        hash.insert("Computers and Technology", "it");
+        hash.insert("Education", "personal");
+        hash.insert("Engineering", "it");
+        hash.insert("Health and Medicine", "other");
+        hash.insert("Humanities", "humanities");
+        hash.insert("Language", "languages");
+        hash.insert("Language and Communication", "languages");
+        hash.insert("Law", "humanities");
+        hash.insert("Lifestyle", "personal");
+        hash.insert("Math and Science", "science");
+        hash.insert("Other", "other");
+        hash.insert("Self Improvement", "personal");
+        hash.insert("Sports and Fitness", "personal");
+        hash.insert("Technology", "it");
     }
 
     return hash;

@@ -5,6 +5,7 @@ src/udemyclient.cpp
 src/preview.cpp
 src/baseclient.cpp
 src/localcache.cpp
+src/openlearningclient.cpp
 src/departmentmanager.cpp
 src/iversityclient.cpp
 src/client.cpp
@@ -18,6 +19,7 @@ src/scope.h
 src/udemyclient.h
 src/iversityclient.h
 src/config.h
+src/openlearningclient.h
 src/localization.h
 src/baseclient.h
 src/departmentmanager.h

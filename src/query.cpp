@@ -62,7 +62,8 @@ Query::Query(const sc::CannedQuery &query, const sc::SearchMetadata &metadata, C
     m_udemy(config),
     m_edx(config),
     m_udacity(config),
-    m_iversity(config)
+    m_iversity(config),
+    m_openLearning(config)
 {
 
 }
@@ -76,6 +77,7 @@ void Query::cancelled()
     m_edx.cancel();
     m_udacity.cancel();
     m_iversity.cancel();
+    m_openLearning.cancel();
 }
 
 
@@ -101,6 +103,8 @@ void Query::run(sc::SearchReplyProxy const& reply)
             sources.append(&m_udacity);
         if (settings().at("iversity").get_bool())
             sources.append(&m_iversity);
+        if (settings().at("openLearning").get_bool())
+            sources.append(&m_openLearning);
         qCDebug(Qry) << "Source count:" << sources.count();
 
         // Working with departments.

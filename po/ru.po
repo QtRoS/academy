@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-29 08:55+0300\n"
+"POT-Creation-Date: 2016-02-29 22:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgid "<b>Source:</b> "
 msgstr "<b>Источник:</b> "
 
 #. Working with departments.
-#: ../src/query.cpp:107
+#: ../src/query.cpp:111
 msgid "All"
 msgstr "Все"
 
@@ -82,7 +82,8 @@ msgstr "Личное развитие"
 msgid "Science"
 msgstr "Наука"
 
-#: ../src/udacityclient.cpp:96 ../src/edxclient.cpp:156
+#: ../src/udacityclient.cpp:96 ../src/openlearningclient.cpp:88
+#: ../src/edxclient.cpp:156
 msgid "duration - "
 msgstr "длительность - "
 

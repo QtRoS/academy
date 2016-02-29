@@ -43,6 +43,11 @@ type = boolean
 defaultValue = false
 displayName = iversity
 
+[openLearning]
+type = boolean
+defaultValue = false
+displayName = OpenLearning
+
 [textPosition]
 type = list
 defaultValue = 1
