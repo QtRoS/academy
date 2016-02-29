@@ -38,6 +38,11 @@ type = boolean
 defaultValue = true
 displayName = Udacity
 
+[iversity]
+type = boolean
+defaultValue = false
+displayName = iversity
+
 [textPosition]
 type = list
 defaultValue = 1

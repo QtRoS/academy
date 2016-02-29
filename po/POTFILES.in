@@ -6,6 +6,7 @@ src/preview.cpp
 src/baseclient.cpp
 src/localcache.cpp
 src/departmentmanager.cpp
+src/iversityclient.cpp
 src/client.cpp
 src/edxclient.cpp
 src/cachedclient.cpp
@@ -15,6 +16,7 @@ src/courseraclient.h
 src/course.h
 src/scope.h
 src/udemyclient.h
+src/iversityclient.h
 src/config.h
 src/localization.h
 src/baseclient.h

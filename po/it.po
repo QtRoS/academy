@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-29 08:22+0300\n"
+"POT-Creation-Date: 2016-02-29 08:43+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgid "<b>Source:</b> "
 msgstr ""
 
 #. Working with departments.
-#: ../src/query.cpp:103
+#: ../src/query.cpp:107
 msgid "All"
 msgstr ""
 
@@ -90,7 +90,7 @@ msgstr ""
 msgid "level - "
 msgstr ""
 
-#: ../src/udemyclient.cpp:106
+#: ../src/udemyclient.cpp:106 ../src/iversityclient.cpp:88
 msgid "price - "
 msgstr ""
 

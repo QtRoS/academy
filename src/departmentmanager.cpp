@@ -102,6 +102,21 @@ QHash<QString, QString> DepartmentManager::mapping()
         hash.insert("Technology", "it");
         hash.insert("Test", "it");
         hash.insert("Test-Prep", "it");
+        // iversity
+        hash.insert("Agricultural studies", "other");
+        hash.insert("Art studies", "art");
+        hash.insert("Economics", "business");
+        hash.insert("Education", "personal");
+        hash.insert("Engineering", "it");
+        hash.insert("Environmental Studies", "other");
+        hash.insert("Health", "personal");
+        hash.insert("History", "humanities");
+        hash.insert("Interdisciplinary", "other");
+        hash.insert("Languages", "languages");
+        hash.insert("Literature", "humanities");
+        hash.insert("Medicine", "other");
+        hash.insert("Philosophy", "humanities");
+        hash.insert("Social Sciences & Humanities ", "humanities");
     }
 
     return hash;
