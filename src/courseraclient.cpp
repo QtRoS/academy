@@ -95,7 +95,7 @@ QList<Course> CourseraClient::courses(const QString &query)
             course.departments.append(kmap["domainId"].toString());
         }
 
-        //qCDebug(Coursera) << "Domain count: " << course.departments.size();
+        //qCDebug(Coursera) << "Domain count: " << course.departments;
         //qCDebug(Coursera) << "Instr count: " << course.instructors.size();
         list.append(course);
     }

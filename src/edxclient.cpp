@@ -124,7 +124,7 @@ QList<Course> EdxClient::courses(const QString &query)
             course.departments.append(depElem.text());
         }
 
-        //qCDebug(Edx) << "Subject count: " << course.departments.size();
+        //qCDebug(Edx) << "Subject count: " << course.departments;
         //qCDebug(Edx) << "Instr count: " << course.instructors.size();
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);

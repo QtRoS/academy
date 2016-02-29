@@ -36,6 +36,8 @@ QList<Course> IversityClient::courses(const QString &query)
     QList<QVariant> courses = variant["courses"].toList();
     qCDebug(Iversity) << "Element count:" << courses.length();
 
+    SearchEngine se(query);
+
     for (const QVariant &i : courses)
     {
         QVariantMap map = i.toMap();
@@ -65,9 +67,10 @@ QList<Course> IversityClient::courses(const QString &query)
 
         course.departments.append(map["discipline"].toString());
 
-        qCDebug(Iversity) << "Category count: " << course.departments.size() << course.departments;
+        //qCDebug(Iversity) << "Category count: " << course.departments;
         //qCDebug(Iversity) << "Instr count: " << course.instructors.size();
-        list.append(course);
+        if (query.isEmpty() || se.isMatch(course))
+            list.append(course);
     }
 
     return list;
