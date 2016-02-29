@@ -35,7 +35,7 @@ displayName = edX
 
 [udacity]
 type = boolean
-defaultValue = true
+defaultValue = false
 displayName = Udacity
 
 [iversity]
@@ -45,7 +45,7 @@ displayName = iversity
 
 [openLearning]
 type = boolean
-defaultValue = false
+defaultValue = true
 displayName = OpenLearning
 
 [textPosition]
