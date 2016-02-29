@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-02-29 22:09+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: JoeyChan <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -19,82 +19,82 @@ msgstr ""
 
 #: ../src/preview.cpp:77
 msgid "<b>Departments:</b> "
-msgstr ""
+msgstr "<b>科目：</b> "
 
 #: ../src/preview.cpp:80
 msgid "<b>Extra:</b> "
-msgstr ""
+msgstr "<b>额外：</b> "
 
 #: ../src/preview.cpp:112
 msgid "<b>Instructors:</b>"
-msgstr ""
+msgstr "<b>讲师：</b>"
 
 #: ../src/preview.cpp:83
 msgid "<b>Source:</b> "
-msgstr ""
+msgstr "<b>来源：</b> "
 
 #. Working with departments.
 #: ../src/query.cpp:111
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: ../src/departmentmanager.cpp:15
 msgid "Art and Design"
-msgstr ""
+msgstr "艺术与设计"
 
 #: ../src/departmentmanager.cpp:16
 msgid "Business"
-msgstr ""
+msgstr "商业"
 
 #: ../src/preview.cpp:71
 msgid "Details"
-msgstr ""
+msgstr "详细介绍"
 
 #: ../src/departmentmanager.cpp:21
 msgid "Humanities"
-msgstr ""
+msgstr "人文"
 
 #: ../src/departmentmanager.cpp:19
 msgid "IT and Tech"
-msgstr ""
+msgstr "IT与技术"
 
 #: ../src/departmentmanager.cpp:18
 msgid "Languages"
-msgstr ""
+msgstr "语言"
 
 #: ../src/departmentmanager.cpp:17
 msgid "Music"
-msgstr ""
+msgstr "音乐"
 
 #: ../src/preview.cpp:95
 msgid "Open"
-msgstr ""
+msgstr "打开"
 
 #: ../src/departmentmanager.cpp:23
 msgid "Other"
-msgstr ""
+msgstr "其它"
 
 #: ../src/departmentmanager.cpp:22
 msgid "Personal"
-msgstr ""
+msgstr "个人的"
 
 #: ../src/departmentmanager.cpp:20
 msgid "Science"
-msgstr ""
+msgstr "科学"
 
 #: ../src/udacityclient.cpp:96 ../src/openlearningclient.cpp:88
 #: ../src/edxclient.cpp:156
 msgid "duration - "
-msgstr ""
+msgstr "持续时间 - "
 
 #: ../src/udacityclient.cpp:95 ../src/iversityclient.cpp:91
 msgid "level - "
-msgstr ""
+msgstr "级别 - "
 
 #: ../src/udemyclient.cpp:106
 msgid "price - "
-msgstr ""
+msgstr "价格 - "
 
 #: ../src/edxclient.cpp:152 ../src/courseraclient.cpp:118
 msgid "workload - "
-msgstr ""
+msgstr "工作量 - "
