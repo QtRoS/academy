@@ -53,5 +53,7 @@ type = list
 defaultValue = 1
 displayName = Label position
 displayName[ru] = Расположение текста
+displayName[sl] = Lega oznake
 displayValues = Bottom;Overlay
 displayValues[ru] = Снизу;Поверх
+displayValues[sl] = Spodaj;Čez
