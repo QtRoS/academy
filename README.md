@@ -49,3 +49,5 @@ menu entry.
 
 Remember! When you copy the .pot file, make sure you change the file extension to ".po".
 
+**AND** don't forget to translate both `academy.ini.in` and `academy-settings.ini.in`.
+
