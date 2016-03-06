@@ -22,7 +22,7 @@ Feel free to fork this project or create pull requests, I will be quite happy to
 
 ## License
 
-GNU LGPL v3
+GNU GPL v3
 
 ## Other
 
