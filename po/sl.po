@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-29 22:34+0300\n"
+"POT-Creation-Date: 2016-03-06 10:31+0300\n"
 "PO-Revision-Date: 2016-02-29 22:20+0200\n"
 "Last-Translator: Bernard Banko <beernarrd (at) gmail.com>\n"
 "Language-Team: lugos\n"
@@ -14,26 +14,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
-"n%100==4 ? 3 : 0);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
 "X-Generator: Virtaal 0.7.1\n"
-
-#: ../src/udacityclient.cpp:95 ../src/iversityclient.cpp:91
-msgid "level - "
-msgstr "stopnja - "
-
-#: ../src/udacityclient.cpp:96 ../src/openlearningclient.cpp:88
-#: ../src/edxclient.cpp:156
-msgid "duration - "
-msgstr "trajanje - "
-
-#: ../src/udemyclient.cpp:106
-msgid "price - "
-msgstr "cena - "
-
-#: ../src/preview.cpp:71
-msgid "Details"
-msgstr "Podrobnosti"
 
 #: ../src/preview.cpp:77
 msgid "<b>Departments:</b> "
@@ -43,17 +26,18 @@ msgstr "<b>Oddelki:</b> "
 msgid "<b>Extra:</b> "
 msgstr "<b>Dodatno:</b> "
 
+#: ../src/preview.cpp:112
+msgid "<b>Instructors:</b>"
+msgstr "<b>Učitelji:</b>"
+
 #: ../src/preview.cpp:83
 msgid "<b>Source:</b> "
 msgstr "<b>Vir:</b> "
 
-#: ../src/preview.cpp:95
-msgid "Open"
-msgstr "Odpri"
-
-#: ../src/preview.cpp:112
-msgid "<b>Instructors:</b>"
-msgstr "<b>Učitelji:</b>"
+#. Working with departments.
+#: ../src/query.cpp:111
+msgid "All"
+msgstr "Vsi"
 
 #: ../src/departmentmanager.cpp:15
 msgid "Art and Design"
@@ -63,39 +47,55 @@ msgstr "Umetnost in oblikovanje"
 msgid "Business"
 msgstr "Posel"
 
-#: ../src/departmentmanager.cpp:17
-msgid "Music"
-msgstr "Glasba"
-
-#: ../src/departmentmanager.cpp:18
-msgid "Languages"
-msgstr "Jeziki"
-
-#: ../src/departmentmanager.cpp:19
-msgid "IT and Tech"
-msgstr "IT in tehnologija"
-
-#: ../src/departmentmanager.cpp:20
-msgid "Science"
-msgstr "Znanost"
+#: ../src/preview.cpp:71
+msgid "Details"
+msgstr "Podrobnosti"
 
 #: ../src/departmentmanager.cpp:21
 msgid "Humanities"
 msgstr "Humanizem"
 
-#: ../src/departmentmanager.cpp:22
-msgid "Personal"
-msgstr "Zasebno"
+#: ../src/departmentmanager.cpp:19
+msgid "IT and Tech"
+msgstr "IT in tehnologija"
+
+#: ../src/departmentmanager.cpp:18
+msgid "Languages"
+msgstr "Jeziki"
+
+#: ../src/departmentmanager.cpp:17
+msgid "Music"
+msgstr "Glasba"
+
+#: ../src/preview.cpp:95
+msgid "Open"
+msgstr "Odpri"
 
 #: ../src/departmentmanager.cpp:23
 msgid "Other"
 msgstr "Drugo"
 
+#: ../src/departmentmanager.cpp:22
+msgid "Personal"
+msgstr "Zasebno"
+
+#: ../src/departmentmanager.cpp:20
+msgid "Science"
+msgstr "Znanost"
+
+#: ../src/udacityclient.cpp:96 ../src/openlearningclient.cpp:88
+#: ../src/edxclient.cpp:156
+msgid "duration - "
+msgstr "trajanje - "
+
+#: ../src/udacityclient.cpp:95 ../src/iversityclient.cpp:91
+msgid "level - "
+msgstr "stopnja - "
+
+#: ../src/udemyclient.cpp:106
+msgid "price - "
+msgstr "cena - "
+
 #: ../src/edxclient.cpp:152 ../src/courseraclient.cpp:118
 msgid "workload - "
 msgstr "obremenitev - "
-
-#. Working with departments.
-#: ../src/query.cpp:111
-msgid "All"
-msgstr "Vsi"
