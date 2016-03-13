@@ -8,7 +8,6 @@ src/localcache.cpp
 src/openlearningclient.cpp
 src/departmentmanager.cpp
 src/iversityclient.cpp
-src/client.cpp
 src/edxclient.cpp
 src/cachedclient.cpp
 src/courseraclient.cpp
@@ -25,7 +24,6 @@ src/baseclient.h
 src/departmentmanager.h
 src/localcache.h
 src/edxclient.h
-src/client.h
 src/query.h
 src/preview.h
 src/cachedclient.h

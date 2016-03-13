@@ -23,11 +23,8 @@
 struct Config {
     typedef std::shared_ptr<Config> Ptr;
 
-    // The root of all API request URLs
-    std::string apiroot { "http://api.openweathermap.org" };
-
     // The custom HTTP user agent string for this library
-    std::string user_agent { "course-explorer-scope 0.1; (foo)" };
+    std::string user_agent { "academy-scope 0.1; (foo)" };
 
     // Cache dir.
     std::string cache_dir { "." };

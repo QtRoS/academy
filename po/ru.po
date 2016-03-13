@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-29 22:09+0300\n"
+"POT-Creation-Date: 2016-03-13 20:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,84 +17,84 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/preview.cpp:77
+#: ../src/preview.cpp:93
 msgid "<b>Departments:</b> "
 msgstr "<b>Категории:</b> "
 
-#: ../src/preview.cpp:80
+#: ../src/preview.cpp:96
 msgid "<b>Extra:</b> "
 msgstr "<b>Дополнительно:</b> "
 
-#: ../src/preview.cpp:112
+#: ../src/preview.cpp:128
 msgid "<b>Instructors:</b>"
 msgstr "<b>Инструкторы:</b>"
 
-#: ../src/preview.cpp:83
+#: ../src/preview.cpp:99
 msgid "<b>Source:</b> "
 msgstr "<b>Источник:</b> "
 
 #. Working with departments.
-#: ../src/query.cpp:111
+#: ../src/query.cpp:127
 msgid "All"
 msgstr "Все"
 
-#: ../src/departmentmanager.cpp:15
+#: ../src/departmentmanager.cpp:31
 msgid "Art and Design"
 msgstr "Искусство и Дизайн"
 
-#: ../src/departmentmanager.cpp:16
+#: ../src/departmentmanager.cpp:32
 msgid "Business"
 msgstr "Бизнес"
 
-#: ../src/preview.cpp:71
+#: ../src/preview.cpp:87
 msgid "Details"
 msgstr "Подробно"
 
-#: ../src/departmentmanager.cpp:21
+#: ../src/departmentmanager.cpp:37
 msgid "Humanities"
 msgstr "Гуманитарные науки"
 
-#: ../src/departmentmanager.cpp:19
+#: ../src/departmentmanager.cpp:35
 msgid "IT and Tech"
 msgstr "Информационные технологии"
 
-#: ../src/departmentmanager.cpp:18
+#: ../src/departmentmanager.cpp:34
 msgid "Languages"
 msgstr "Языки"
 
-#: ../src/departmentmanager.cpp:17
+#: ../src/departmentmanager.cpp:33
 msgid "Music"
 msgstr "Музыка"
 
-#: ../src/preview.cpp:95
+#: ../src/preview.cpp:111
 msgid "Open"
 msgstr "Открыть"
 
-#: ../src/departmentmanager.cpp:23
+#: ../src/departmentmanager.cpp:39
 msgid "Other"
 msgstr "Другое"
 
-#: ../src/departmentmanager.cpp:22
+#: ../src/departmentmanager.cpp:38
 msgid "Personal"
 msgstr "Личное развитие"
 
-#: ../src/departmentmanager.cpp:20
+#: ../src/departmentmanager.cpp:36
 msgid "Science"
 msgstr "Наука"
 
-#: ../src/udacityclient.cpp:96 ../src/openlearningclient.cpp:88
-#: ../src/edxclient.cpp:156
+#: ../src/udacityclient.cpp:112 ../src/openlearningclient.cpp:104
+#: ../src/edxclient.cpp:172
 msgid "duration - "
 msgstr "длительность - "
 
-#: ../src/udacityclient.cpp:95 ../src/iversityclient.cpp:91
+#: ../src/udacityclient.cpp:111 ../src/iversityclient.cpp:107
 msgid "level - "
 msgstr "уровень - "
 
-#: ../src/udemyclient.cpp:106
+#: ../src/udemyclient.cpp:122
 msgid "price - "
 msgstr "цена - "
 
-#: ../src/edxclient.cpp:152 ../src/courseraclient.cpp:118
+#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:134
 msgid "workload - "
 msgstr "загрузка - "

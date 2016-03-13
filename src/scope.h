@@ -17,8 +17,6 @@
 #ifndef SCOPE_H_
 #define SCOPE_H_
 
-#include <client.h>
-
 #include <unity/scopes/ScopeBase.h>
 #include <unity/scopes/QueryBase.h>
 #include <unity/scopes/ReplyProxyFwd.h>

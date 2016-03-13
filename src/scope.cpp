@@ -35,12 +35,6 @@ void Scope::start(string const&)
             + "/../share/locale/";
     bindtextdomain(GETTEXT_PACKAGE, translation_directory.c_str());
 
-    // Under test we set a different API root
-    char *apiroot = getenv("NETWORK_SCOPE_APIROOT");
-    if (apiroot) {
-        //config_->apiroot = apiroot;
-    }
-
     config_->cache_dir = cache_directory();
 }
 

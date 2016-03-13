@@ -17,8 +17,6 @@
 #ifndef QUERY_H_
 #define QUERY_H_
 
-#include <client.h>
-
 #include <unity/scopes/SearchQueryBase.h>
 #include <unity/scopes/ReplyProxyFwd.h>
 #include <unity/scopes/Department.h>

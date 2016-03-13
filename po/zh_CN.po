@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-29 22:09+0300\n"
+"POT-Creation-Date: 2016-03-13 20:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: JoeyChan <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,84 +17,84 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/preview.cpp:77
+#: ../src/preview.cpp:93
 msgid "<b>Departments:</b> "
 msgstr "<b>科目：</b> "
 
-#: ../src/preview.cpp:80
+#: ../src/preview.cpp:96
 msgid "<b>Extra:</b> "
 msgstr "<b>额外：</b> "
 
-#: ../src/preview.cpp:112
+#: ../src/preview.cpp:128
 msgid "<b>Instructors:</b>"
 msgstr "<b>讲师：</b>"
 
-#: ../src/preview.cpp:83
+#: ../src/preview.cpp:99
 msgid "<b>Source:</b> "
 msgstr "<b>来源：</b> "
 
 #. Working with departments.
-#: ../src/query.cpp:111
+#: ../src/query.cpp:127
 msgid "All"
 msgstr "全部"
 
-#: ../src/departmentmanager.cpp:15
+#: ../src/departmentmanager.cpp:31
 msgid "Art and Design"
 msgstr "艺术与设计"
 
-#: ../src/departmentmanager.cpp:16
+#: ../src/departmentmanager.cpp:32
 msgid "Business"
 msgstr "商业"
 
-#: ../src/preview.cpp:71
+#: ../src/preview.cpp:87
 msgid "Details"
 msgstr "详细介绍"
 
-#: ../src/departmentmanager.cpp:21
+#: ../src/departmentmanager.cpp:37
 msgid "Humanities"
 msgstr "人文"
 
-#: ../src/departmentmanager.cpp:19
+#: ../src/departmentmanager.cpp:35
 msgid "IT and Tech"
 msgstr "IT与技术"
 
-#: ../src/departmentmanager.cpp:18
+#: ../src/departmentmanager.cpp:34
 msgid "Languages"
 msgstr "语言"
 
-#: ../src/departmentmanager.cpp:17
+#: ../src/departmentmanager.cpp:33
 msgid "Music"
 msgstr "音乐"
 
-#: ../src/preview.cpp:95
+#: ../src/preview.cpp:111
 msgid "Open"
 msgstr "打开"
 
-#: ../src/departmentmanager.cpp:23
+#: ../src/departmentmanager.cpp:39
 msgid "Other"
 msgstr "其它"
 
-#: ../src/departmentmanager.cpp:22
+#: ../src/departmentmanager.cpp:38
 msgid "Personal"
 msgstr "个人的"
 
-#: ../src/departmentmanager.cpp:20
+#: ../src/departmentmanager.cpp:36
 msgid "Science"
 msgstr "科学"
 
-#: ../src/udacityclient.cpp:96 ../src/openlearningclient.cpp:88
-#: ../src/edxclient.cpp:156
+#: ../src/udacityclient.cpp:112 ../src/openlearningclient.cpp:104
+#: ../src/edxclient.cpp:172
 msgid "duration - "
 msgstr "持续时间 - "
 
-#: ../src/udacityclient.cpp:95 ../src/iversityclient.cpp:91
+#: ../src/udacityclient.cpp:111 ../src/iversityclient.cpp:107
 msgid "level - "
 msgstr "级别 - "
 
-#: ../src/udemyclient.cpp:106
+#: ../src/udemyclient.cpp:122
 msgid "price - "
 msgstr "价格 - "
 
-#: ../src/edxclient.cpp:152 ../src/courseraclient.cpp:118
+#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:134
 msgid "workload - "
 msgstr "工作量 - "
