@@ -80,7 +80,7 @@ QList<Course> OpenLearningClient::courses(const QString &query)
 
         course.departments.append(map["category"].toString());
 
-        qCDebug(OpenLearning) << "Categories: " << course.departments;
+        //qCDebug(OpenLearning) << "Categories: " << course.departments;
         //qCDebug(OpenLearning) << "Instr count: " << course.instructors.size();
         if (query.isEmpty() || se.isMatch(course))
             list.append(course);
