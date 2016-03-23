@@ -19,4 +19,6 @@ SearchHint[zh_TW]=課程名字或關鍵字
 
 [Appearance]
 PageHeader.Logo=logo.png
+PageHeader.DividerColor= #dd4243
+PreviewButtonColor = #dd4243
 
