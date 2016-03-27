@@ -7,33 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 13:23+0200\n"
+"POT-Creation-Date: 2016-03-27 19:14+0300\n"
 "PO-Revision-Date: 2016-03-27 13:33+0200\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.4\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de\n"
-
-#: ../src/udacityclient.cpp:111 ../src/iversityclient.cpp:107
-msgid "level - "
-msgstr "Stand - "
-
-#: ../src/udacityclient.cpp:112 ../src/openlearningclient.cpp:104
-#: ../src/edxclient.cpp:172
-msgid "duration - "
-msgstr "Länge - "
-
-#: ../src/udemyclient.cpp:122
-msgid "price - "
-msgstr "Kosten - "
-
-#: ../src/preview.cpp:87
-msgid "Details"
-msgstr "Details"
 
 #: ../src/preview.cpp:93
 msgid "<b>Departments:</b> "
@@ -43,17 +26,18 @@ msgstr "<b>Bereiche:</b>"
 msgid "<b>Extra:</b> "
 msgstr "<b>Extra:</b>"
 
+#: ../src/preview.cpp:128
+msgid "<b>Instructors:</b>"
+msgstr "<b>Ausbilder:</b>"
+
 #: ../src/preview.cpp:99
 msgid "<b>Source:</b> "
 msgstr "<b>Quelle:</b>"
 
-#: ../src/preview.cpp:111
-msgid "Open"
-msgstr "Offen"
-
-#: ../src/preview.cpp:128
-msgid "<b>Instructors:</b>"
-msgstr "<b>Ausbilder:</b>"
+#. Working with departments.
+#: ../src/query.cpp:127
+msgid "All"
+msgstr "Alle"
 
 #: ../src/departmentmanager.cpp:31
 msgid "Art and Design"
@@ -63,39 +47,55 @@ msgstr "Kunst und Design"
 msgid "Business"
 msgstr "Wirtschaft"
 
-#: ../src/departmentmanager.cpp:33
-msgid "Music"
-msgstr "Musik"
-
-#: ../src/departmentmanager.cpp:34
-msgid "Languages"
-msgstr "Sprachen"
-
-#: ../src/departmentmanager.cpp:35
-msgid "IT and Tech"
-msgstr "IT und Technologie"
-
-#: ../src/departmentmanager.cpp:36
-msgid "Science"
-msgstr "Wissenschaft"
+#: ../src/preview.cpp:87
+msgid "Details"
+msgstr "Details"
 
 #: ../src/departmentmanager.cpp:37
 msgid "Humanities"
 msgstr "Geisteswissenschaften"
 
-#: ../src/departmentmanager.cpp:38
-msgid "Personal"
-msgstr "Persönlich"
+#: ../src/departmentmanager.cpp:35
+msgid "IT and Tech"
+msgstr "IT und Technologie"
+
+#: ../src/departmentmanager.cpp:34
+msgid "Languages"
+msgstr "Sprachen"
+
+#: ../src/departmentmanager.cpp:33
+msgid "Music"
+msgstr "Musik"
+
+#: ../src/preview.cpp:111
+msgid "Open"
+msgstr "Offen"
 
 #: ../src/departmentmanager.cpp:39
 msgid "Other"
 msgstr "Sonstige"
 
-#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:134
+#: ../src/departmentmanager.cpp:38
+msgid "Personal"
+msgstr "Persönlich"
+
+#: ../src/departmentmanager.cpp:36
+msgid "Science"
+msgstr "Wissenschaft"
+
+#: ../src/udacityclient.cpp:111 ../src/openlearningclient.cpp:103
+#: ../src/edxclient.cpp:171
+msgid "duration - "
+msgstr "länge - "
+
+#: ../src/udacityclient.cpp:110 ../src/iversityclient.cpp:106
+msgid "level - "
+msgstr "stand - "
+
+#: ../src/templateclient.cpp:119 ../src/udemyclient.cpp:121
+msgid "price - "
+msgstr "kosten - "
+
+#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:134
 msgid "workload - "
 msgstr "Pensum - "
-
-#. Working with departments.
-#: ../src/query.cpp:127
-msgid "All"
-msgstr "Alle"

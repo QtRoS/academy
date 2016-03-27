@@ -17,7 +17,7 @@ SearchHint[sl]=naslov ali ključna beseda
 SearchHint[it]=nome del corso o keyword
 SearchHint[zh_CN]=课程名字或关键字
 SearchHint[zh_TW]=課程名字或關鍵字
-SearchHint[de]=Kursname oder Suchbegriff
+SearchHint[de]=kursname oder suchbegriff
 
 [Appearance]
 PageHeader.Logo=logo.png
