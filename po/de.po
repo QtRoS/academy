@@ -86,15 +86,15 @@ msgstr "Wissenschaft"
 #: ../src/udacityclient.cpp:111 ../src/openlearningclient.cpp:103
 #: ../src/edxclient.cpp:171
 msgid "duration - "
-msgstr "länge - "
+msgstr "Länge - "
 
 #: ../src/udacityclient.cpp:110 ../src/iversityclient.cpp:106
 msgid "level - "
-msgstr "stand - "
+msgstr "Stand - "
 
 #: ../src/templateclient.cpp:119 ../src/udemyclient.cpp:121
 msgid "price - "
-msgstr "kosten - "
+msgstr "Kosten - "
 
 #: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:134
 msgid "workload - "
