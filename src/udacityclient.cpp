@@ -38,13 +38,12 @@ QList<Course> UdacityClient::courses(const QString &query)
 {
     QList<Course> list;
 
-    static QByteArray data;
+    QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
 
     qCDebug(Udacity) << "Download started...";
-    if (data.isNull())
-        get( path, params, data);
+    get( path, params, data);
     qCDebug(Udacity) << "Data received:" << data.length() << "bytes";
     QJsonDocument root = QJsonDocument::fromJson(data);
 

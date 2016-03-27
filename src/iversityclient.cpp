@@ -43,8 +43,7 @@ QList<Course> IversityClient::courses(const QString &query)
     net::Uri::QueryParameters params;
 
     qCDebug(Iversity) << "Download started...";
-    if (data.isNull())
-        get( path, params, data);
+    get( path, params, data);
     qCDebug(Iversity) << "Data received:" << data.length() << "bytes";
     QJsonDocument root = QJsonDocument::fromJson(data);
 

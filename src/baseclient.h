@@ -41,8 +41,6 @@ Q_DECLARE_LOGGING_CATEGORY(BaseCli)
 
 /**
  * Provide a nice way to access the HTTP API.
- *
- * We don't want our scope's code to be mixed together with HTTP and JSON handling.
  */
 class BaseClient
 {
@@ -51,9 +49,29 @@ public:
 
     virtual ~BaseClient() = default;
 
+    /**
+     * @brief main method of a client class, it is used when Query is trying to retrieve results
+     * @param query - search query, keyword or course name (from user input)
+     * @return list of available courses
+     */
     virtual QList<Course> courses(const QString& query) = 0;
+
+    /**
+     * @brief this method is used by a client when it is contructing full URL (with parameters)
+     * @return base URL of your service
+     */
     virtual const QString baseApiUrl() const = 0;
+
+    /**
+     * @brief used by Query when it is organazing results in groups
+     * @return human-visible name of a client
+     */
     virtual const QString name() const = 0;
+
+    /**
+     * @brief Some APIs require custom headers in HTTP request (for example for authorization)
+     * @return map of headers
+     */
     virtual const QMap<QByteArray, QByteArray> customHeaders() const;
 
     /**
@@ -64,7 +82,15 @@ public:
     virtual Config::Ptr config();
 
 protected:
+
+    /**
+     * @brief This method is used to get raw data (QByteArray) from API. Basically you DO NOT need to override it
+     * @param path - additional path in API URL, returned by baseApiUrl()
+     * @param parameters - parameter pairs (the will be automatically transformed to HTTP parameters)
+     * @param result - raw bytes of result
+     */
     virtual void get(const core::net::Uri::Path &path, const core::net::Uri::QueryParameters &parameters, QByteArray &result);
+
     /**
      * Progress callback that allows the query to cancel pending HTTP requests.
      */

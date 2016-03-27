@@ -1,4 +1,5 @@
 src/searchengine.cpp
+src/templateclient.cpp
 src/scope.cpp
 src/udacityclient.cpp
 src/udemyclient.cpp
@@ -20,6 +21,7 @@ src/iversityclient.h
 src/config.h
 src/openlearningclient.h
 src/localization.h
+src/templateclient.h
 src/baseclient.h
 src/departmentmanager.h
 src/localcache.h

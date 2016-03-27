@@ -52,7 +52,7 @@ QList<Course> CourseraClient::courses(const QString &query)
     }
 
     qCDebug(Coursera) << "Download started...";
-    get( path, params, data);
+    get(path, params, data);
     qCDebug(Coursera) << "Data received:" << data.length() << "bytes";
     QJsonDocument root = QJsonDocument::fromJson(data);
 

@@ -20,6 +20,9 @@
 #include "baseclient.h"
 #include "localcache.h"
 
+/**
+ * @brief The CachedClient class introduces caching capabilities.
+ */
 class CachedClient : public BaseClient
 {
 public:

@@ -14,8 +14,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef OPENLEARNINGCLIENT_H_
-#define OPENLEARNINGCLIENT_H_
+#ifndef TEMPLATECLIENT_H_
+#define TEMPLATECLIENT_H_
 
 #include <core/net/http/request.h>
 #include <core/net/uri.h>
@@ -24,31 +24,32 @@
 #include <QJsonObject>
 #include <QString>
 #include <QList>
+#include <QMap>
+#include <QByteArray>
 #include <QDebug>
-
 
 #include "config.h"
 #include "baseclient.h"
-#include "cachedclient.h"
 #include "searchengine.h"
+#include "cachedclient.h"
 
-Q_DECLARE_LOGGING_CATEGORY(OpenLearning)
+Q_DECLARE_LOGGING_CATEGORY(Template)
 
-class OpenLearningClient : public CachedClient
+class TemplateClient : public CachedClient
 {
 public:
 
-    OpenLearningClient(Config::Ptr config);
-    virtual ~OpenLearningClient() = default;
+    TemplateClient(Config::Ptr config);
+    virtual ~TemplateClient() = default;
 
     virtual QList<Course> courses(const QString& query) override;
     virtual const QString baseApiUrl() const override;
     virtual const QString name() const override;
+    virtual const QMap<QByteArray, QByteArray> customHeaders() const override;
 
 private:
     QString grabExtra(const QVariantMap& map);
-    QString grabVideo(const QString& promo);
 };
 
-#endif // OPENLEARNINGCLIENT_H_
+#endif // TEMPLATECLIENT_H_
 

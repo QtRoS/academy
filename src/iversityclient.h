@@ -17,11 +17,6 @@
 #ifndef IVERSITYCLIENT_H_
 #define IVERSITYCLIENT_H_
 
-#include <atomic>
-#include <deque>
-#include <map>
-#include <memory>
-#include <string>
 #include <core/net/http/request.h>
 #include <core/net/uri.h>
 

@@ -43,8 +43,7 @@ QList<Course> OpenLearningClient::courses(const QString &query)
     net::Uri::QueryParameters params;
 
     qCDebug(OpenLearning) << "Download started...";
-    if (data.isNull())
-        get( path, params, data);
+    get( path, params, data);
     qCDebug(OpenLearning) << "Data received:" << data.length() << "bytes";
     QJsonDocument root = QJsonDocument::fromJson(data);
 

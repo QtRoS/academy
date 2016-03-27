@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-23 00:08+0300\n"
+"POT-Creation-Date: 2016-03-27 18:31+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/udacityclient.cpp:111 ../src/iversityclient.cpp:107
+#: ../src/templateclient.cpp:119 ../src/udemyclient.cpp:121
+msgid "price - "
+msgstr ""
+
+#: ../src/udacityclient.cpp:110 ../src/iversityclient.cpp:106
 msgid "level - "
 msgstr ""
 
-#: ../src/udacityclient.cpp:112 ../src/openlearningclient.cpp:104
-#: ../src/edxclient.cpp:172
+#: ../src/udacityclient.cpp:111 ../src/openlearningclient.cpp:103
+#: ../src/edxclient.cpp:171
 msgid "duration - "
-msgstr ""
-
-#: ../src/udemyclient.cpp:122
-msgid "price - "
 msgstr ""
 
 #: ../src/preview.cpp:87
@@ -90,7 +90,7 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:134
+#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:134
 msgid "workload - "
 msgstr ""
 
