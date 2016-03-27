@@ -20,6 +20,16 @@ You can find this scope in the Ubuntu Store (more details https://uappexplorer.c
 
 Feel free to fork this project or create pull requests, I will be quite happy to see them.
 
+#### Adding new client (new service like edX or Coursera)
+
+##### Configuration files
+Add new boolean option to academy-settings.ini.in (see previous clients as example) 
+
+##### C++
+* Use TemplateClient as template for your API client (implement "courses(...)" method)
+* Add new client instance as member to Query class (init it in the same way and check its option before using)
+* Add department mapping to the DepartmentManager (custom departments must be mapped in limited set of departments used in Academy)
+
 ## License
 
 GNU GPL v3
