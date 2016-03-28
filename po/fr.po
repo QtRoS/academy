@@ -1,0 +1,100 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-27 19:14+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../src/templateclient.cpp:119 ../src/udemyclient.cpp:121
+msgid "price - "
+msgstr "prix - "
+
+#: ../src/udacityclient.cpp:110 ../src/iversityclient.cpp:106
+msgid "level - "
+msgstr "niveau - "
+
+#: ../src/udacityclient.cpp:111 ../src/openlearningclient.cpp:103
+#: ../src/edxclient.cpp:171
+msgid "duration - "
+msgstr "durée - "
+
+#: ../src/preview.cpp:87
+msgid "Details"
+msgstr "Détails"
+
+#: ../src/preview.cpp:93
+msgid "<b>Departments:</b> "
+msgstr "<b>Catégories[nbsp]:</b> "
+
+#: ../src/preview.cpp:96
+msgid "<b>Extra:</b> "
+msgstr "<b>Extra[nbsp]:</b> "
+
+#: ../src/preview.cpp:99
+msgid "<b>Source:</b> "
+msgstr "<b>Source[nbsp]:</b> "
+
+#: ../src/preview.cpp:111
+msgid "Open"
+msgstr "Ouvrir"
+
+#: ../src/preview.cpp:128
+msgid "<b>Instructors:</b>"
+msgstr "<b>Instructeurs[nbsp]:</b>"
+
+#: ../src/departmentmanager.cpp:31
+msgid "Art and Design"
+msgstr "Art et Design"
+
+#: ../src/departmentmanager.cpp:32
+msgid "Business"
+msgstr "Économie"
+
+#: ../src/departmentmanager.cpp:33
+msgid "Music"
+msgstr "Musique"
+
+#: ../src/departmentmanager.cpp:34
+msgid "Languages"
+msgstr "Langues"
+
+#: ../src/departmentmanager.cpp:35
+msgid "IT and Tech"
+msgstr "Informatique et Technologie"
+
+#: ../src/departmentmanager.cpp:36
+msgid "Science"
+msgstr "Science"
+
+#: ../src/departmentmanager.cpp:37
+msgid "Humanities"
+msgstr "Sciences humaines"
+
+#: ../src/departmentmanager.cpp:38
+msgid "Personal"
+msgstr "Personnel"
+
+#: ../src/departmentmanager.cpp:39
+msgid "Other"
+msgstr "Autre"
+
+#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:134
+msgid "workload - "
+msgstr "charge de travail - "
+
+#. Working with departments.
+#: ../src/query.cpp:127
+msgid "All"
+msgstr "Tous"
