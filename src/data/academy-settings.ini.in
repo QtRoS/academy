@@ -40,4 +40,4 @@ displayValues = Bottom;Overlay
 displayValues[ru] = Снизу;Поверх
 displayValues[sl] = Spodaj;Čez
 displayValues[de] = Unten;Überdeckend
-displayValues[fr] = Bas;Revêtement
+displayValues[fr] = En bas;Superposé
