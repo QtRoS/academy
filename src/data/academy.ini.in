@@ -7,7 +7,7 @@ Description[it]=Un modo veloce per trovare corsi online da diversi provider
 Description[zh_CN]=快速查找多个在线课程
 Description[zh_TW]=快速查找多個在線課程
 Description[de]=Ein schneller Weg, Onlinekurse aus verschiedenen Quellen zu entdecken
-Description[fr]=La plus rapide façon de trouver des cours à partir de plusieurs sources
+Description[fr]=La façon la plus rapide de trouver des cours en ligne à partir de plusieurs sources
 Art=screenshot.png
 Author=Roman Shchekin
 Icon=icon.png
@@ -19,7 +19,7 @@ SearchHint[it]=nome del corso o keyword
 SearchHint[zh_CN]=课程名字或关键字
 SearchHint[zh_TW]=課程名字或關鍵字
 SearchHint[de]=Kursname oder Suchbegriff
-SearchHint[fr]=le nom du cours ou mot-clé
+SearchHint[fr]=le nom du cours ou un mot-clé
 
 [Appearance]
 PageHeader.Logo=logo.png
