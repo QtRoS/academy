@@ -157,32 +157,27 @@ QHash<QString, QString> DepartmentManager::mapping()
 
 bool DepartmentManager::isMatch(const Course &course, const QString &department)
 {
-    QHash<QString, QString> hash = mapping();
+    const QHash<QString, QString> hash = mapping();
 
     for(int i = 0; i < course.departments.length(); i++)
     {
         // Some departments are mapped to multiple categories.
         if (department == "art" || department == "humanities")
         {
-            QList<QString> values = hash.values(course.departments[i]);
-            for (int j = 0; j < values.size(); ++j)
-                if (values.at(j) == department)
-                    return true;
-        }
-        else
-        {
-            if (hash[course.departments[i]] == department)
+            if (hash.values(course.departments[i]).contains(department))
                 return true;
         }
-
+        else if (hash[course.departments[i]] == department)
+            return true;
     }
+
     return false;
 }
 
 QString DepartmentManager::flatDescription(const QString& deps)
 {
-    QList<Department> list = departments();
-    QHash<QString, QString> hash = mapping();
+    const QList<Department> list = departments();
+    const QHash<QString, QString> hash = mapping();
 
     QStringList names;
     QStringList courseDeps = deps.split(';');
