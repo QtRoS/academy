@@ -23,10 +23,6 @@
 #include <unity/scopes/QueryBase.h>
 #include <unity/scopes/SearchReply.h>
 
-#include <iomanip>
-#include <iostream>
-#include <sstream>
-
 Q_LOGGING_CATEGORY(Qry, "Query")
 
 namespace sc = unity::scopes;
@@ -103,45 +99,30 @@ void Query::run(sc::SearchReplyProxy const& reply)
         // Start by getting information about the query
         const sc::CannedQuery &query(sc::SearchQueryBase::query());
 
-        // Get the query string
-        string query_string = query.query_string();
-        qCDebug(Qry) << "Query string is:" << QString::fromStdString(query_string);
+        // Get query string and selected department.
+        QString queryString = QString::fromStdString(query.query_string());
+        qCDebug(Qry) << "Query string is:" << queryString;
+        QString selectedDepartment = QString::fromStdString(query.department_id());
+        qCDebug(Qry) << "Selected department:" << selectedDepartment;
 
-        // Checking out which sources are enabled.
-        QList<BaseClient*> sources;
-        if (settings().at("coursera").get_bool())
-            sources.append(&m_coursera);
-        if (settings().at("udemy").get_bool())
-            sources.append(&m_udemy);
-        if (settings().at("edx").get_bool())
-            sources.append(&m_edx);
-        if (settings().at("udacity").get_bool())
-            sources.append(&m_udacity);
-        if (settings().at("iversity").get_bool())
-            sources.append(&m_iversity);
-        if (settings().at("openLearning").get_bool())
-            sources.append(&m_openLearning);
+        // Getting source list.
+        QList<BaseClient*> sources = enabledSources();
         qCDebug(Qry) << "Source count:" << sources.count();
 
-        // Working with departments.
-        sc::Department::SPtr all_depts = sc::Department::create("", query, _("All"));
+        // Create and register departments.
+        sc::Department::SPtr allDepts = sc::Department::create("", query, _("All"));
         sc::DepartmentList depList;
         QList<Department> list = DepartmentManager::departments();
         for (int i = 0; i < list.length(); i++)
             depList.push_back(sc::Department::create(list[i].id.toStdString(), query, list[i].label.toStdString()));
-        all_depts->set_subdepartments(depList);
-
-        // Register the root department on the reply
-        reply->register_departments(all_depts);
-
-        QString selectedDepartment = QString::fromStdString(query.department_id());
-        qCDebug(Qry) << "Selected department:" << selectedDepartment;
+        allDepts->set_subdepartments(depList);
+        reply->register_departments(allDepts);
 
         QSet<QString> uniqueSet;
         for(int i = 0; i < sources.count(); ++i)
         {
             QString sourceCatName = sources[i]->name();
-            auto sourceList = sources[i]->courses(QString::fromStdString(query_string));
+            auto courseList = sources[i]->courses(queryString);
 
             auto templ = settings().at("textPosition").get_int() ? CURRENT_TEMPLATE_OV : CURRENT_TEMPLATE;
             auto sourceCategory = reply->register_category(sourceCatName.toLower().toStdString(),
@@ -150,9 +131,8 @@ void Query::run(sc::SearchReplyProxy const& reply)
 
             //qCDebug(Qry) << "Processing source:" << sourceCatName;
 
-            for (const auto &course : sourceList)
+            for (const auto &course : courseList)
             {
-
                 // Department check.
                 if (!selectedDepartment.isEmpty() && !DepartmentManager::isMatch(course, selectedDepartment))
                     continue;
@@ -167,8 +147,6 @@ void Query::run(sc::SearchReplyProxy const& reply)
 
 
                 sc::CategorisedResult res(sourceCategory);
-
-                // We must have a URI
                 res.set_uri(course.link.toStdString());
                 res.set_title(course.title.toStdString());
                 res.set_art(course.art.toStdString());
@@ -204,9 +182,29 @@ void Query::run(sc::SearchReplyProxy const& reply)
         }
 
     } catch (domain_error &e) {
-        // Handle exceptions being thrown by the client API
-        cerr << e.what() << endl;
+        qCDebug(Qry) << "Exception:" << QString::fromStdString(e.what());
         reply->error(current_exception());
     }
+}
+
+QList<BaseClient*> Query::enabledSources()
+{
+    QList<BaseClient*> sources;
+
+    // Checking out which sources are enabled.
+    if (settings().at("coursera").get_bool())
+        sources.append(&m_coursera);
+    if (settings().at("udemy").get_bool())
+        sources.append(&m_udemy);
+    if (settings().at("edx").get_bool())
+        sources.append(&m_edx);
+    if (settings().at("udacity").get_bool())
+        sources.append(&m_udacity);
+    if (settings().at("iversity").get_bool())
+        sources.append(&m_iversity);
+    if (settings().at("openLearning").get_bool())
+        sources.append(&m_openLearning);
+
+    return sources;
 }
 

@@ -57,6 +57,9 @@ public:
     void run(const unity::scopes::SearchReplyProxy &reply) override;
 
 private:
+    QList<BaseClient*> enabledSources();
+
+private:
     //Client client_;
     Config::Ptr m_config;
     CourseraClient m_coursera;

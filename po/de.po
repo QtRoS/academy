@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 19:14+0300\n"
+"POT-Creation-Date: 2016-04-06 22:58+0300\n"
 "PO-Revision-Date: 2016-03-27 13:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,8 +34,8 @@ msgstr "<b>Ausbilder:</b>"
 msgid "<b>Source:</b> "
 msgstr "<b>Quelle:</b>"
 
-#. Working with departments.
-#: ../src/query.cpp:127
+#. Create and register departments.
+#: ../src/query.cpp:117
 msgid "All"
 msgstr "Alle"
 

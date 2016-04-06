@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-27 18:04+0300\n"
+"POT-Creation-Date: 2016-04-06 22:58+0300\n"
 "PO-Revision-Date: 2016-02-29 22:20+0200\n"
 "Last-Translator: Bernard Banko <beernarrd (at) gmail.com>\n"
 "Language-Team: lugos\n"
@@ -34,8 +34,8 @@ msgstr "<b>Učitelji:</b>"
 msgid "<b>Source:</b> "
 msgstr "<b>Vir:</b> "
 
-#. Working with departments.
-#: ../src/query.cpp:127
+#. Create and register departments.
+#: ../src/query.cpp:117
 msgid "All"
 msgstr "Vsi"
 
