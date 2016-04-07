@@ -10,12 +10,12 @@ displayName = Udemy
 
 [edx]
 type = boolean
-defaultValue = true
+defaultValue = false
 displayName = edX
 
 [udacity]
 type = boolean
-defaultValue = false
+defaultValue = true
 displayName = Udacity
 
 [iversity]
