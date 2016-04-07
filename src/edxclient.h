@@ -49,6 +49,7 @@ public:
 
 private:
     QString grabExtra(const QDomElement& courseElem);
+    const QString FallBackImage = "https://cdn2.vox-cdn.com/thumbor/Kf5Ct7VfeCTLb2JnQzV5kUFVQpg=/0x4:640x364/1600x900/cdn0.vox-cdn.com/assets/1094556/edx.png";
 };
 
 #endif // EDXCLIENT_H_

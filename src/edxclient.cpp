@@ -88,6 +88,7 @@ QList<Course> EdxClient::courses(const QString &query)
         QDomElement art = courseElem.firstChildElement("course:image-thumbnail");
         if (!art.isNull())
             course.art = art.text();
+        else course.art = FallBackImage;
 
         QDomElement link = courseElem.firstChildElement("link");
         if (!link.isNull())

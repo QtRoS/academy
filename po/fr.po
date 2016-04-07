@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-06 23:14+0300\n"
+"POT-Creation-Date: 2016-04-07 23:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,7 +83,7 @@ msgid "Science"
 msgstr "Science"
 
 #: ../src/udacityclient.cpp:111 ../src/openlearningclient.cpp:103
-#: ../src/edxclient.cpp:171
+#: ../src/edxclient.cpp:172
 msgid "duration - "
 msgstr "dure - "
 
@@ -95,6 +95,6 @@ msgstr "niveau - "
 msgid "price - "
 msgstr "prix - "
 
-#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:134
+#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:134
 msgid "workload - "
 msgstr "charge de travail - "
