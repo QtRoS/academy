@@ -8,6 +8,7 @@ Description[zh_CN]=快速查找多个在线课程
 Description[zh_TW]=快速查找多個在線課程
 Description[de]=Ein schneller Weg, Onlinekurse aus verschiedenen Quellen zu entdecken
 Description[fr]=La façon la plus rapide de trouver des cours en ligne à partir de plusieurs sources
+Description[ua]=Швидкий та зручний інструмент для пошуку онлайн курсів з декількох джерел
 Art=screenshot.png
 Author=Roman Shchekin
 Icon=icon.png
@@ -20,6 +21,7 @@ SearchHint[zh_CN]=课程名字或关键字
 SearchHint[zh_TW]=課程名字或關鍵字
 SearchHint[de]=Kursname oder Suchbegriff
 SearchHint[fr]=le nom du cours ou un mot-clé
+SearchHint[ua]=назва або ключове слово
 
 [Appearance]
 PageHeader.Logo=logo.png
