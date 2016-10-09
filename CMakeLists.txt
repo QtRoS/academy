@@ -27,6 +27,7 @@ find_package(Intltool)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Xml REQUIRED)
 
+
 pkg_check_modules(
   SCOPE
   libunity-scopes>=0.6.0
@@ -44,6 +45,8 @@ include_directories(
 # Do not remove these 2 lines, they are required for the correct functionality of the Ubuntu-SDK
 set(UBUNTU_MANIFEST_PATH "manifest.json.in" CACHE INTERNAL "Tells QtCreator location and name of the manifest file")
 set(UBUNTU_PROJECT_TYPE "Scope" CACHE INTERNAL "Tells QtCreator this is a Scope project")
+
+set(CMAKE_AUTOMOC TRUE)
 
 # Important project paths
 set(CMAKE_INSTALL_PREFIX /)

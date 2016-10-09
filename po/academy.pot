@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-07 23:10+0300\n"
+"POT-Creation-Date: 2016-10-09 07:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,17 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/templateclient.cpp:119 ../src/udemyclient.cpp:121
+#: ../src/udemyclient.cpp:121 ../src/templateclient.cpp:119
 msgid "price - "
-msgstr ""
-
-#: ../src/udacityclient.cpp:110 ../src/iversityclient.cpp:106
-msgid "level - "
-msgstr ""
-
-#: ../src/udacityclient.cpp:111 ../src/openlearningclient.cpp:103
-#: ../src/edxclient.cpp:172
-msgid "duration - "
 msgstr ""
 
 #: ../src/preview.cpp:87
@@ -52,6 +43,15 @@ msgstr ""
 
 #: ../src/preview.cpp:128
 msgid "<b>Instructors:</b>"
+msgstr ""
+
+#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:134
+msgid "workload - "
+msgstr ""
+
+#: ../src/edxclient.cpp:172 ../src/openlearningclient.cpp:103
+#: ../src/udacityclient.cpp:111
+msgid "duration - "
 msgstr ""
 
 #: ../src/departmentmanager.cpp:31
@@ -90,11 +90,11 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:134
-msgid "workload - "
+#. Create and register departments.
+#: ../src/query.cpp:116
+msgid "All"
 msgstr ""
 
-#. Create and register departments.
-#: ../src/query.cpp:113
-msgid "All"
+#: ../src/iversityclient.cpp:106 ../src/udacityclient.cpp:110
+msgid "level - "
 msgstr ""

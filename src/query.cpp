@@ -16,6 +16,7 @@
 
 #include <query.h>
 #include <localization.h>
+#include <scopeimagecache.h>
 
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
@@ -99,6 +100,8 @@ void Query::run(sc::SearchReplyProxy const& reply)
         // Start by getting information about the query
         const sc::CannedQuery &query(sc::SearchQueryBase::query());
 
+        static ScopeImageCache icache;
+
         // Get query string and selected department.
         QString queryString = QString::fromStdString(query.query_string());
         qCDebug(Qry) << "Query string is:" << queryString;
@@ -145,6 +148,9 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 }
                 uniqueSet.insert(course.link);
 
+                //QString art = m_config->cache.getByPreview(course.art);
+                QString art = icache.getByPreview(course.art);
+                art = art.isEmpty() ? course.art : art;
 
                 sc::CategorisedResult res(sourceCategory);
                 res.set_uri(course.link.toStdString());

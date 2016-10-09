@@ -49,6 +49,8 @@ file(GLOB_RECURSE
   "*.h"
 )
 
+find_package(Qt5Network REQUIRED)
+
 # Build a shared library containing our scope code.
 add_library(
   scope SHARED
@@ -58,6 +60,7 @@ add_library(
 # Link against the object library and our external library dependencies
 target_link_libraries(
   scope
+  Qt5::Network
   ${SCOPE_LDFLAGS}
 )
 
@@ -65,6 +68,7 @@ qt5_use_modules(
   scope
   Core
   Xml
+  Network
 )
 
 # Set the correct library output name to conform to the securiry policy 

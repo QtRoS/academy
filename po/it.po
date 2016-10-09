@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-07 23:03+0300\n"
+"POT-Creation-Date: 2016-10-09 07:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgid "<b>Source:</b> "
 msgstr "<b>Fonte:</b> "
 
 #. Create and register departments.
-#: ../src/query.cpp:113
+#: ../src/query.cpp:116
 msgid "All"
 msgstr "Tutte le categorie"
 
@@ -82,16 +82,16 @@ msgstr "Personale"
 msgid "Science"
 msgstr "Scienze"
 
-#: ../src/udacityclient.cpp:111 ../src/openlearningclient.cpp:103
-#: ../src/edxclient.cpp:172
+#: ../src/edxclient.cpp:172 ../src/openlearningclient.cpp:103
+#: ../src/udacityclient.cpp:111
 msgid "duration - "
 msgstr "durata - "
 
-#: ../src/udacityclient.cpp:110 ../src/iversityclient.cpp:106
+#: ../src/iversityclient.cpp:106 ../src/udacityclient.cpp:110
 msgid "level - "
 msgstr "livello - "
 
-#: ../src/templateclient.cpp:119 ../src/udemyclient.cpp:121
+#: ../src/udemyclient.cpp:121 ../src/templateclient.cpp:119
 msgid "price - "
 msgstr "prezzo - "
 
