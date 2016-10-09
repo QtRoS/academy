@@ -22,11 +22,13 @@
 #include <core/net/http/content_type.h>
 #include <core/net/http/response.h>
 #include <QVariantMap>
+#include <json/json.h>
 
 Q_LOGGING_CATEGORY(Udacity, "Udacity")
 
 namespace http = core::net::http;
 namespace net = core::net;
+namespace json = Json;
 
 using namespace std;
 
@@ -38,58 +40,63 @@ QList<Course> UdacityClient::courses(const QString &query)
 {
     QList<Course> list;
 
-//    QByteArray data;
-//    net::Uri::Path path;
-//    net::Uri::QueryParameters params;
+    SearchEngine se(query);
 
-//    qCDebug(Udacity) << "Download started...";
-//    get( path, params, data);
-//    qCDebug(Udacity) << "Data received:" << data.length() << "bytes";
-//    QJsonDocument root = QJsonDocument::fromJson(data);
+    QByteArray data;
+    net::Uri::Path path;
+    net::Uri::QueryParameters params;
 
-//    QVariantMap variant = root.toVariant().toMap();
-//    QList<QVariant> courses = variant["courses"].toList();
-//    qCDebug(Udacity) << "Element count:" << courses.length();
+    qCDebug(Udacity) << "Download started...";
+    get( path, params, data);
+    qCDebug(Udacity) << "Data received:" << data.length() << "bytes";
 
-//    SearchEngine se(query);
+    json::Value root;
+    json::Reader reader;
+    reader.parse(data.data(), root); // TODO
 
-//    for (const QVariant &i : courses)
-//    {
-//        QVariantMap map = i.toMap();
+    json::Value courses = root["courses"];
+    qCDebug(Udacity) << "Element count:" << courses.size();
 
-//        Course course;
-//        course.id = map["key"].toString();
-//        course.slug = map["slug"].toString();
-//        course.title = map["title"].toString();
-//        course.description = map["summary"].toString();
-//        course.headline = map["short_summary"].toString();
-//        course.art = map["image"].toString();
-//        course.link = map["homepage"].toString();
-//        course.video = map["teaser_video"].toMap()["youtube_url"].toString();
-//        course.extra = grabExtra(map);
-//        //qCDebug(Udacity) << "VIDEO URL" << course.video;
 
-//        QList<QVariant> instructors = map["instructors"].toList();
-//        for (const QVariant& j : instructors)
-//        {
-//            QVariantMap imap = j.toMap();
-//            Instructor instr;
-//            instr.image = imap["image"].toString();
-//            instr.bio = imap["bio"].toString();
-//            instr.name = imap["name"].toString();
+    for (json::ArrayIndex index = 0; index < courses.size(); ++index)
+    {
+        json::Value map = courses.get(index, json::Value());
 
-//            course.instructors.append(instr);
-//        }
+        Course course;
+        course.id = map["key"].asString();
+        course.slug = map["slug"].asString();
+        course.title = map["title"].asString();
+        course.description = map["summary"].asString();
+        course.headline = map["short_summary"].asString();
+        course.art = map["image"].asString();
+        course.link = map["homepage"].asString();
+        course.video = map["teaser_video"]["youtube_url"].asString();
+        //course.extra = grabExtra(map);
+        //qCDebug(Udacity) << "VIDEO URL" << course.video;
 
-//        QList<QVariant> tracks = map["tracks"].toList();
-//        for (const QVariant& k : tracks)
-//            course.departments.append(k.toString());
+        json::Value instructors = map["instructors"];
+        for (json::ArrayIndex jj = 0; jj < instructors.size(); ++jj)
+        {
+            json::Value imap = instructors.get(jj, json::Value());
+            Instructor instr;
+            instr.image = imap["image"].asString();
+            instr.bio = imap["bio"].asString();
+            instr.name = imap["name"].asString();
 
-//        //qCDebug(Udacity) << "Track count: " << course.departments;
-//        //qCDebug(Udacity) << "Instr count: " << course.instructors.size();
-//        if (query.isEmpty() || se.isMatch(course))
-//            list.append(course);
-//    }
+            course.instructors.push_back(instr);
+        }
+
+        json::Value tracks = map["tracks"];
+        for (json::ArrayIndex kk = 0; kk < instructors.size(); ++kk)
+        {
+            json::Value kmap = tracks.get(kk, json::Value());
+            course.departments.push_back(kmap.asString());
+        }
+        //qCDebug(Udacity) << "Track count: " << course.departments;
+        //qCDebug(Udacity) << "Instr count: " << course.instructors.size();
+        if (query.isEmpty() || se.isMatch(course))
+            list.append(course);
+    }
 
     return list;
 }

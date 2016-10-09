@@ -47,7 +47,7 @@ public:
 
 private:
     QString grabExtra(const QVariantMap& map);
-    QString grabVideo(const QString& promo);
+    string grabVideo(const string& promo);
 };
 
 #endif // OPENLEARNINGCLIENT_H_

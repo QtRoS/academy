@@ -167,7 +167,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 res["extra"] = course.extra;
                 if (!course.video.empty())
                     res["video_url"] = course.video;
-                // TODO BUG res["departments"] = course.departments.join(';');
+                res["departments"] = join(course.departments, ";");
 
                 // Add instructors to map.
                 if (course.instructors.size() > 0)
@@ -177,7 +177,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                     {
                         images.push_back(sc::Variant(j->image));
                         names.push_back(sc::Variant(j->name));
-                        bios.push_back(sc::Variant((j->bio.length() < 150 ? j->bio :  "..."))); // TODO BUG j->bio.substring(0, 150) +
+                        bios.push_back(sc::Variant((j->bio.length() < 150 ? j->bio : j->bio.substr(0, 150) + "...")));
                     }
                     res["instr_images"] = images;
                     res["instr_names"] = names;

@@ -22,11 +22,13 @@
 #include <core/net/http/content_type.h>
 #include <core/net/http/response.h>
 #include <QVariantMap>
+#include <json/json.h>
 
 Q_LOGGING_CATEGORY(Udemy, "Udemy")
 
 namespace http = core::net::http;
 namespace net = core::net;
+namespace json = Json;
 
 using namespace std;
 
@@ -38,63 +40,65 @@ QList<Course> UdemyClient::courses(const QString &query)
 {
     QList<Course> list;
 
-//    QByteArray data;
-//    net::Uri::Path path;
-//    net::Uri::QueryParameters params;
+    QByteArray data;
+    net::Uri::Path path;
+    net::Uri::QueryParameters params;
 
-//    params.push_back({"fields[course]", "@default,description,headline,slug,primary_category"});
-//    params.push_back({"page_size", "80"});
-//    params.push_back({"ordering", "trending"});
+    params.push_back({"fields[course]", "@default,description,headline,slug,primary_category"});
+    params.push_back({"page_size", "80"});
+    params.push_back({"ordering", "trending"});
 
-//    if (!query.isEmpty())
-//    {
-//        params.push_back({"search", query.toStdString()});
-//        setCacheEnabled(false);
-//    }
+    if (!query.isEmpty())
+    {
+        params.push_back({"search", query.toStdString()});
+        setCacheEnabled(false);
+    }
 
-//    qCDebug(Udemy) << "Download started...";
-//    get(path, params, data);
-//    qCDebug(Udemy) << "Data received:" << data.length() << "bytes";
-//    QJsonDocument root = QJsonDocument::fromJson(data);
+    qCDebug(Udemy) << "Download started...";
+    get(path, params, data);
+    qCDebug(Udemy) << "Data received:" << data.length() << "bytes";
 
-//    QVariantMap variant = root.toVariant().toMap();
-//    QList<QVariant> courses = variant["results"].toList();
-//    qCDebug(Udemy) << "Element count:" << courses.length();
+    json::Value root;
+    json::Reader reader;
+    reader.parse(data.data(), root); // TODO
 
-//    for (const QVariant &i : courses)
-//    {
-//        QVariantMap map = i.toMap();
+    json::Value courses = root["results"];
+    qCDebug(Udemy) << "Element count:" << courses.size();
 
-//        Course course;
-//        course.id = map["id"].toString();
-//        course.slug = map["url"].toString();
-//        course.title = map["title"].toString();
-//        course.description = map["description"].toString();
-//        course.headline = map["headline"].toString();
-//        course.art = map["image_480x270"].toString();
-//        course.link = QStringLiteral("https://www.udemy.com") + map["url"].toString();
-//        course.extra = grabExtra(map);
-//        //course.video = map["teaser_video"].toMap()["youtube_url"].toString();
+    for (json::ArrayIndex index = 0; index < courses.size(); ++index)
+    {
+        json::Value map = courses.get(index, json::Value());
 
-//        QList<QVariant> instructors = map["visible_instructors"].toList();
-//        for (const QVariant& j : instructors)
-//        {
-//            QVariantMap imap = j.toMap();
-//            Instructor instr;
-//            instr.image = imap["image_100x100"].toString();
-//            instr.bio = imap["job_title"].toString();
-//            instr.name = imap["title"].toString();
+        Course course;
+        course.id = map["id"].asString();
+        course.slug = map["url"].asString();
+        course.title = map["title"].asString();
+        course.description = map["description"].asString();
+        course.headline = map["headline"].asString();
+        course.art = map["image_480x270"].asString();
+        course.link = ("https://www.udemy.com") + map["url"].asString();
+        //course.extra = grabExtra(map);
+        //course.video = map["teaser_video"].toMap()["youtube_url"].toString();
 
-//            course.instructors.append(instr);
-//        }
+        json::Value instructors = map["visible_instructors"];
+        for (json::ArrayIndex jj = 0; jj < instructors.size(); ++jj)
+        {
+            json::Value imap = instructors.get(jj, json::Value());
+            Instructor instr;
+            instr.image = imap["image_100x100"].asString();
+            instr.bio = imap["job_title"].asString();
+            instr.name = imap["title"].asString();
 
-//        QVariantMap kmap = map["primary_category"].toMap();
-//        course.departments.append(kmap["title"].toString());
+            course.instructors.push_back(instr);
+        }
 
-//        //qCDebug(Udemy) << "Category count: " << course.departments;
-//        //qCDebug(Udemy) << "Instr count: " << course.instructors.size();
-//        list.append(course);
-//    }
+        json::Value kmap = map["primary_category"];
+        course.departments.push_back(kmap["title"].asString());
+
+        //qCDebug(Udemy) << "Category count: " << course.departments;
+        //qCDebug(Udemy) << "Instr count: " << course.instructors.size();
+        list.append(course);
+    }
 
     return list;
 }

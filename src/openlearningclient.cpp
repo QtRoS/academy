@@ -21,12 +21,13 @@
 #include <core/net/http/client.h>
 #include <core/net/http/content_type.h>
 #include <core/net/http/response.h>
-#include <QVariantMap>
+#include <json/json.h>
 
 Q_LOGGING_CATEGORY(OpenLearning, "OpenLearning")
 
 namespace http = core::net::http;
 namespace net = core::net;
+namespace json = Json;
 
 using namespace std;
 
@@ -38,52 +39,54 @@ QList<Course> OpenLearningClient::courses(const QString &query)
 {
     QList<Course> list;
 
-//    QByteArray data;
-//    net::Uri::Path path;
-//    net::Uri::QueryParameters params;
+    SearchEngine se(query);
 
-//    qCDebug(OpenLearning) << "Download started...";
-//    get( path, params, data);
-//    qCDebug(OpenLearning) << "Data received:" << data.length() << "bytes";
-//    QJsonDocument root = QJsonDocument::fromJson(data);
+    QByteArray data;
+    net::Uri::Path path;
+    net::Uri::QueryParameters params;
 
-//    QVariantMap variant = root.toVariant().toMap();
-//    QList<QVariant> courses = variant["courses"].toList();
-//    qCDebug(OpenLearning) << "Element count:" << courses.length();
+    qCDebug(OpenLearning) << "Download started...";
+    get( path, params, data);
+    qCDebug(OpenLearning) << "Data received:" << data.length() << "bytes";
 
-//    SearchEngine se(query);
 
-//    for (const QVariant &i : courses)
-//    {
-//        QVariantMap map = i.toMap();
+    json::Value root;
+    json::Reader reader;
+    reader.parse(data.data(), root); // TODO
 
-//        Course course;
-//        course.id = map["courseUrl"].toString();
-//        course.slug = map["courseUrl"].toString();
-//        course.title = map["name"].toString();
-//        course.description = map["summary"].toString();
-//        course.headline = course.description.left(120) + QStringLiteral("...");
-//        course.art = map["image"].toString();
-//        course.link = map["courseUrl"].toString();
-//        course.extra = grabExtra(map);
-//        course.video = grabVideo(map["promoMediaUrl"].toString());
+    json::Value courses = root["courses"];
 
-//        {
-//            QVariantMap imap = map["creator"].toMap();
-//            Instructor instr;
-//            instr.image = imap["imageUrl"].toString();
-//            instr.bio = imap["profileUrl"].toString();
-//            instr.name = imap["fullName"].toString();
-//            course.instructors.append(instr);
-//        }
+    for (json::ArrayIndex index = 0; index < courses.size(); ++index)
+    {
+        json::Value map = courses.get(index, json::Value());
 
-//        course.departments.append(map["category"].toString());
+        Course course;
+        course.id = map["courseUrl"].asString();
+        course.slug = map["courseUrl"].asString();
+        course.title = map["name"].asString();
+        course.description = map["summary"].asString();
+        course.headline = course.description.length() > 120 ? course.description.substr(120) + ("...") : course.description;
+        course.art = map["image"].asString();
+        course.link = map["courseUrl"].asString();
+        //course.extra = grabExtra(map);
+        course.video = grabVideo(map["promoMediaUrl"].asString());
 
-//        //qCDebug(OpenLearning) << "Categories: " << course.departments;
-//        //qCDebug(OpenLearning) << "Instr count: " << course.instructors.size();
-//        if (query.isEmpty() || se.isMatch(course))
-//            list.append(course);
-//    }
+        {
+            json::Value imap = map["creator"];
+            Instructor instr;
+            instr.image = imap["imageUrl"].asString();
+            instr.bio = imap["profileUrl"].asString();
+            instr.name = imap["fullName"].asString();
+            course.instructors.push_back(instr);
+        }
+
+        course.departments.push_back(map["category"].asString());
+
+        //qCDebug(OpenLearning) << "Categories: " << course.departments;
+        //qCDebug(OpenLearning) << "Instr count: " << course.instructors.size();
+        if (query.isEmpty() || se.isMatch(course))
+            list.append(course);
+    }
 
     return list;
 }
@@ -101,14 +104,11 @@ const QString OpenLearningClient::name() const
 QString OpenLearningClient::grabExtra(const QVariantMap &map)
 {
     return _("duration - ") + map["duration"].toString();
-    //    QStringList extra;
-    //    extra << QStringLiteral("price - ") + map["price"].toString();
-    //    return extra.join(", ");
 }
 
-QString OpenLearningClient::grabVideo(const QString &promo)
+string OpenLearningClient::grabVideo(const string &promo)
 {
-    if (promo.contains("youtube") || promo.contains("vimeo"))
+    if (promo.find("youtube") != std::string::npos || promo.find("vimeo") != std::string::npos)
         return promo;
-    else return QString();
+    else return string();
 }

@@ -21,6 +21,8 @@
 #include <unity/scopes/ReplyProxyFwd.h>
 #include <unity/scopes/Department.h>
 
+#include <sstream>
+
 #include <QLoggingCategory>
 #include <QPointer>
 #include <QSharedPointer>
@@ -68,6 +70,13 @@ private:
     UdacityClient m_udacity;
     IversityClient m_iversity;
     OpenLearningClient m_openLearning;
+
+    string join(const vector<string>& vec, const char* delim)
+    {
+        stringstream res;
+        copy(vec.begin(), vec.end(), ostream_iterator<string>(res, delim));
+        return res.str();
+    }
 };
 
 #endif // QUERY_H_

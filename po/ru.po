@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-09 11:29+0000\n"
+"POT-Creation-Date: 2016-10-09 12:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,16 +82,16 @@ msgstr "Личное развитие"
 msgid "Science"
 msgstr "Наука"
 
-#: ../src/edxclient.cpp:172 ../src/openlearningclient.cpp:103
-#: ../src/udacityclient.cpp:111
+#: ../src/edxclient.cpp:172 ../src/openlearningclient.cpp:106
+#: ../src/udacityclient.cpp:118
 msgid "duration - "
 msgstr "длительность - "
 
-#: ../src/iversityclient.cpp:106 ../src/udacityclient.cpp:110
+#: ../src/iversityclient.cpp:111 ../src/udacityclient.cpp:117
 msgid "level - "
 msgstr "уровень - "
 
-#: ../src/udemyclient.cpp:121 ../src/templateclient.cpp:119
+#: ../src/udemyclient.cpp:183 ../src/templateclient.cpp:119
 msgid "price - "
 msgstr "цена - "
 

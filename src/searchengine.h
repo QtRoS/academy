@@ -35,7 +35,7 @@ public:
 
     bool isMatch(const Course& course)
     {
-        // TODO BUG
+        // TODO
         return m_regex.indexIn(QString::fromStdString(course.title)) != -1 ||
                 m_regex.indexIn(QString::fromStdString(course.headline)) != -1 ||
                 m_regex.indexIn(QString::fromStdString(course.description)) != -1;

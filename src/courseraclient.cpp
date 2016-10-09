@@ -23,12 +23,12 @@
 #include <core/net/http/response.h>
 #include <QVariantMap>
 #include <json/json.h>
+namespace json = Json;
 
 Q_LOGGING_CATEGORY(Coursera, "Coursera")
 
 namespace http = core::net::http;
 namespace net = core::net;
-namespace json = Json;
 
 using namespace std;
 
@@ -59,7 +59,7 @@ QList<Course> CourseraClient::courses(const QString &query)
 
     json::Value root;
     json::Reader reader;
-    reader.parse(data.data(), root); // TODO BUG
+    reader.parse(data.data(), root); // TODO
 
     QMap<string, Instructor> instructorsMap;
 
@@ -112,71 +112,6 @@ QList<Course> CourseraClient::courses(const QString &query)
         //qCDebug(Coursera) << "Instr count: " << course.instructors.size();
         list.append(course);
     }
-
-    // ----------------------------------------------------------------- //
-
-
-    //QJsonDocument root = QJsonDocument::fromJson(data);
-
-//    QVariantMap variant = root.toVariant().toMap();
-
-//    // Instructors.
-
-//    QList<QVariant> instrs = variant["linked"].toMap()["instructors.v1"].toList();
-//    //qCDebug(Coursera) << "Instructor count:" << instrs.length();
-
-//    QMap<QString, Instructor> instructorsMap;
-
-//    for (const QVariant &j : instrs)
-//    {
-//        QVariantMap imap = j.toMap();
-//        Instructor instr;
-//        instr.image = imap["photo"].toString();
-//        instr.bio = imap["bio"].toString();
-//        instr.name = imap["firstName"].toString() + " " + imap["lastName"].toString();
-
-//        //qCDebug(Coursera) << "Instr details:" << instr.image << instr.name;
-
-//        instructorsMap.insert(imap["id"].toString(), instr);
-//    }
-
-//    // Courses.
-
-//    QList<QVariant> elems = variant["elements"].toList();
-//    qCDebug(Coursera) << "Element count:" << elems.length();
-
-//    for (const QVariant &i : elems)
-//    {
-//        QVariantMap map = i.toMap();
-
-//        Course course;
-//        course.id = map["id"].toString();
-//        course.slug = map["slug"].toString();
-//        course.title = map["name"].toString();
-//        course.description = map["description"].toString();
-//        course.headline = course.description.left(120) + QStringLiteral("...");
-//        course.art = map["photoUrl"].toString();
-//        course.link = QStringLiteral("http://www.coursera.org/learn/") + map["slug"].toString();
-//        course.extra = grabExtra(map);
-
-//        QList<QVariant> instructorsIds = map["instructorIds"].toList();
-//        for (const QVariant& j : instructorsIds)
-//        {
-//            if (instructorsMap.contains(j.toString()))
-//                course.instructors.append(instructorsMap.value(j.toString()));
-//        }
-
-//        QList<QVariant> domainTypes = map["domainTypes"].toList();
-//        for (const QVariant& k : domainTypes)
-//        {
-//            QVariantMap kmap = k.toMap();
-//            course.departments.append(kmap["domainId"].toString());
-//        }
-
-//        //qCDebug(Coursera) << "Domain count: " << course.departments;
-//        //qCDebug(Coursera) << "Instr count: " << course.instructors.size();
-//        list.append(course);
-//    }
 
     return list;
 }
