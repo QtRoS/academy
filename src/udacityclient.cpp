@@ -36,9 +36,9 @@ UdacityClient::UdacityClient(Config::Ptr config) :
     CachedClient(config)
 { }
 
-QList<Course> UdacityClient::courses(const QString &query)
+vector<Course> UdacityClient::courses(const string &query)
 {
-    QList<Course> list;
+    vector<Course> list;
 
     SearchEngine se(query);
 
@@ -94,21 +94,21 @@ QList<Course> UdacityClient::courses(const QString &query)
         }
         //qCDebug(Udacity) << "Track count: " << course.departments;
         //qCDebug(Udacity) << "Instr count: " << course.instructors.size();
-        if (query.isEmpty() || se.isMatch(course))
-            list.append(course);
+        if (query.empty() || se.isMatch(course))
+            list.push_back(course);
     }
 
     return list;
 }
 
-const QString UdacityClient::baseApiUrl() const
+const string UdacityClient::baseApiUrl() const
 {
-    return QStringLiteral("https://www.udacity.com/public-api/v0/courses");
+    return ("https://www.udacity.com/public-api/v0/courses");
 }
 
-const QString UdacityClient::name() const
+const string UdacityClient::name() const
 {
-    return QStringLiteral("Udacity");
+    return ("Udacity");
 }
 
 QString UdacityClient::grabExtra(const QVariantMap &map)

@@ -54,19 +54,19 @@ public:
      * @param query - search query, keyword or course name (from user input)
      * @return list of available courses
      */
-    virtual QList<Course> courses(const QString& query) = 0;
+    virtual vector<Course> courses(const string& query) = 0;
 
     /**
      * @brief this method is used by a client when it is contructing full URL (with parameters)
      * @return base URL of your service
      */
-    virtual const QString baseApiUrl() const = 0;
+    virtual const string baseApiUrl() const = 0;
 
     /**
      * @brief used by Query when it is organazing results in groups
      * @return human-visible name of a client
      */
-    virtual const QString name() const = 0;
+    virtual const string name() const = 0;
 
     /**
      * @brief Some APIs require custom headers in HTTP request (for example for authorization)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-09 12:43+0000\n"
+"POT-Creation-Date: 2016-10-09 13:19+0000\n"
 "PO-Revision-Date: 2016-03-27 13:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -35,7 +35,7 @@ msgid "<b>Source:</b> "
 msgstr "<b>Quelle:</b>"
 
 #. Create and register departments.
-#: ../src/query.cpp:120
+#: ../src/query.cpp:121
 msgid "All"
 msgstr "Alle"
 
@@ -92,10 +92,10 @@ msgstr "Länge - "
 msgid "level - "
 msgstr "Stand - "
 
-#: ../src/udemyclient.cpp:183 ../src/templateclient.cpp:119
+#: ../src/udemyclient.cpp:125 ../src/templateclient.cpp:119
 msgid "price - "
 msgstr "Kosten - "
 
-#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:196
+#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:131
 msgid "workload - "
 msgstr "Pensum - "

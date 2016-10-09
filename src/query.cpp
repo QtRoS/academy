@@ -26,6 +26,7 @@
 
 #include <vector>
 #include <string>
+#include <locale>
 #include <set>
 
 Q_LOGGING_CATEGORY(Qry, "Query")
@@ -107,14 +108,14 @@ void Query::run(sc::SearchReplyProxy const& reply)
         static ScopeImageCache icache;
 
         // Get query string and selected department.
-        QString queryString = QString::fromStdString(query.query_string());
-        qCDebug(Qry) << "Query string is:" << queryString;
+        string queryString = query.query_string();
+        qCDebug(Qry) << "Query string is:" << QString::fromStdString(queryString);
         string selectedDepartment = query.department_id();
         //qCDebug(Qry) << "Selected department:" << selectedDepartment;
 
         // Getting source list.
-        QList<BaseClient*> sources = enabledSources();
-        qCDebug(Qry) << "Source count:" << sources.count();
+        vector<BaseClient*> sources = enabledSources();
+        qCDebug(Qry) << "Source count:" << sources.size();
 
         // Create and register departments.
         sc::Department::SPtr allDepts = sc::Department::create("", query, _("All"));
@@ -126,15 +127,13 @@ void Query::run(sc::SearchReplyProxy const& reply)
         reply->register_departments(allDepts);
 
         set<string> uniqueSet;
-        for(int i = 0; i < sources.count(); ++i)
+        for(int i = 0; i < sources.size(); ++i)
         {
-            QString sourceCatName = sources[i]->name();
+            string sourceCatName = sources[i]->name();
             auto courseList = sources[i]->courses(queryString);
 
             auto templ = settings().at("textPosition").get_int() ? CURRENT_TEMPLATE_OV : CURRENT_TEMPLATE;
-            auto sourceCategory = reply->register_category(sourceCatName.toLower().toStdString(),
-                                                             sourceCatName.toStdString(),
-                                                             "", sc::CategoryRenderer(templ));
+            auto sourceCategory = reply->register_category(sourceCatName, sourceCatName, "", sc::CategoryRenderer(templ));
 
             //qCDebug(Qry) << "Processing source:" << sourceCatName;
 
@@ -163,7 +162,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 res.set_art(course.art);
                 res["headline"] = course.headline;
                 res["description"] = course.description;
-                res["source"] = sourceCatName.toStdString();
+                res["source"] = sourceCatName;
                 res["extra"] = course.extra;
                 if (!course.video.empty())
                     res["video_url"] = course.video;
@@ -189,7 +188,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                     return;
             }
 
-            qCDebug(Qry) << "Finished with source:" << sourceCatName;
+            qCDebug(Qry) << "Finished with source:" << QString::fromStdString(sourceCatName);
         }
 
     } catch (domain_error &e) {
@@ -198,23 +197,23 @@ void Query::run(sc::SearchReplyProxy const& reply)
     }
 }
 
-QList<BaseClient*> Query::enabledSources()
+vector<BaseClient *> Query::enabledSources()
 {
-    QList<BaseClient*> sources;
+    vector<BaseClient*> sources;
 
     // Checking out which sources are enabled.
     if (settings().at("coursera").get_bool())
-        sources.append(&m_coursera);
+        sources.push_back(&m_coursera);
     if (settings().at("udemy").get_bool())
-        sources.append(&m_udemy);
+        sources.push_back(&m_udemy);
     if (settings().at("edx").get_bool())
-        sources.append(&m_edx);
+        sources.push_back(&m_edx);
     if (settings().at("udacity").get_bool())
-        sources.append(&m_udacity);
+        sources.push_back(&m_udacity);
     if (settings().at("iversity").get_bool())
-        sources.append(&m_iversity);
+        sources.push_back(&m_iversity);
     if (settings().at("openLearning").get_bool())
-        sources.append(&m_openLearning);
+        sources.push_back(&m_openLearning);
 
     return sources;
 }

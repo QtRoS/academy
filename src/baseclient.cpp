@@ -52,7 +52,7 @@ void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters
     http::Request::Configuration configuration;
 
     // Build the URI from its components
-    net::Uri uri = net::make_uri(baseApiUrl().toStdString(), path, parameters);
+    net::Uri uri = net::make_uri(baseApiUrl(), path, parameters);
     configuration.uri = client->uri_to_string(uri);
 
     // Give out a user agent string
@@ -91,7 +91,7 @@ http::Request::Progress::Next BaseClient::progress_report(const http::Request::P
 void BaseClient::cancel()
 {
     m_cancelled = true;
-    qCDebug(BaseCli) << name() << "cancelled";
+    qCDebug(BaseCli) << QString::fromStdString(name()) << "cancelled";
 }
 
 Config::Ptr BaseClient::config()

@@ -36,9 +36,9 @@ UdemyClient::UdemyClient(Config::Ptr config) :
     CachedClient(config)
 { }
 
-QList<Course> UdemyClient::courses(const QString &query)
+vector<Course> UdemyClient::courses(const string &query)
 {
-    QList<Course> list;
+    vector<Course> list;
 
     QByteArray data;
     net::Uri::Path path;
@@ -48,9 +48,9 @@ QList<Course> UdemyClient::courses(const QString &query)
     params.push_back({"page_size", "80"});
     params.push_back({"ordering", "trending"});
 
-    if (!query.isEmpty())
+    if (!query.empty())
     {
-        params.push_back({"search", query.toStdString()});
+        params.push_back({"search", query});
         setCacheEnabled(false);
     }
 
@@ -97,20 +97,20 @@ QList<Course> UdemyClient::courses(const QString &query)
 
         //qCDebug(Udemy) << "Category count: " << course.departments;
         //qCDebug(Udemy) << "Instr count: " << course.instructors.size();
-        list.append(course);
+        list.push_back(course);
     }
 
     return list;
 }
 
-const QString UdemyClient::baseApiUrl() const
+const string UdemyClient::baseApiUrl() const
 {
-    return QStringLiteral("https://www.udemy.com/api-2.0/courses");
+    return ("https://www.udemy.com/api-2.0/courses");
 }
 
-const QString UdemyClient::name() const
+const string UdemyClient::name() const
 {
-    return QStringLiteral("Udemy");
+    return ("Udemy");
 }
 
 const QMap<QByteArray, QByteArray> UdemyClient::customHeaders() const

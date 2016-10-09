@@ -20,13 +20,7 @@
 #include <core/net/http/request.h>
 #include <core/net/uri.h>
 
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QString>
-#include <QList>
-#include <QMap>
-#include <QByteArray>
-#include <QDebug>
 
 #include "config.h"
 #include "baseclient.h"
@@ -42,9 +36,9 @@ public:
     UdemyClient(Config::Ptr config);
     virtual ~UdemyClient() = default;
 
-    virtual QList<Course> courses(const QString& query) override;
-    virtual const QString baseApiUrl() const override;
-    virtual const QString name() const override;
+    virtual vector<Course> courses(const string& query) override;
+    virtual const string baseApiUrl() const override;
+    virtual const string name() const override;
     virtual const QMap<QByteArray, QByteArray> customHeaders() const override;
 
 private:

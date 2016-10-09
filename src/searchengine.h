@@ -17,32 +17,30 @@
 #ifndef SEARCHENGINE_H_
 #define SEARCHENGINE_H_
 
-#include <QRegExp>
-
 #include "course.h"
 
 class SearchEngine
 {
 public:
-    explicit SearchEngine(const QString& query)
+    explicit SearchEngine(const string& query)
     {
-        QStringList parts = query.split(' ');
-        for (int i = 0; i < parts.size(); ++i)
-            parts[i] = "(" + parts[i].toLower().replace("+", "\\+") + ")";
-        QString regex = parts.join('|');
-        m_regex = QRegExp(regex, Qt::CaseInsensitive);
+//        QStringList parts = query.split(' ');
+//        for (int i = 0; i < parts.size(); ++i)
+//            parts[i] = "(" + parts[i].toLower().replace("+", "\\+") + ")";
+//        QString regex = parts.join('|');
+        m_regex = query;
     }
 
     bool isMatch(const Course& course)
     {
         // TODO
-        return m_regex.indexIn(QString::fromStdString(course.title)) != -1 ||
-                m_regex.indexIn(QString::fromStdString(course.headline)) != -1 ||
-                m_regex.indexIn(QString::fromStdString(course.description)) != -1;
+        return (course.title.find("youtube") != std::string::npos  ||
+                course.headline.find("vimeo") != std::string::npos ||
+                course.description.find("vimeo") != std::string::npos);
     }
 
 private:
-    QRegExp m_regex;
+    string m_regex;
 };
 
 #endif // SEARCHENGINE_H_

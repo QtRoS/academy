@@ -36,9 +36,9 @@ IversityClient::IversityClient(Config::Ptr config) :
     CachedClient(config)
 { }
 
-QList<Course> IversityClient::courses(const QString &query)
+vector<Course> IversityClient::courses(const string &query)
 {
-    QList<Course> list;
+    vector<Course> list;
 
     SearchEngine se(query);
 
@@ -89,21 +89,21 @@ QList<Course> IversityClient::courses(const QString &query)
 
         //qCDebug(Iversity) << "Category count: " << course.departments;
         //qCDebug(Iversity) << "Instr count: " << course.instructors.size();
-        if (query.isEmpty() || se.isMatch(course))
-            list.append(course);
+        if (query.empty() || se.isMatch(course))
+            list.push_back(course);
     }
 
     return list;
 }
 
-const QString IversityClient::baseApiUrl() const
+const string IversityClient::baseApiUrl() const
 {
-    return QStringLiteral("https://iversity.org/api/v1/courses");
+    return ("https://iversity.org/api/v1/courses");
 }
 
-const QString IversityClient::name() const
+const string IversityClient::name() const
 {
-    return QStringLiteral("iversity");
+    return ("iversity");
 }
 
 QString IversityClient::grabExtra(const QVariantMap &map)

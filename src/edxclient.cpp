@@ -36,9 +36,9 @@ EdxClient::EdxClient(Config::Ptr config) :
     //qCDebug(Edx) << "Cache dir:" << QString::fromStdString(config->cache_dir);
 }
 
-QList<Course> EdxClient::courses(const QString &query)
+vector<Course> EdxClient::courses(const string &query)
 {
-    QList<Course> list;
+    vector<Course> list;
 
 //    QByteArray data;
 //    net::Uri::Path path;
@@ -149,14 +149,14 @@ QList<Course> EdxClient::courses(const QString &query)
     return list;
 }
 
-const QString EdxClient::baseApiUrl() const
+const string EdxClient::baseApiUrl() const
 {
-    return QStringLiteral("https://www.edx.org/api/v2/report/course-feed/rss");
+    return ("https://www.edx.org/api/v2/report/course-feed/rss");
 }
 
-const QString EdxClient::name() const
+const string EdxClient::name() const
 {
-    return QStringLiteral("edX");
+    return ("edX");
 }
 
 QString EdxClient::grabExtra(const QDomElement &courseElem)

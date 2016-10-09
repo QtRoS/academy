@@ -28,13 +28,14 @@ void CachedClient::get(const core::net::Uri::Path &path, const core::net::Uri::Q
 {
     if (m_cacheEnabled)
     {
-        if (!m_cache.containsData(name()))
+        QString nm = QString::fromStdString(name());
+        if (!m_cache.containsData(nm))
         {
             BaseClient::get(path, parameters, result);
             if (!m_cancelled)
-                m_cache.setData(name(), result);
+                m_cache.setData(nm, result);
         }
-        else result = m_cache.data(name());
+        else result = m_cache.data(nm);
     }
     else BaseClient::get(path, parameters, result);
 

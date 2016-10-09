@@ -34,9 +34,9 @@ TemplateClient::TemplateClient(Config::Ptr config) :
     CachedClient(config)
 { }
 
-QList<Course> TemplateClient::courses(const QString &query)
+vector<Course> TemplateClient::courses(const string &query)
 {
-    QList<Course> list;
+    vector<Course> list;
 
 //    QByteArray data;
 //    net::Uri::Path path;
@@ -97,14 +97,14 @@ QList<Course> TemplateClient::courses(const QString &query)
     return list;
 }
 
-const QString TemplateClient::baseApiUrl() const
+const string TemplateClient::baseApiUrl() const
 {
-    return QStringLiteral("https://www.template.com/api-2.0/courses");
+    return ("https://www.template.com/api-2.0/courses");
 }
 
-const QString TemplateClient::name() const
+const string TemplateClient::name() const
 {
-    return QStringLiteral("Template");
+    return ("Template");
 }
 
 const QMap<QByteArray, QByteArray> TemplateClient::customHeaders() const

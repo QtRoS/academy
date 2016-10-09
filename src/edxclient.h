@@ -43,13 +43,13 @@ public:
     EdxClient(Config::Ptr config);
     virtual ~EdxClient() = default;
 
-    virtual QList<Course> courses(const QString& query) override;
-    virtual const QString baseApiUrl() const override;
-    virtual const QString name() const override;
+    virtual vector<Course> courses(const string& query) override;
+    virtual const string baseApiUrl() const override;
+    virtual const string name() const override;
 
 private:
     QString grabExtra(const QDomElement& courseElem);
-    const QString FallBackImage = "https://cdn2.vox-cdn.com/thumbor/Kf5Ct7VfeCTLb2JnQzV5kUFVQpg=/0x4:640x364/1600x900/cdn0.vox-cdn.com/assets/1094556/edx.png";
+    const string FallBackImage = "https://cdn2.vox-cdn.com/thumbor/Kf5Ct7VfeCTLb2JnQzV5kUFVQpg=/0x4:640x364/1600x900/cdn0.vox-cdn.com/assets/1094556/edx.png";
 };
 
 #endif // EDXCLIENT_H_

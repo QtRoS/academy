@@ -35,9 +35,9 @@ OpenLearningClient::OpenLearningClient(Config::Ptr config) :
     CachedClient(config)
 { }
 
-QList<Course> OpenLearningClient::courses(const QString &query)
+vector<Course> OpenLearningClient::courses(const string &query)
 {
-    QList<Course> list;
+    vector<Course> list;
 
     SearchEngine se(query);
 
@@ -84,21 +84,21 @@ QList<Course> OpenLearningClient::courses(const QString &query)
 
         //qCDebug(OpenLearning) << "Categories: " << course.departments;
         //qCDebug(OpenLearning) << "Instr count: " << course.instructors.size();
-        if (query.isEmpty() || se.isMatch(course))
-            list.append(course);
+        if (query.empty() || se.isMatch(course))
+            list.push_back(course);
     }
 
     return list;
 }
 
-const QString OpenLearningClient::baseApiUrl() const
+const string OpenLearningClient::baseApiUrl() const
 {
-    return QStringLiteral("https://www.openlearning.com/api/courses/list?type=free,paid");
+    return ("https://www.openlearning.com/api/courses/list?type=free,paid");
 }
 
-const QString OpenLearningClient::name() const
+const string OpenLearningClient::name() const
 {
-    return QStringLiteral("OpenLearning");
+    return ("OpenLearning");
 }
 
 QString OpenLearningClient::grabExtra(const QVariantMap &map)

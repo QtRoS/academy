@@ -36,9 +36,9 @@ CourseraClient::CourseraClient(Config::Ptr config) :
     CachedClient(config)
 { }
 
-QList<Course> CourseraClient::courses(const QString &query)
+vector<Course> CourseraClient::courses(const string &query)
 {
-    QList<Course> list;
+    vector<Course> list;
 
     QByteArray data;
     net::Uri::Path path;
@@ -46,10 +46,10 @@ QList<Course> CourseraClient::courses(const QString &query)
     params.push_back({"includes", "instructorIds"});
     params.push_back({"limit", "80"});
     params.push_back({"fields", "instructors.v1(firstName,lastName,suffix,photo,photo150,bio),description,photoUrl,slug,workload,instructorIds,domainTypes" });
-    if (!query.isEmpty())
+    if (!query.empty())
     {
         params.push_back({"q", "search"});
-        params.push_back({"query", query.toStdString()});
+        params.push_back({"query", query});
         setCacheEnabled(false);
     }
 
@@ -110,20 +110,20 @@ QList<Course> CourseraClient::courses(const QString &query)
 
         //qCDebug(Coursera) << "Domain count: " << course.departments;
         //qCDebug(Coursera) << "Instr count: " << course.instructors.size();
-        list.append(course);
+        list.push_back(course);
     }
 
     return list;
 }
 
-const QString CourseraClient::baseApiUrl() const
+const string CourseraClient::baseApiUrl() const
 {
-    return QStringLiteral("https://api.coursera.org/api/courses.v1");
+    return ("https://api.coursera.org/api/courses.v1");
 }
 
-const QString CourseraClient::name() const
+const string CourseraClient::name() const
 {
-    return QStringLiteral("Coursera");
+    return ("Coursera");
 }
 
 QString CourseraClient::grabExtra(const QVariantMap &map)

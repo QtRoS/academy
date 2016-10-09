@@ -24,9 +24,6 @@
 #include <sstream>
 
 #include <QLoggingCategory>
-#include <QPointer>
-#include <QSharedPointer>
-#include <QSet>
 
 #include "config.h"
 #include "courseraclient.h"
@@ -59,7 +56,7 @@ public:
     void run(const unity::scopes::SearchReplyProxy &reply) override;
 
 private:
-    QList<BaseClient*> enabledSources();
+    vector<BaseClient*> enabledSources();
 
 private:
     //Client client_;
