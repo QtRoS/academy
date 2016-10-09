@@ -17,6 +17,8 @@
 #ifndef LOCALCACHE_H
 #define LOCALCACHE_H
 
+#include <string>
+
 #include <QObject>
 #include <QString>
 #include <QByteArray>
@@ -30,14 +32,16 @@
 
 Q_DECLARE_LOGGING_CATEGORY(LoCache)
 
+using namespace std;
+
 class LocalCache
 {
 public:
-    LocalCache(const QString& cacheDir);
+    LocalCache(const string& cacheDir);
 
-    bool containsData(const QString& key) const;
-    QByteArray data(const QString& key) const;
-    bool setData(const QString& key, QByteArray data);
+    bool containsData(const string& key) const;
+    QByteArray data(const string& key) const;
+    bool setData(const string& key, QByteArray data);
 
     qint64 expireTime() const { return m_expireTime; }
     void setExpireTime(qint64 t) { m_expireTime = t; }
@@ -48,7 +52,7 @@ private:
     qint64 m_expireTime;
 
 private:
-    QString fileNameByKey(const QString& key) const;
+    QString fileNameByKey(const string& key) const;
 };
 
 #endif // LOCALCACHE_H

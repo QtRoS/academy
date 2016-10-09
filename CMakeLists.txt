@@ -43,6 +43,7 @@ include_directories(
   ${Qt5Core_INCLUDE_DIRS}
 )
 
+
 # Do not remove these 2 lines, they are required for the correct functionality of the Ubuntu-SDK
 set(UBUNTU_MANIFEST_PATH "manifest.json.in" CACHE INTERNAL "Tells QtCreator location and name of the manifest file")
 set(UBUNTU_PROJECT_TYPE "Scope" CACHE INTERNAL "Tells QtCreator this is a Scope project")

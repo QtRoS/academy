@@ -18,14 +18,14 @@
 
 Q_LOGGING_CATEGORY(LoCache, "LocalCache")
 
-LocalCache::LocalCache(const QString &cacheDir):
-    m_cacheDirectory(cacheDir),
+LocalCache::LocalCache(const string &cacheDir):
+    m_cacheDirectory(QString::fromStdString(cacheDir)),
     m_expireTime(60 * 60 *24)
 {
 
 }
 
-bool LocalCache::containsData(const QString &key) const
+bool LocalCache::containsData(const string &key) const
 {
     QString filePath = fileNameByKey(key);
     QFileInfo fi(filePath);
@@ -38,7 +38,7 @@ bool LocalCache::containsData(const QString &key) const
     return fi.lastModified().secsTo(now) < m_expireTime;
 }
 
-QByteArray LocalCache::data(const QString &key) const
+QByteArray LocalCache::data(const string &key) const
 {
     QString filePath = fileNameByKey(key);
 
@@ -52,7 +52,7 @@ QByteArray LocalCache::data(const QString &key) const
     return file.readAll();
 }
 
-bool LocalCache::setData(const QString &key, QByteArray data)
+bool LocalCache::setData(const string &key, QByteArray data)
 {
     QString filePath = fileNameByKey(key);
 
@@ -68,8 +68,8 @@ bool LocalCache::setData(const QString &key, QByteArray data)
     return true;
 }
 
-QString LocalCache::fileNameByKey(const QString &key) const
+QString LocalCache::fileNameByKey(const string &key) const
 {
-    QString md5 = QCryptographicHash::hash(key.toLatin1(), QCryptographicHash::Md5).toHex();
+    QString md5 = QCryptographicHash::hash(key.c_str(), QCryptographicHash::Md5).toHex();
     return QDir::cleanPath(m_cacheDirectory + QDir::separator() + md5 + FileNameSuffix);
 }

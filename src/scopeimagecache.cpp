@@ -1,29 +1,44 @@
 ﻿#include <QStandardPaths>
 #include "scopeimagecache.h"
 
+#include <chrono>
+#include <thread>
+
+#include <core/net/error.h>
+#include <core/net/http/client.h>
+#include <core/net/http/content_type.h>
+#include <core/net/http/response.h>
+#include <core/net/http/request.h>
+#include <core/net/uri.h>
+
+namespace http = core::net::http;
+namespace net = core::net;
+
 Q_LOGGING_CATEGORY(ImgCache, "ScopeImageCache")
 
-ScopeImageCache::ScopeImageCache(QObject *parent) :
-    QObject(parent),
-    m_isBusy(false),
-    m_reply(0)
+ScopeImageCache::ScopeImageCache():
+    m_thread(&ScopeImageCache::threadProc, this)
 { }
 
 ScopeImageCache::~ScopeImageCache()
 { }
 
-QString ScopeImageCache::getByPreview(const QString &preview,  bool downloadOnMiss)
+string ScopeImageCache::getByPreview(const string &previewUrl,  bool downloadOnMiss)
 {
+    QMutexLocker lock(&m_lock); // TODO
+
     // --------------- First (and fastest) way - hash ---------------- //
+    QString preview = QString::fromStdString(previewUrl);
+
     if (preview.isEmpty())
-        return QString("");
+        return string("");
 
     bool contains = m_hash.contains(preview);
     if (contains)
     {
         QString ret = m_hash[preview];
         if (!ret.isEmpty())
-            return QStringLiteral("file:/") + cacheLocation() + QDir::separator() + ret;
+            return (QStringLiteral("file:/") + cacheLocation() + QDir::separator() + ret).toStdString();
     }
 
     // --------------- Second way - file                    ---------------- //
@@ -35,7 +50,7 @@ QString ScopeImageCache::getByPreview(const QString &preview,  bool downloadOnMi
     if (fi.exists() && fi.size() > 0 )
     {
         m_hash[preview] = md5;
-        return QStringLiteral("file:/") + previewPath;
+        return (QStringLiteral("file:/") + previewPath).toStdString();
     }
 
     // --------------- Last way - network                   ---------------- //
@@ -44,53 +59,9 @@ QString ScopeImageCache::getByPreview(const QString &preview,  bool downloadOnMi
     {
         m_hash[preview] = QStringLiteral("");
         m_queue.enqueue(QueueItem(preview, previewPath));
-
-        if (!m_isBusy)
-            downloadNext();
     }
 
-    return QString("");
-}
-
-void ScopeImageCache::slotDownloadDataAvailable()
-{
-    qint64 dataLen = m_reply->bytesAvailable();
-    qint64 written = m_file.write(m_reply->read(dataLen));
-    qCDebug(ImgCache) << "Downloading" << QFileInfo(m_file).fileName() << "available" << dataLen << "written" << written;
-}
-
-void ScopeImageCache::makeRequest(const QString &url)
-{
-    QUrl reqUrl(url);
-    QNetworkRequest req(reqUrl);
-
-    //req.setRawHeader("Authorization", "OAuth " + m_token.toLatin1());
-    m_reply = m_manager.get(req);
-
-    connect(m_reply, &QNetworkReply::readyRead, this, &ScopeImageCache::slotDownloadDataAvailable);
-    connect(m_reply, &QNetworkReply::finished, this, &ScopeImageCache::slotFinished);
-    connect(m_reply, static_cast<void(QNetworkReply::*)(QNetworkReply::NetworkError)>(&QNetworkReply::error), this, &ScopeImageCache::slotError);
-}
-
-void ScopeImageCache::downloadNext()
-{
-    if (m_queue.isEmpty())
-    {
-        setIsBusy(false);
-        return;
-    }
-
-    qCDebug(ImgCache) << "Queue length:" << m_queue.length();
-
-    setIsBusy(true);
-
-    QueueItem item = m_queue.dequeue();
-
-    m_file.setFileName(item.localPath);
-    if (!m_file.open(QIODevice::Truncate | QIODevice::WriteOnly))
-        qCWarning(ImgCache) << "File '" + item.localPath + "' can't be opened:" << m_file.errorString() << m_file.error();
-
-    makeRequest(item.url);
+    return string("");
 }
 
 QString ScopeImageCache::cacheLocation() const
@@ -100,7 +71,6 @@ QString ScopeImageCache::cacheLocation() const
     if (cacheLocation.isEmpty())
     {
         cacheLocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + QStringLiteral("/Previews");
-        //cacheLocation = QStringLiteral("/Previews");
 
         if (!QDir(cacheLocation).exists() && !QDir().mkdir(cacheLocation))
             qCCritical(ImgCache) << "Can't create directory for previews:" << cacheLocation;
@@ -110,51 +80,27 @@ QString ScopeImageCache::cacheLocation() const
     return cacheLocation;
 }
 
-void ScopeImageCache::slotError(QNetworkReply::NetworkError code)
+void ScopeImageCache::threadProc()
 {
-    qCWarning(ImgCache) << "Download error:" << code << m_reply->errorString();
-}
-
-void ScopeImageCache::slotFinished()
-{
-    int status = m_reply->attribute( QNetworkRequest::HttpStatusCodeAttribute ).toInt();
-    QString location = m_reply->rawHeader("Location");
-
-    m_reply->deleteLater();
-
-    // Check if redirect.
-    if (status / 100 == 3 || !location.isEmpty())
+    while(true)
     {
-        qCDebug(ImgCache) << "Redirected: " << location;
-        makeRequest(location);
-    }
-    else
-    {
-        m_file.close();
-        downloadNext();
+        m_lock.lock();
+        qCDebug(ImgCache) << "Queue length:" << m_queue.size() << &m_queue;
+        if (!m_queue.size())
+        {
+            m_lock.unlock();
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            continue;
+        }
+
+        QueueItem item = m_queue.dequeue();
+        m_lock.unlock();
+
+        downloadFile(item.url.toStdString(), item.localPath.toStdString());
     }
 }
 
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
-
-QString ScopeImageCache::token() const
+http::Request::Progress::Next ScopeImageCache::progress_report(const http::Request::Progress &progress)
 {
-    return m_token;
-}
-
-bool ScopeImageCache::isBusy() const
-{
-    return m_isBusy;
-}
-
-void ScopeImageCache::setToken(const QString &t)
-{
-    m_token = t;
-    Q_EMIT tokenChanged();
-}
-
-void ScopeImageCache::setIsBusy(bool v)
-{
-    m_isBusy = v;
-    Q_EMIT isBusyChanged();
+    return http::Request::Progress::Next::continue_operation;
 }

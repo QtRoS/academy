@@ -105,7 +105,9 @@ void Query::run(sc::SearchReplyProxy const& reply)
         // Start by getting information about the query
         const sc::CannedQuery &query(sc::SearchQueryBase::query());
 
-        static ScopeImageCache icache;
+        static ScopeImageCache* icache = nullptr;
+        if (!icache)
+            icache = new ScopeImageCache();
 
         // Get query string and selected department.
         string queryString = query.query_string();
@@ -145,21 +147,17 @@ void Query::run(sc::SearchReplyProxy const& reply)
 
                 // Duplicate results cause Dash to crash.
                 if (uniqueSet.count(course.link))
-                {
-                    //qCDebug(Qry) << "Duplicate:" << course.link;
                     continue;
-                }
                 uniqueSet.insert(course.link);
 
-                // TODO
-                //QString art = m_config->cache.getByPreview(course.art);
-                //QString art = icache.getByPreview(course.art);
-                //art = art.isEmpty() ? course.art : art;
+                string art = icache->getByPreview(course.art);
+                if (art.empty())
+                    art = course.art;
 
                 sc::CategorisedResult res(sourceCategory);
                 res.set_uri(course.link);
                 res.set_title(course.title);
-                res.set_art(course.art);
+                res.set_art(art);
                 res["headline"] = course.headline;
                 res["description"] = course.description;
                 res["source"] = sourceCatName;

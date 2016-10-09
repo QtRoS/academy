@@ -3,15 +3,29 @@
 
 #include <QQueue>
 #include <QCryptographicHash>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QNetworkRequest>
 #include <QFile>
 #include <QHash>
 #include <QFileInfo>
 #include <QDir>
 #include <QDebug>
 #include <QLoggingCategory>
+#include <QMutex>
+#include <QMutexLocker>
+
+#include <core/net/error.h>
+#include <core/net/http/client.h>
+#include <core/net/http/content_type.h>
+#include <core/net/http/response.h>
+#include <core/net/http/request.h>
+#include <core/net/uri.h>
+
+#include <string>
+#include <thread>
+
+#include <stdio.h>
+#include <curl/curl.h>
+
+using namespace std;
 
 Q_DECLARE_LOGGING_CATEGORY(ImgCache)
 
@@ -28,47 +42,43 @@ public:
     QString localPath;
 };
 
-class ScopeImageCache : public QObject
+class ScopeImageCache
 {
-    Q_OBJECT
 public:
-    explicit ScopeImageCache(QObject *parent = 0);
+    ScopeImageCache();
     ~ScopeImageCache();
 
-    Q_PROPERTY(QString token READ token WRITE setToken NOTIFY tokenChanged)
-    Q_PROPERTY(bool isBusy READ isBusy WRITE setIsBusy NOTIFY isBusyChanged)
-    Q_INVOKABLE QString getByPreview(const QString& preview, bool downloadOnMiss = true);
-
-public:
-    QString token() const;
-    bool isBusy() const;
-    void setToken(const QString& t);
-    void setIsBusy(bool v);
-
-Q_SIGNALS:
-    void operationProgress(qint64 current, qint64 total);
-    void tokenChanged();
-    void isBusyChanged();
-
-private Q_SLOTS:
-    void slotDownloadDataAvailable();
-    void slotError(QNetworkReply::NetworkError code);
-    void slotFinished();
+    string getByPreview(const string& preview, bool downloadOnMiss = true);
 
 private:
-    void makeRequest(const QString& url);
-    void downloadNext();
+    void threadProc();
+    QMutex m_lock;
+    core::net::http::Request::Progress::Next progress_report(const core::net::http::Request::Progress& progress);
+
+    static size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream) {
+        size_t written = fwrite(ptr, size, nmemb, stream);
+        return written;
+    }
+
+    static void downloadFile(const string& strurl , const string& fname) {
+        CURL* curl = curl_easy_init();
+        if (curl) {
+            FILE* fp = fopen(fname.c_str(), "wb");
+            curl_easy_setopt(curl, CURLOPT_URL, strurl.c_str());
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+            /*CURLcode res = */ curl_easy_perform(curl);
+            curl_easy_cleanup(curl);
+            fclose(fp);
+        }
+    }
+
+private:
     QString cacheLocation() const;
 
-    QNetworkAccessManager m_manager;
-    QString m_token;
-
     QHash<QString, QString> m_hash; // <PreviewUrl, MD5>
-    bool m_isBusy;
-
-    QFile m_file;
-    QNetworkReply* m_reply;
     QQueue<QueueItem> m_queue;
+    thread m_thread;
 };
 
 

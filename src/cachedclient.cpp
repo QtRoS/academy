@@ -18,7 +18,7 @@
 
 CachedClient::CachedClient(Config::Ptr config):
     BaseClient(config),
-    m_cache(QString::fromStdString(config->cache_dir)),
+    m_cache(config->cache_dir),
     m_cacheEnabled(true)
 {
 
@@ -28,14 +28,13 @@ void CachedClient::get(const core::net::Uri::Path &path, const core::net::Uri::Q
 {
     if (m_cacheEnabled)
     {
-        QString nm = QString::fromStdString(name());
-        if (!m_cache.containsData(nm))
+        if (!m_cache.containsData(name()))
         {
             BaseClient::get(path, parameters, result);
             if (!m_cancelled)
-                m_cache.setData(nm, result);
+                m_cache.setData(name(), result);
         }
-        else result = m_cache.data(nm);
+        else result = m_cache.data(name());
     }
     else BaseClient::get(path, parameters, result);
 

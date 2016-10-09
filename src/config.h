@@ -17,8 +17,6 @@
 #ifndef CONFIG_H_
 #define CONFIG_H_
 
-#include <scopeimagecache.h>
-
 /**
  * Client configuration
  */
@@ -30,8 +28,6 @@ struct Config {
 
     // Cache dir.
     std::string cache_dir { "." };
-
-    ScopeImageCache cache;
 };
 
 #endif // CONFIG_H_
