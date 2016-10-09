@@ -38,55 +38,55 @@ QList<Course> IversityClient::courses(const QString &query)
 {
     QList<Course> list;
 
-    QByteArray data;
-    net::Uri::Path path;
-    net::Uri::QueryParameters params;
+//    QByteArray data;
+//    net::Uri::Path path;
+//    net::Uri::QueryParameters params;
 
-    qCDebug(Iversity) << "Download started...";
-    get( path, params, data);
-    qCDebug(Iversity) << "Data received:" << data.length() << "bytes";
-    QJsonDocument root = QJsonDocument::fromJson(data);
+//    qCDebug(Iversity) << "Download started...";
+//    get( path, params, data);
+//    qCDebug(Iversity) << "Data received:" << data.length() << "bytes";
+//    QJsonDocument root = QJsonDocument::fromJson(data);
 
-    QVariantMap variant = root.toVariant().toMap();
-    QList<QVariant> courses = variant["courses"].toList();
-    qCDebug(Iversity) << "Element count:" << courses.length();
+//    QVariantMap variant = root.toVariant().toMap();
+//    QList<QVariant> courses = variant["courses"].toList();
+//    qCDebug(Iversity) << "Element count:" << courses.length();
 
-    SearchEngine se(query);
+//    SearchEngine se(query);
 
-    for (const QVariant &i : courses)
-    {
-        QVariantMap map = i.toMap();
+//    for (const QVariant &i : courses)
+//    {
+//        QVariantMap map = i.toMap();
 
-        Course course;
-        course.id = map["id"].toString();
-        course.slug = map["url"].toString();
-        course.title = map["title"].toString();
-        course.description = map["description"].toString();
-        course.headline = map["subtitle"].toString();
-        course.art = map["cover"].toString();
-        course.link = map["url"].toString();
-        course.extra = grabExtra(map);
-        course.video = map["trailer_video"].toString();
+//        Course course;
+//        course.id = map["id"].toString();
+//        course.slug = map["url"].toString();
+//        course.title = map["title"].toString();
+//        course.description = map["description"].toString();
+//        course.headline = map["subtitle"].toString();
+//        course.art = map["cover"].toString();
+//        course.link = map["url"].toString();
+//        course.extra = grabExtra(map);
+//        course.video = map["trailer_video"].toString();
 
-        QList<QVariant> instructors = map["instructors"].toList();
-        for (const QVariant& j : instructors)
-        {
-            QVariantMap imap = j.toMap();
-            Instructor instr;
-            instr.image = imap["image"].toString();
-            instr.bio = imap["biography"].toString();
-            instr.name = imap["name"].toString();
+//        QList<QVariant> instructors = map["instructors"].toList();
+//        for (const QVariant& j : instructors)
+//        {
+//            QVariantMap imap = j.toMap();
+//            Instructor instr;
+//            instr.image = imap["image"].toString();
+//            instr.bio = imap["biography"].toString();
+//            instr.name = imap["name"].toString();
 
-            course.instructors.append(instr);
-        }
+//            course.instructors.append(instr);
+//        }
 
-        course.departments.append(map["discipline"].toString());
+//        course.departments.append(map["discipline"].toString());
 
-        //qCDebug(Iversity) << "Category count: " << course.departments;
-        //qCDebug(Iversity) << "Instr count: " << course.instructors.size();
-        if (query.isEmpty() || se.isMatch(course))
-            list.append(course);
-    }
+//        //qCDebug(Iversity) << "Category count: " << course.departments;
+//        //qCDebug(Iversity) << "Instr count: " << course.instructors.size();
+//        if (query.isEmpty() || se.isMatch(course))
+//            list.append(course);
+//    }
 
     return list;
 }

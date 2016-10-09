@@ -17,31 +17,30 @@
 #ifndef COURSE_H_
 #define COURSE_H_
 
-#include <QList>
-#include <QStringList>
-
-class QString;
+#include <string>
+#include <vector>
+using namespace std;
 
 struct Instructor
 {
-    QString name;
-    QString bio;
-    QString image;
+    string name;
+    string bio;
+    string image;
 };
 
 struct Course
 {
-    QString id;
-    QString slug;
-    QString art;
-    QString title;
-    QString description;
-    QString headline;
-    QString link;
-    QString video;
-    QString extra;
-    QList<Instructor> instructors;
-    QStringList departments;
+    string id;
+    string slug;
+    string art;
+    string title;
+    string description;
+    string headline;
+    string link;
+    string video;
+    string extra;
+    vector<Instructor> instructors;
+    vector<string> departments;
 };
 
 #endif // COURSE_H_

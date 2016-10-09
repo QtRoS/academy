@@ -30,6 +30,7 @@ find_package(Qt5Xml REQUIRED)
 
 pkg_check_modules(
   SCOPE
+  jsoncpp
   libunity-scopes>=0.6.0
   net-cpp>=1.1.0
   REQUIRED

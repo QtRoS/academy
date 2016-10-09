@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-09 07:52+0000\n"
+"POT-Creation-Date: 2016-10-09 11:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgid "<b>Source:</b> "
 msgstr "<b>Source:</b> "
 
 #. Create and register departments.
-#: ../src/query.cpp:116
+#: ../src/query.cpp:120
 msgid "All"
 msgstr "Tous"
 
@@ -95,6 +95,6 @@ msgstr "niveau - "
 msgid "price - "
 msgstr "prix - "
 
-#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:134
+#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:196
 msgid "workload - "
 msgstr "charge de travail - "

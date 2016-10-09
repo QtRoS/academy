@@ -38,63 +38,63 @@ QList<Course> UdemyClient::courses(const QString &query)
 {
     QList<Course> list;
 
-    QByteArray data;
-    net::Uri::Path path;
-    net::Uri::QueryParameters params;
+//    QByteArray data;
+//    net::Uri::Path path;
+//    net::Uri::QueryParameters params;
 
-    params.push_back({"fields[course]", "@default,description,headline,slug,primary_category"});
-    params.push_back({"page_size", "80"});
-    params.push_back({"ordering", "trending"});
+//    params.push_back({"fields[course]", "@default,description,headline,slug,primary_category"});
+//    params.push_back({"page_size", "80"});
+//    params.push_back({"ordering", "trending"});
 
-    if (!query.isEmpty())
-    {
-        params.push_back({"search", query.toStdString()});
-        setCacheEnabled(false);
-    }
+//    if (!query.isEmpty())
+//    {
+//        params.push_back({"search", query.toStdString()});
+//        setCacheEnabled(false);
+//    }
 
-    qCDebug(Udemy) << "Download started...";
-    get(path, params, data);
-    qCDebug(Udemy) << "Data received:" << data.length() << "bytes";
-    QJsonDocument root = QJsonDocument::fromJson(data);
+//    qCDebug(Udemy) << "Download started...";
+//    get(path, params, data);
+//    qCDebug(Udemy) << "Data received:" << data.length() << "bytes";
+//    QJsonDocument root = QJsonDocument::fromJson(data);
 
-    QVariantMap variant = root.toVariant().toMap();
-    QList<QVariant> courses = variant["results"].toList();
-    qCDebug(Udemy) << "Element count:" << courses.length();
+//    QVariantMap variant = root.toVariant().toMap();
+//    QList<QVariant> courses = variant["results"].toList();
+//    qCDebug(Udemy) << "Element count:" << courses.length();
 
-    for (const QVariant &i : courses)
-    {
-        QVariantMap map = i.toMap();
+//    for (const QVariant &i : courses)
+//    {
+//        QVariantMap map = i.toMap();
 
-        Course course;
-        course.id = map["id"].toString();
-        course.slug = map["url"].toString();
-        course.title = map["title"].toString();
-        course.description = map["description"].toString();
-        course.headline = map["headline"].toString();
-        course.art = map["image_480x270"].toString();
-        course.link = QStringLiteral("https://www.udemy.com") + map["url"].toString();
-        course.extra = grabExtra(map);
-        //course.video = map["teaser_video"].toMap()["youtube_url"].toString();
+//        Course course;
+//        course.id = map["id"].toString();
+//        course.slug = map["url"].toString();
+//        course.title = map["title"].toString();
+//        course.description = map["description"].toString();
+//        course.headline = map["headline"].toString();
+//        course.art = map["image_480x270"].toString();
+//        course.link = QStringLiteral("https://www.udemy.com") + map["url"].toString();
+//        course.extra = grabExtra(map);
+//        //course.video = map["teaser_video"].toMap()["youtube_url"].toString();
 
-        QList<QVariant> instructors = map["visible_instructors"].toList();
-        for (const QVariant& j : instructors)
-        {
-            QVariantMap imap = j.toMap();
-            Instructor instr;
-            instr.image = imap["image_100x100"].toString();
-            instr.bio = imap["job_title"].toString();
-            instr.name = imap["title"].toString();
+//        QList<QVariant> instructors = map["visible_instructors"].toList();
+//        for (const QVariant& j : instructors)
+//        {
+//            QVariantMap imap = j.toMap();
+//            Instructor instr;
+//            instr.image = imap["image_100x100"].toString();
+//            instr.bio = imap["job_title"].toString();
+//            instr.name = imap["title"].toString();
 
-            course.instructors.append(instr);
-        }
+//            course.instructors.append(instr);
+//        }
 
-        QVariantMap kmap = map["primary_category"].toMap();
-        course.departments.append(kmap["title"].toString());
+//        QVariantMap kmap = map["primary_category"].toMap();
+//        course.departments.append(kmap["title"].toString());
 
-        //qCDebug(Udemy) << "Category count: " << course.departments;
-        //qCDebug(Udemy) << "Instr count: " << course.instructors.size();
-        list.append(course);
-    }
+//        //qCDebug(Udemy) << "Category count: " << course.departments;
+//        //qCDebug(Udemy) << "Instr count: " << course.instructors.size();
+//        list.append(course);
+//    }
 
     return list;
 }

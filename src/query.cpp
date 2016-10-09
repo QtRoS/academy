@@ -24,6 +24,10 @@
 #include <unity/scopes/QueryBase.h>
 #include <unity/scopes/SearchReply.h>
 
+#include <vector>
+#include <string>
+#include <set>
+
 Q_LOGGING_CATEGORY(Qry, "Query")
 
 namespace sc = unity::scopes;
@@ -105,8 +109,8 @@ void Query::run(sc::SearchReplyProxy const& reply)
         // Get query string and selected department.
         QString queryString = QString::fromStdString(query.query_string());
         qCDebug(Qry) << "Query string is:" << queryString;
-        QString selectedDepartment = QString::fromStdString(query.department_id());
-        qCDebug(Qry) << "Selected department:" << selectedDepartment;
+        string selectedDepartment = query.department_id();
+        //qCDebug(Qry) << "Selected department:" << selectedDepartment;
 
         // Getting source list.
         QList<BaseClient*> sources = enabledSources();
@@ -115,13 +119,13 @@ void Query::run(sc::SearchReplyProxy const& reply)
         // Create and register departments.
         sc::Department::SPtr allDepts = sc::Department::create("", query, _("All"));
         sc::DepartmentList depList;
-        QList<Department> list = DepartmentManager::departments();
-        for (int i = 0; i < list.length(); i++)
-            depList.push_back(sc::Department::create(list[i].id.toStdString(), query, list[i].label.toStdString()));
+        vector<Department> list = DepartmentManager::departments();
+        for (int i = 0; i < list.size(); i++)
+            depList.push_back(sc::Department::create(list[i].id, query, list[i].label));
         allDepts->set_subdepartments(depList);
         reply->register_departments(allDepts);
 
-        QSet<QString> uniqueSet;
+        set<string> uniqueSet;
         for(int i = 0; i < sources.count(); ++i)
         {
             QString sourceCatName = sources[i]->name();
@@ -137,42 +141,43 @@ void Query::run(sc::SearchReplyProxy const& reply)
             for (const auto &course : courseList)
             {
                 // Department check.
-                if (!selectedDepartment.isEmpty() && !DepartmentManager::isMatch(course, selectedDepartment))
+                if (!selectedDepartment.empty() && !DepartmentManager::isMatch(course, selectedDepartment))
                     continue;
 
                 // Duplicate results cause Dash to crash.
-                if (uniqueSet.contains(course.link))
+                if (uniqueSet.count(course.link))
                 {
-                    qCDebug(Qry) << "Duplicate:" << course.link;
+                    //qCDebug(Qry) << "Duplicate:" << course.link;
                     continue;
                 }
                 uniqueSet.insert(course.link);
 
+                // TODO
                 //QString art = m_config->cache.getByPreview(course.art);
-                QString art = icache.getByPreview(course.art);
-                art = art.isEmpty() ? course.art : art;
+                //QString art = icache.getByPreview(course.art);
+                //art = art.isEmpty() ? course.art : art;
 
                 sc::CategorisedResult res(sourceCategory);
-                res.set_uri(course.link.toStdString());
-                res.set_title(course.title.toStdString());
-                res.set_art(course.art.toStdString());
-                res["headline"] = course.headline.toStdString();
-                res["description"] = course.description.toStdString();
+                res.set_uri(course.link);
+                res.set_title(course.title);
+                res.set_art(course.art);
+                res["headline"] = course.headline;
+                res["description"] = course.description;
                 res["source"] = sourceCatName.toStdString();
-                res["extra"] = course.extra.toStdString();
-                if (!course.video.isEmpty())
-                    res["video_url"] = course.video.toStdString();
-                res["departments"] = course.departments.join(';').toStdString();
+                res["extra"] = course.extra;
+                if (!course.video.empty())
+                    res["video_url"] = course.video;
+                // TODO BUG res["departments"] = course.departments.join(';');
 
                 // Add instructors to map.
-                if (course.instructors.count() > 0)
+                if (course.instructors.size() > 0)
                 {
                     std::vector<sc::Variant> images, names, bios;
                     for (auto j = course.instructors.begin(); j != course.instructors.end(); ++j)
                     {
-                        images.push_back(sc::Variant(j->image.toStdString()));
-                        names.push_back(sc::Variant(j->name.toStdString()));
-                        bios.push_back(sc::Variant((j->bio.length() < 150 ? j->bio : j->bio.left(150) + "...").toStdString()));
+                        images.push_back(sc::Variant(j->image));
+                        names.push_back(sc::Variant(j->name));
+                        bios.push_back(sc::Variant((j->bio.length() < 150 ? j->bio :  "..."))); // TODO BUG j->bio.substring(0, 150) +
                     }
                     res["instr_images"] = images;
                     res["instr_names"] = names;

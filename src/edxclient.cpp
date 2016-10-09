@@ -40,111 +40,111 @@ QList<Course> EdxClient::courses(const QString &query)
 {
     QList<Course> list;
 
-    QByteArray data;
-    net::Uri::Path path;
-    net::Uri::QueryParameters params;
+//    QByteArray data;
+//    net::Uri::Path path;
+//    net::Uri::QueryParameters params;
 
-    qCDebug(Edx) << "Download started...";
-    get(path, params, data);
-    qCDebug(Edx) << "Data received:" << data.length() << "bytes";
+//    qCDebug(Edx) << "Download started...";
+//    get(path, params, data);
+//    qCDebug(Edx) << "Data received:" << data.length() << "bytes";
 
-    QDomDocument doc;
-    if (!doc.setContent(data))
-    {
-        qCWarning(Edx) << "Parse error, data was incorrect:" << data;
-        return list;
-    }
+//    QDomDocument doc;
+//    if (!doc.setContent(data))
+//    {
+//        qCWarning(Edx) << "Parse error, data was incorrect:" << data;
+//        return list;
+//    }
 
-    QDomNodeList itemList = doc.elementsByTagName("item");
-    qCDebug(Edx) << "Element count:" << itemList.length();
+//    QDomNodeList itemList = doc.elementsByTagName("item");
+//    qCDebug(Edx) << "Element count:" << itemList.length();
 
-    SearchEngine se(query);
+//    SearchEngine se(query);
 
-    for (int i = 0; i < itemList.length(); i++)
-    {
-        QDomElement courseElem = itemList.at(i).toElement();
+//    for (int i = 0; i < itemList.length(); i++)
+//    {
+//        QDomElement courseElem = itemList.at(i).toElement();
 
-        if (courseElem.isNull())
-            continue;
+//        if (courseElem.isNull())
+//            continue;
 
-        Course course;
+//        Course course;
 
-        QDomElement id = courseElem.firstChildElement("guid");
-        if (!id.isNull())
-            course.id = id.text();
+//        QDomElement id = courseElem.firstChildElement("guid");
+//        if (!id.isNull())
+//            course.id = id.text();
 
-        QDomElement title = courseElem.firstChildElement("title");
-        if (!title.isNull())
-            course.title = title.text();
+//        QDomElement title = courseElem.firstChildElement("title");
+//        if (!title.isNull())
+//            course.title = title.text();
 
-        QDomElement description = courseElem.firstChildElement("description");
-        if (!description.isNull())
-            course.description = description.text();
+//        QDomElement description = courseElem.firstChildElement("description");
+//        if (!description.isNull())
+//            course.description = description.text();
 
-        QDomElement subtitle = courseElem.firstChildElement("course:subtitle");
-        if (!subtitle.isNull())
-            course.headline = subtitle.text();
+//        QDomElement subtitle = courseElem.firstChildElement("course:subtitle");
+//        if (!subtitle.isNull())
+//            course.headline = subtitle.text();
 
-        QDomElement art = courseElem.firstChildElement("course:image-thumbnail");
-        if (!art.isNull())
-            course.art = art.text();
-        else course.art = FallBackImage;
+//        QDomElement art = courseElem.firstChildElement("course:image-thumbnail");
+//        if (!art.isNull())
+//            course.art = art.text();
+//        else course.art = FallBackImage;
 
-        QDomElement link = courseElem.firstChildElement("link");
-        if (!link.isNull())
-            course.link = link.text();
+//        QDomElement link = courseElem.firstChildElement("link");
+//        if (!link.isNull())
+//            course.link = link.text();
 
-        QDomElement video = courseElem.firstChildElement("course:video-youtube");
-        if (!video.isNull())
-            course.video = video.text();
+//        QDomElement video = courseElem.firstChildElement("course:video-youtube");
+//        if (!video.isNull())
+//            course.video = video.text();
 
-        course.extra = grabExtra(courseElem);
+//        course.extra = grabExtra(courseElem);
 
-        // Instructors.
-        QDomNodeList instrList = courseElem.elementsByTagName("course:staff");
-        for (int j = 0; j < instrList.count(); ++j)
-        {
-            QDomElement instrElem = instrList.at(j).toElement();
+//        // Instructors.
+//        QDomNodeList instrList = courseElem.elementsByTagName("course:staff");
+//        for (int j = 0; j < instrList.count(); ++j)
+//        {
+//            QDomElement instrElem = instrList.at(j).toElement();
 
-            if (instrElem.isNull())
-                continue;
+//            if (instrElem.isNull())
+//                continue;
 
-            Instructor instr;
+//            Instructor instr;
 
-            QDomElement name = instrElem.firstChildElement("staff:name");
-            if (!name.isNull())
-                instr.name = name.text();
+//            QDomElement name = instrElem.firstChildElement("staff:name");
+//            if (!name.isNull())
+//                instr.name = name.text();
 
-            QDomElement bio = instrElem.firstChildElement("staff:bio");
-            if (!bio.isNull())
-                instr.bio = bio.text();
+//            QDomElement bio = instrElem.firstChildElement("staff:bio");
+//            if (!bio.isNull())
+//                instr.bio = bio.text();
 
-            QDomElement image = instrElem.firstChildElement("staff:image");
-            if (!image.isNull())
-                instr.image = image.text();
+//            QDomElement image = instrElem.firstChildElement("staff:image");
+//            if (!image.isNull())
+//                instr.image = image.text();
 
-            //qCDebug(Edx) << "Instr details:" << instr.name << instr.image;
+//            //qCDebug(Edx) << "Instr details:" << instr.name << instr.image;
 
-            course.instructors.append(instr);
-        }
+//            course.instructors.append(instr);
+//        }
 
-        // Departments.
-        QDomNodeList depList = courseElem.elementsByTagName("course:subject");
-        for (int k = 0; k < depList.count(); ++k)
-        {
-            QDomElement depElem = depList.at(k).toElement();
+//        // Departments.
+//        QDomNodeList depList = courseElem.elementsByTagName("course:subject");
+//        for (int k = 0; k < depList.count(); ++k)
+//        {
+//            QDomElement depElem = depList.at(k).toElement();
 
-            if (depElem.isNull())
-                continue;
+//            if (depElem.isNull())
+//                continue;
 
-            course.departments.append(depElem.text());
-        }
+//            course.departments.append(depElem.text());
+//        }
 
-        //qCDebug(Edx) << "Subject count: " << course.departments;
-        //qCDebug(Edx) << "Instr count: " << course.instructors.size();
-        if (query.isEmpty() || se.isMatch(course))
-            list.append(course);
-    }
+//        //qCDebug(Edx) << "Subject count: " << course.departments;
+//        //qCDebug(Edx) << "Instr count: " << course.instructors.size();
+//        if (query.isEmpty() || se.isMatch(course))
+//            list.append(course);
+//    }
 
     return list;
 }

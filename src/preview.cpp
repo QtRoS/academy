@@ -147,8 +147,6 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
 
 string Preview::decorate_departments(const string &deps)
 {
-    QString semicolonSeparatedDeps = QString::fromStdString(deps);
-    QString decoratedDeps = DepartmentManager::flatDescription(semicolonSeparatedDeps);
-    return decoratedDeps.toStdString();
+    return DepartmentManager::flatDescription(deps);
 }
 

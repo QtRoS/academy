@@ -22,176 +22,179 @@ DepartmentManager::DepartmentManager()
 
 }
 
-QList<Department> DepartmentManager::departments()
+vector<Department> DepartmentManager::departments()
 {
-    static QList<Department> list;
+    static vector<Department> list;
 
     if (list.empty())
     {
-        list << Department("art",       _("Art and Design"));
-        list << Department("business",  _("Business"));
-        list << Department("music",     _("Music"));
-        list << Department("languages", _("Languages"));
-        list << Department("it",        _("IT and Tech"));
-        list << Department("science",   _("Science"));
-        list << Department("humanities",_("Humanities"));
-        list << Department("personal",  _("Personal"));
-        list << Department("other",     _("Other"));
+        list.push_back(Department("art",       _("Art and Design")));
+        list.push_back(Department("business",  _("Business")));
+        list.push_back(Department("music",     _("Music")));
+        list.push_back(Department("languages", _("Languages")));
+        list.push_back(Department("it",        _("IT and Tech")));
+        list.push_back(Department("science",   _("Science")));
+        list.push_back(Department("humanities",_("Humanities")));
+        list.push_back(Department("personal",  _("Personal")));
+        list.push_back(Department("other",     _("Other")));
     }
 
     return list;
 }
 
-QHash<QString, QString> DepartmentManager::mapping()
+multimap<string, string> DepartmentManager::mapping()
 {
-    static QHash<QString, QString> hash;
+    static multimap<string, string> hash;
 
-    if (!hash.count())
+    if (!hash.size())
     {
         // Coursera.
-        hash.insertMulti("arts-and-humanities", "art");
-        hash.insertMulti("arts-and-humanities", "humanities");
-        hash.insert("business", "business");
-        hash.insert("computer-science", "it");
-        hash.insert("data-science", "it");
-        hash.insert("language-learning", "languages");
-        hash.insert("life-sciences", "science");
-        hash.insert("math-and-logic", "science");
-        hash.insert("personal-development", "personal");
-        hash.insert("physical-science-and-engineering", "science");
-        hash.insert("social-sciences", "science");
+        hash.insert(std::pair<string,string>("arts-and-humanities", "art")); // TODO Recheck
+        hash.insert(std::pair<string,string>("arts-and-humanities", "humanities"));
+        hash.insert(std::pair<string,string>("business", "business"));
+        hash.insert(std::pair<string,string>("computer-science", "it"));
+        hash.insert(std::pair<string,string>("data-science", "it"));
+        hash.insert(std::pair<string,string>("language-learning", "languages"));
+        hash.insert(std::pair<string,string>("life-sciences", "science"));
+        hash.insert(std::pair<string,string>("math-and-logic", "science"));
+        hash.insert(std::pair<string,string>("personal-development", "personal"));
+        hash.insert(std::pair<string,string>("physical-science-and-engineering", "science"));
+        hash.insert(std::pair<string,string>("social-sciences", "science"));
         // Udacity.
-        hash.insert("Data Science", "it");
-        hash.insert("Web Development", "it");
-        hash.insert("Software Engineering", "it");
-        hash.insert("Android", "it");
-        hash.insert("iOS", "it");
-        hash.insert("Georgia Tech Masters in CS", "it");
-        hash.insert("Non-Tech", "other");
+        hash.insert(std::pair<string,string>("Data Science", "it"));
+        hash.insert(std::pair<string,string>("Web Development", "it"));
+        hash.insert(std::pair<string,string>("Software Engineering", "it"));
+        hash.insert(std::pair<string,string>("Android", "it"));
+        hash.insert(std::pair<string,string>("iOS", "it"));
+        hash.insert(std::pair<string,string>("Georgia Tech Masters in CS", "it"));
+        hash.insert(std::pair<string,string>("Non-Tech", "other"));
         // Edx
-        hash.insert("Art & Culture", "art");
-        hash.insert("Biology & Life Sciences", "science");
-        hash.insert("Business & Management", "business");
-        hash.insert("Communication", "other");
-        hash.insert("Computer Science", "it");
-        hash.insert("Data Analysis & Statistics", "it");
-        hash.insert("Economics & Finance", "business");
-        hash.insert("Education & Teacher Training", "personal");
-        hash.insert("Electronics", "it");
-        hash.insert("Energy & Earth Sciences", "science");
-        hash.insert("Engineering", "it");
-        hash.insert("Environmental Studies", "science");
-        hash.insert("Health & Safety", "other");
-        hash.insert("History", "humanities");
-        hash.insert("Humanities", "humanities");
-        hash.insert("Language", "languages");
-        hash.insert("Law", "humanities");
-        hash.insert("Literature", "humanities");
-        hash.insert("Math", "science");
-        hash.insert("Medicine", "other");
-        hash.insert("Philosophy & Ethics", "humanities");
-        hash.insert("Physics", "science");
-        hash.insert("Science", "science");
-        hash.insert("Social Sciences", "humanities");
+        hash.insert(std::pair<string,string>("Art & Culture", "art"));
+        hash.insert(std::pair<string,string>("Biology & Life Sciences", "science"));
+        hash.insert(std::pair<string,string>("Business & Management", "business"));
+        hash.insert(std::pair<string,string>("Communication", "other"));
+        hash.insert(std::pair<string,string>("Computer Science", "it"));
+        hash.insert(std::pair<string,string>("Data Analysis & Statistics", "it"));
+        hash.insert(std::pair<string,string>("Economics & Finance", "business"));
+        hash.insert(std::pair<string,string>("Education & Teacher Training", "personal"));
+        hash.insert(std::pair<string,string>("Electronics", "it"));
+        hash.insert(std::pair<string,string>("Energy & Earth Sciences", "science"));
+        hash.insert(std::pair<string,string>("Engineering", "it"));
+        hash.insert(std::pair<string,string>("Environmental Studies", "science"));
+        hash.insert(std::pair<string,string>("Health & Safety", "other"));
+        hash.insert(std::pair<string,string>("History", "humanities"));
+        hash.insert(std::pair<string,string>("Humanities", "humanities"));
+        hash.insert(std::pair<string,string>("Language", "languages"));
+        hash.insert(std::pair<string,string>("Law", "humanities"));
+        hash.insert(std::pair<string,string>("Literature", "humanities"));
+        hash.insert(std::pair<string,string>("Math", "science"));
+        hash.insert(std::pair<string,string>("Medicine", "other"));
+        hash.insert(std::pair<string,string>("Philosophy & Ethics", "humanities"));
+        hash.insert(std::pair<string,string>("Physics", "science"));
+        hash.insert(std::pair<string,string>("Science", "science"));
+        hash.insert(std::pair<string,string>("Social Sciences", "humanities"));
         // Udemy
-        hash.insert("Academics", "other");
-        hash.insert("Business", "business");
-        hash.insert("Crafts & Hobbies", "other");
-        hash.insert("Design", "art");
-        hash.insert("Development", "it");
-        hash.insert("Games", "other");
-        hash.insert("Health & Fitness", "other");
-        hash.insert("Humanities", "humanities");
-        hash.insert("IT & Software", "it");
-        hash.insert("Language", "languages");
-        hash.insert("Lifestyle", "other");
-        hash.insert("Marketing", "business");
-        hash.insert("Math & Science", "science");
-        hash.insert("Music", "music");
-        hash.insert("Office-Productivity", "business");
-        hash.insert("Other", "other");
-        hash.insert("Personal-Development", "personal");
-        hash.insert("Photography", "art");
-        hash.insert("Social-Science", "humanities");
-        hash.insert("Sports", "other");
-        hash.insert("Teacher-Training", "personal");
-        hash.insert("Technology", "it");
-        hash.insert("Test", "it");
-        hash.insert("Test-Prep", "it");
+        hash.insert(std::pair<string,string>("Academics", "other"));
+        hash.insert(std::pair<string,string>("Business", "business"));
+        hash.insert(std::pair<string,string>("Crafts & Hobbies", "other"));
+        hash.insert(std::pair<string,string>("Design", "art"));
+        hash.insert(std::pair<string,string>("Development", "it"));
+        hash.insert(std::pair<string,string>("Games", "other"));
+        hash.insert(std::pair<string,string>("Health & Fitness", "other"));
+        hash.insert(std::pair<string,string>("Humanities", "humanities"));
+        hash.insert(std::pair<string,string>("IT & Software", "it"));
+        hash.insert(std::pair<string,string>("Language", "languages"));
+        hash.insert(std::pair<string,string>("Lifestyle", "other"));
+        hash.insert(std::pair<string,string>("Marketing", "business"));
+        hash.insert(std::pair<string,string>("Math & Science", "science"));
+        hash.insert(std::pair<string,string>("Music", "music"));
+        hash.insert(std::pair<string,string>("Office-Productivity", "business"));
+        hash.insert(std::pair<string,string>("Other", "other"));
+        hash.insert(std::pair<string,string>("Personal-Development", "personal"));
+        hash.insert(std::pair<string,string>("Photography", "art"));
+        hash.insert(std::pair<string,string>("Social-Science", "humanities"));
+        hash.insert(std::pair<string,string>("Sports", "other"));
+        hash.insert(std::pair<string,string>("Teacher-Training", "personal"));
+        hash.insert(std::pair<string,string>("Technology", "it"));
+        hash.insert(std::pair<string,string>("Test", "it"));
+        hash.insert(std::pair<string,string>("Test-Prep", "it"));
         // iversity
-        hash.insert("Agricultural studies", "other");
-        hash.insert("Art studies", "art");
-        hash.insert("Economics", "business");
-        hash.insert("Education", "personal");
-        hash.insert("Engineering", "it");
-        hash.insert("Environmental Studies", "other");
-        hash.insert("Health", "personal");
-        hash.insert("History", "humanities");
-        hash.insert("Interdisciplinary", "other");
-        hash.insert("Languages", "languages");
-        hash.insert("Literature", "humanities");
-        hash.insert("Medicine", "other");
-        hash.insert("Philosophy", "humanities");
-        hash.insert("Social Sciences & Humanities ", "humanities");
+        hash.insert(std::pair<string,string>("Agricultural studies", "other"));
+        hash.insert(std::pair<string,string>("Art studies", "art"));
+        hash.insert(std::pair<string,string>("Economics", "business"));
+        hash.insert(std::pair<string,string>("Education", "personal"));
+        hash.insert(std::pair<string,string>("Engineering", "it"));
+        hash.insert(std::pair<string,string>("Environmental Studies", "other"));
+        hash.insert(std::pair<string,string>("Health", "personal"));
+        hash.insert(std::pair<string,string>("History", "humanities"));
+        hash.insert(std::pair<string,string>("Interdisciplinary", "other"));
+        hash.insert(std::pair<string,string>("Languages", "languages"));
+        hash.insert(std::pair<string,string>("Literature", "humanities"));
+        hash.insert(std::pair<string,string>("Medicine", "other"));
+        hash.insert(std::pair<string,string>("Philosophy", "humanities"));
+        hash.insert(std::pair<string,string>("Social Sciences & Humanities ", "humanities"));
         // openlearning
-        hash.insert("Arts and Design", "art");
-        hash.insert("Business and Economics", "business");
-        hash.insert("Computers and Technology", "it");
-        hash.insert("Education", "personal");
-        hash.insert("Engineering", "it");
-        hash.insert("Health and Medicine", "other");
-        hash.insert("Humanities", "humanities");
-        hash.insert("Language", "languages");
-        hash.insert("Language and Communication", "languages");
-        hash.insert("Law", "humanities");
-        hash.insert("Lifestyle", "personal");
-        hash.insert("Math and Science", "science");
-        hash.insert("Other", "other");
-        hash.insert("Self Improvement", "personal");
-        hash.insert("Sports and Fitness", "personal");
-        hash.insert("Technology", "it");
+        hash.insert(std::pair<string,string>("Arts and Design", "art"));
+        hash.insert(std::pair<string,string>("Business and Economics", "business"));
+        hash.insert(std::pair<string,string>("Computers and Technology", "it"));
+        hash.insert(std::pair<string,string>("Education", "personal"));
+        hash.insert(std::pair<string,string>("Engineering", "it"));
+        hash.insert(std::pair<string,string>("Health and Medicine", "other"));
+        hash.insert(std::pair<string,string>("Humanities", "humanities"));
+        hash.insert(std::pair<string,string>("Language", "languages"));
+        hash.insert(std::pair<string,string>("Language and Communication", "languages"));
+        hash.insert(std::pair<string,string>("Law", "humanities"));
+        hash.insert(std::pair<string,string>("Lifestyle", "personal"));
+        hash.insert(std::pair<string,string>("Math and Science", "science"));
+        hash.insert(std::pair<string,string>("Other", "other"));
+        hash.insert(std::pair<string,string>("Self Improvement", "personal"));
+        hash.insert(std::pair<string,string>("Sports and Fitness", "personal"));
+        hash.insert(std::pair<string,string>("Technology", "it"));
     }
 
     return hash;
 }
 
-bool DepartmentManager::isMatch(const Course &course, const QString &department)
+bool DepartmentManager::isMatch(const Course &course, const string &department)
 {
-    const QHash<QString, QString> hash = mapping();
+    const multimap<string, string> hash = mapping();
 
-    for(int i = 0; i < course.departments.length(); i++)
-    {
-        // Some departments are mapped to multiple categories.
-        if (department == "art" || department == "humanities")
-        {
-            if (hash.values(course.departments[i]).contains(department))
-                return true;
-        }
-        else if (hash[course.departments[i]] == department)
-            return true;
-    }
+    // TODO
+//    for(int i = 0; i < course.departments.size(); i++)
+//    {
+//        // Some departments are mapped to multiple categories.
+//        if (department == "art" || department == "humanities")
+//        {
+//            if (hash.values(course.departments[i]).contains(department))
+//                return true;
+//        }
+//        else if (hash[course.departments[i]] == department)
+//            return true;
+//    }
 
     return false;
 }
 
-QString DepartmentManager::flatDescription(const QString& deps)
+string DepartmentManager::flatDescription(const string &deps)
 {
-    const QList<Department> list = departments();
-    const QHash<QString, QString> hash = mapping();
+    const vector<Department> list = departments();
+    const multimap<string, string> hash = mapping();
 
-    QStringList names;
-    QStringList courseDeps = deps.split(';');
-    for(int i = 0; i < courseDeps.length(); i++)
-    {
-        QString dep = courseDeps[i];
-        QList<QString> intCat = hash.values(dep);
+    // TODO BUG
+    return deps;
+//    QStringList names;
+//    QStringList courseDeps = deps.split(';');
+//    for(int i = 0; i < courseDeps.length(); i++)
+//    {
+//        QString dep = courseDeps[i];
+//        QList<QString> intCat = hash.values(dep);
 
-        for (int j = 0; j < list.size(); ++j)
-            for (int k = 0; k < intCat.size(); ++k)
-                if (list[j].id == intCat[k] && !names.contains(list[j].label))
-                    names << list[j].label;
-    }
+//        for (int j = 0; j < list.size(); ++j)
+//            for (int k = 0; k < intCat.size(); ++k)
+//                if (list[j].id == intCat[k] && !names.contains(list[j].label))
+//                    names << list[j].label;
+//    }
 
-    return names.join(", ");
+    //return names.join(", ");
 }
 

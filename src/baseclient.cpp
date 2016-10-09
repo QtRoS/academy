@@ -22,10 +22,13 @@
 #include <core/net/http/response.h>
 #include <QVariantMap>
 
+#include <json/json.h>
+
 Q_LOGGING_CATEGORY(BaseCli, "BaseClient")
 
 namespace http = core::net::http;
 namespace net = core::net;
+namespace json = Json;
 
 using namespace std;
 
