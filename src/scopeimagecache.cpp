@@ -17,15 +17,23 @@ namespace net = core::net;
 Q_LOGGING_CATEGORY(ImgCache, "ScopeImageCache")
 
 ScopeImageCache::ScopeImageCache():
-    m_thread(&ScopeImageCache::threadProc, this)
-{ }
+    m_thread(&ScopeImageCache::threadProc, this),
+    m_isTerminated(false)
+{
+    m_curl = curl_easy_init();
+}
 
 ScopeImageCache::~ScopeImageCache()
-{ }
+{
+    m_isTerminated = true;
+    // TODO
+    m_thread.join();
+    curl_easy_cleanup(m_curl);
+}
 
 string ScopeImageCache::getByPreview(const string &previewUrl,  bool downloadOnMiss)
 {
-    QMutexLocker lock(&m_lock); // TODO
+    QMutexLocker lock(&m_lock);
 
     // --------------- First (and fastest) way - hash ---------------- //
     QString preview = QString::fromStdString(previewUrl);
@@ -82,10 +90,13 @@ QString ScopeImageCache::cacheLocation() const
 
 void ScopeImageCache::threadProc()
 {
+    qCDebug(ImgCache) << "Background thread started...";
     while(true)
     {
+        if (m_isTerminated)
+            return;
+
         m_lock.lock();
-        qCDebug(ImgCache) << "Queue length:" << m_queue.size() << &m_queue;
         if (!m_queue.size())
         {
             m_lock.unlock();
@@ -93,14 +104,23 @@ void ScopeImageCache::threadProc()
             continue;
         }
 
+        qCDebug(ImgCache) << "Queue length:" << m_queue.size() << &m_queue;
         QueueItem item = m_queue.dequeue();
         m_lock.unlock();
-
         downloadFile(item.url.toStdString(), item.localPath.toStdString());
     }
 }
 
-http::Request::Progress::Next ScopeImageCache::progress_report(const http::Request::Progress &progress)
+void ScopeImageCache::downloadFile(const string &strurl, const string &fname)
 {
-    return http::Request::Progress::Next::continue_operation;
+    if (m_curl)
+    {
+        FILE* fp = fopen(fname.c_str(), "wb");
+        curl_easy_setopt(m_curl, CURLOPT_URL, strurl.c_str());
+        curl_easy_setopt(m_curl, CURLOPT_WRITEFUNCTION, fwrite);
+        curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, fp);
+        /*CURLcode res = */ curl_easy_perform(m_curl);
+        curl_easy_cleanup(m_curl);
+        fclose(fp);
+    }
 }

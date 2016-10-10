@@ -17,6 +17,7 @@
 #include <query.h>
 #include <localization.h>
 #include <scopeimagecache.h>
+#include <thesuffering.h>
 
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
@@ -164,7 +165,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 res["extra"] = course.extra;
                 if (!course.video.empty())
                     res["video_url"] = course.video;
-                res["departments"] = join(course.departments, ";");
+                res["departments"] = utils::join(course.departments, ";");
 
                 // Add instructors to map.
                 if (course.instructors.size() > 0)

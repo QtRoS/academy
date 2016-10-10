@@ -49,7 +49,6 @@ vector<Course> OpenLearningClient::courses(const string &query)
     get( path, params, data);
     qCDebug(OpenLearning) << "Data received:" << data.length() << "bytes";
 
-
     json::Value root;
     json::Reader reader;
     reader.parse(data.data(), root); // TODO

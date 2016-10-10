@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-09 14:32+0000\n"
+"POT-Creation-Date: 2016-10-10 17:15+0000\n"
 "PO-Revision-Date: 2016-03-27 13:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -35,7 +35,7 @@ msgid "<b>Source:</b> "
 msgstr "<b>Quelle:</b>"
 
 #. Create and register departments.
-#: ../src/query.cpp:123
+#: ../src/query.cpp:124
 msgid "All"
 msgstr "Alle"
 
@@ -83,7 +83,7 @@ msgstr "Persönlich"
 msgid "Science"
 msgstr "Wissenschaft"
 
-#: ../src/edxclient.cpp:172 ../src/openlearningclient.cpp:106
+#: ../src/edxclient.cpp:171 ../src/openlearningclient.cpp:105
 #: ../src/udacityclient.cpp:118
 msgid "duration - "
 msgstr "Länge - "
@@ -96,6 +96,6 @@ msgstr "Stand - "
 msgid "price - "
 msgstr "Kosten - "
 
-#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:131
+#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:131
 msgid "workload - "
 msgstr "Pensum - "

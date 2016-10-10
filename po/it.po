@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-09 14:32+0000\n"
+"POT-Creation-Date: 2016-10-10 17:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,7 @@ msgid "<b>Source:</b> "
 msgstr "<b>Fonte:</b> "
 
 #. Create and register departments.
-#: ../src/query.cpp:123
+#: ../src/query.cpp:124
 msgid "All"
 msgstr "Tutte le categorie"
 
@@ -82,7 +82,7 @@ msgstr "Personale"
 msgid "Science"
 msgstr "Scienze"
 
-#: ../src/edxclient.cpp:172 ../src/openlearningclient.cpp:106
+#: ../src/edxclient.cpp:171 ../src/openlearningclient.cpp:105
 #: ../src/udacityclient.cpp:118
 msgid "duration - "
 msgstr "durata - "
@@ -95,6 +95,6 @@ msgstr "livello - "
 msgid "price - "
 msgstr "prezzo - "
 
-#: ../src/edxclient.cpp:168 ../src/courseraclient.cpp:131
+#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:131
 msgid "workload - "
 msgstr "carico di lavoro - "

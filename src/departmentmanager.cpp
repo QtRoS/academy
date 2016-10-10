@@ -159,7 +159,7 @@ bool DepartmentManager::isMatch(const Course &course, const string &department)
 {
     const multimap<string, string> hash = mapping();
 
-    // TODO
+    // BUG
 //    for(int i = 0; i < course.departments.size(); i++)
 //    {
 //        // Some departments are mapped to multiple categories.
@@ -180,7 +180,7 @@ string DepartmentManager::flatDescription(const string &deps)
     const vector<Department> list = departments();
     const multimap<string, string> hash = mapping();
 
-    // TODO BUG
+    // BUG
     return deps;
 //    QStringList names;
 //    QStringList courseDeps = deps.split(';');

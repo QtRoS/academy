@@ -21,6 +21,7 @@
 
 #include <string>
 #include <thread>
+#include <atomic>
 
 #include <stdio.h>
 #include <curl/curl.h>
@@ -53,25 +54,9 @@ public:
 private:
     void threadProc();
     QMutex m_lock;
-    core::net::http::Request::Progress::Next progress_report(const core::net::http::Request::Progress& progress);
-
-    static size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream) {
-        size_t written = fwrite(ptr, size, nmemb, stream);
-        return written;
-    }
-
-    static void downloadFile(const string& strurl , const string& fname) {
-        CURL* curl = curl_easy_init();
-        if (curl) {
-            FILE* fp = fopen(fname.c_str(), "wb");
-            curl_easy_setopt(curl, CURLOPT_URL, strurl.c_str());
-            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-            curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
-            /*CURLcode res = */ curl_easy_perform(curl);
-            curl_easy_cleanup(curl);
-            fclose(fp);
-        }
-    }
+    std::atomic<bool> m_isTerminated;
+    CURL* m_curl;
+    void downloadFile(const string& strurl , const string& fname);
 
 private:
     QString cacheLocation() const;

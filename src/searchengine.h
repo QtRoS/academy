@@ -18,13 +18,14 @@
 #define SEARCHENGINE_H_
 
 #include "course.h"
+#include <regex>
 
 class SearchEngine
 {
 public:
     explicit SearchEngine(const string& query)
     {
-//        QStringList parts = query.split(' ');
+//        auto parts = utils::split(query, " ");
 //        for (int i = 0; i < parts.size(); ++i)
 //            parts[i] = "(" + parts[i].toLower().replace("+", "\\+") + ")";
 //        QString regex = parts.join('|');
@@ -33,14 +34,13 @@ public:
 
     bool isMatch(const Course& course)
     {
-        // TODO
-        return (course.title.find("youtube") != std::string::npos  ||
-                course.headline.find("vimeo") != std::string::npos ||
-                course.description.find("vimeo") != std::string::npos);
+        return (course.title.find(m_regex) != std::string::npos  ||
+                course.headline.find(m_regex) != std::string::npos ||
+                course.description.find(m_regex) != std::string::npos);
     }
 
 private:
-    string m_regex;
+    std::string m_regex;
 };
 
 #endif // SEARCHENGINE_H_

@@ -21,7 +21,6 @@
 #include <core/net/http/client.h>
 #include <core/net/http/content_type.h>
 #include <core/net/http/response.h>
-#include <QVariantMap>
 
 Q_LOGGING_CATEGORY(Edx, "Edx")
 

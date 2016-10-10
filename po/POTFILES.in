@@ -16,6 +16,7 @@ src/templateclient.cpp
 src/udacityclient.cpp
 src/scopeimagecache.h
 src/config.h
+src/thesuffering.h
 src/edxclient.h
 src/searchengine.h
 src/departmentmanager.h
