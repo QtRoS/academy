@@ -139,6 +139,8 @@ void Query::run(sc::SearchReplyProxy const& reply)
             auto sourceCategory = reply->register_category(sourceCatName, sourceCatName, "", sc::CategoryRenderer(templ));
 
             //qCDebug(Qry) << "Processing source:" << sourceCatName;
+            int maxCacheSize = 8;
+            int cacheUsage = 0;
 
             for (const auto &course : courseList)
             {
@@ -151,9 +153,14 @@ void Query::run(sc::SearchReplyProxy const& reply)
                     continue;
                 uniqueSet.insert(course.link);
 
-                string art = icache->getCached(course.art);
-                if (art.empty())
-                    art = course.art;
+                string art = course.art;
+                if (++cacheUsage <= maxCacheSize)
+                {
+                    string cachedArt = icache->getCached(course.art);
+                    qCDebug(Qry) << "cachedArt" << cachedArt.c_str();
+                    if (!cachedArt.empty())
+                        art = cachedArt;
+                }
 
                 sc::CategorisedResult res(sourceCategory);
                 res.set_uri(course.link);
@@ -205,14 +212,14 @@ vector<BaseClient *> Query::enabledSources()
         sources.push_back(&m_coursera);
     if (settings().at("udemy").get_bool())
         sources.push_back(&m_udemy);
-    if (settings().at("edx").get_bool())
-        sources.push_back(&m_edx);
     if (settings().at("udacity").get_bool())
         sources.push_back(&m_udacity);
     if (settings().at("iversity").get_bool())
         sources.push_back(&m_iversity);
     if (settings().at("openLearning").get_bool())
         sources.push_back(&m_openLearning);
+    if (settings().at("edx").get_bool())
+        sources.push_back(&m_edx);
 
     return sources;
 }

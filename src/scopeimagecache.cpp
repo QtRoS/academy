@@ -114,7 +114,7 @@ void ScopeImageCache::threadProc()
         qCDebug(ImgCache) << "Background thread queue length:" << m_queue.size();
         QueueItem item = m_queue.dequeue();
         lock.unlock();
-        //downloadFile(item.url.toStdString(), item.localPath.toStdString());
+        downloadFile(item.url.toStdString(), item.localPath.toStdString());
     }
 }
 
