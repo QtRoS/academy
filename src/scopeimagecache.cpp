@@ -14,11 +14,12 @@
 namespace http = core::net::http;
 namespace net = core::net;
 
+using namespace std;
+
 Q_LOGGING_CATEGORY(ImgCache, "ScopeImageCache")
 
 ScopeImageCache::ScopeImageCache():
-    m_thread(&ScopeImageCache::threadProc, this),
-    m_isTerminated(false)
+    m_thread(&ScopeImageCache::threadProc, this)
 {
     m_curl = curl_easy_init();
 }
@@ -26,14 +27,16 @@ ScopeImageCache::ScopeImageCache():
 ScopeImageCache::~ScopeImageCache()
 {
     m_isTerminated = true;
-    // TODO
+    m_mutex.lock();
+    m_ready.notify_one();
+    m_mutex.unlock();
     m_thread.join();
     curl_easy_cleanup(m_curl);
 }
 
-string ScopeImageCache::getByPreview(const string &previewUrl,  bool downloadOnMiss)
+string ScopeImageCache::getCached(const string &previewUrl, bool downloadOnMiss)
 {
-    QMutexLocker lock(&m_lock);
+    lock_guard<mutex> lock(m_mutex);
 
     // --------------- First (and fastest) way - hash ---------------- //
     QString preview = QString::fromStdString(previewUrl);
@@ -66,7 +69,9 @@ string ScopeImageCache::getByPreview(const string &previewUrl,  bool downloadOnM
     if (!contains && downloadOnMiss)
     {
         m_hash[preview] = QStringLiteral("");
+        if (m_queue.size() < 10) // TODO BUG
         m_queue.enqueue(QueueItem(preview, previewPath));
+        m_ready.notify_one();
     }
 
     return string("");
@@ -93,25 +98,28 @@ void ScopeImageCache::threadProc()
     qCDebug(ImgCache) << "Background thread started...";
     while(true)
     {
-        if (m_isTerminated)
-            return;
+        unique_lock<mutex> lock(m_mutex);
 
-        m_lock.lock();
         if (!m_queue.size())
         {
-            m_lock.unlock();
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-            continue;
+            qCDebug(ImgCache) << "Background thread wait...";
+            m_ready.wait(lock, [this] { return m_queue.size();} );
         }
 
-        qCDebug(ImgCache) << "Queue length:" << m_queue.size() << &m_queue;
+        if (m_isTerminated)
+        {
+            qCDebug(ImgCache) << "Background thread finished";
+            return;
+        }
+
+        qCDebug(ImgCache) << "Background thread queue length:" << m_queue.size();
         QueueItem item = m_queue.dequeue();
-        m_lock.unlock();
+        lock.unlock();
         downloadFile(item.url.toStdString(), item.localPath.toStdString());
     }
 }
 
-void ScopeImageCache::downloadFile(const string &strurl, const string &fname)
+void ScopeImageCache::downloadFile(const string &strurl, const string &fname) const
 {
     if (m_curl)
     {
@@ -120,7 +128,6 @@ void ScopeImageCache::downloadFile(const string &strurl, const string &fname)
         curl_easy_setopt(m_curl, CURLOPT_WRITEFUNCTION, fwrite);
         curl_easy_setopt(m_curl, CURLOPT_WRITEDATA, fp);
         /*CURLcode res = */ curl_easy_perform(m_curl);
-        curl_easy_cleanup(m_curl);
         fclose(fp);
     }
 }

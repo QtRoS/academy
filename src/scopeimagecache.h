@@ -7,10 +7,7 @@
 #include <QHash>
 #include <QFileInfo>
 #include <QDir>
-#include <QDebug>
 #include <QLoggingCategory>
-#include <QMutex>
-#include <QMutexLocker>
 
 #include <core/net/error.h>
 #include <core/net/http/client.h>
@@ -22,6 +19,8 @@
 #include <string>
 #include <thread>
 #include <atomic>
+#include <mutex>
+#include <condition_variable>
 
 #include <stdio.h>
 #include <curl/curl.h>
@@ -49,21 +48,23 @@ public:
     ScopeImageCache();
     ~ScopeImageCache();
 
-    string getByPreview(const string& preview, bool downloadOnMiss = true);
+    string getCached(const string& preview, bool downloadOnMiss = true);
 
 private:
     void threadProc();
-    QMutex m_lock;
+    std::mutex m_mutex;
+    std::thread m_thread;
     std::atomic<bool> m_isTerminated;
+    std::condition_variable m_ready;
+
+private:
     CURL* m_curl;
-    void downloadFile(const string& strurl , const string& fname);
+    void downloadFile(const string& strurl , const string& fname) const;
 
 private:
     QString cacheLocation() const;
-
     QHash<QString, QString> m_hash; // <PreviewUrl, MD5>
     QQueue<QueueItem> m_queue;
-    thread m_thread;
 };
 
 

@@ -151,7 +151,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                     continue;
                 uniqueSet.insert(course.link);
 
-                string art = icache->getByPreview(course.art);
+                string art = icache->getCached(course.art);
                 if (art.empty())
                     art = course.art;
 
