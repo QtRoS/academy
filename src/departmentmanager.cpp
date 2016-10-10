@@ -157,28 +157,25 @@ multimap<string, string> DepartmentManager::mapping()
 
 bool DepartmentManager::isMatch(const Course &course, const string &department)
 {
-    const multimap<string, string> hash = mapping();
+    const auto& hash = mapping();
 
-    // BUG
-//    for(int i = 0; i < course.departments.size(); i++)
-//    {
-//        // Some departments are mapped to multiple categories.
-//        if (department == "art" || department == "humanities")
-//        {
-//            if (hash.values(course.departments[i]).contains(department))
-//                return true;
-//        }
-//        else if (hash[course.departments[i]] == department)
-//            return true;
-//    }
+    for(auto i = 0; i < course.departments.size(); ++i)
+    {
+        auto its = hash.equal_range(course.departments[i]);
+        for (auto iter = its.first; iter != its.second; ++iter)
+        {
+            if (iter->second == department)
+                return true;
+        }
+    }
 
     return false;
 }
 
 string DepartmentManager::flatDescription(const string &deps)
 {
-    const vector<Department> list = departments();
-    const multimap<string, string> hash = mapping();
+    const auto& list = departments();
+    const auto& hash = mapping();
 
     // BUG
     return deps;

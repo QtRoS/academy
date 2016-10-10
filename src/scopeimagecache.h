@@ -9,13 +9,6 @@
 #include <QDir>
 #include <QLoggingCategory>
 
-#include <core/net/error.h>
-#include <core/net/http/client.h>
-#include <core/net/http/content_type.h>
-#include <core/net/http/response.h>
-#include <core/net/http/request.h>
-#include <core/net/uri.h>
-
 #include <string>
 #include <thread>
 #include <atomic>

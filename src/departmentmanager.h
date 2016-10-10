@@ -23,6 +23,8 @@
 
 #include "course.h"
 
+#include <QDebug>
+
 struct Department
 {
     string id;
