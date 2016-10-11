@@ -21,9 +21,13 @@
 #include <map>
 #include <vector>
 
+#include <unity/scopes/Variant.h>
+
 #include "course.h"
 
 #include <QDebug>
+
+namespace sc = unity::scopes;
 
 struct Department
 {
@@ -43,7 +47,7 @@ public:
     static vector<Department> departments();
     static multimap<string, string> mapping();
     static bool isMatch(const Course& course, const string& department);
-    static string flatDescription(const string& deps);
+    // static string flatDescription(const sc::VariantArray &deps);
 };
 
 #endif // DEPARTMENTMANAGER_H

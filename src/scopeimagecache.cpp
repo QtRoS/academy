@@ -18,10 +18,11 @@ using namespace std;
 
 Q_LOGGING_CATEGORY(ImgCache, "ScopeImageCache")
 
-ScopeImageCache::ScopeImageCache():
+ScopeImageCache::ScopeImageCache(const string &cacheDir):
     m_thread(&ScopeImageCache::threadProc, this)
 {
     m_curl = curl_easy_init();
+    m_cacheDir = QString::fromStdString(cacheDir);
 }
 
 ScopeImageCache::~ScopeImageCache()
@@ -82,7 +83,7 @@ QString ScopeImageCache::cacheLocation() const
 
     if (cacheLocation.isEmpty())
     {
-        cacheLocation = QStandardPaths::writableLocation(QStandardPaths::CacheLocation) + QStringLiteral("/Previews");
+        cacheLocation = m_cacheDir + QStringLiteral("/Previews");
 
         if (!QDir(cacheLocation).exists() && !QDir().mkdir(cacheLocation))
             qCCritical(ImgCache) << "Can't create directory for previews:" << cacheLocation;

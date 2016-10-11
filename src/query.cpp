@@ -17,7 +17,6 @@
 #include <query.h>
 #include <localization.h>
 #include <scopeimagecache.h>
-#include <thesuffering.h>
 
 #include <unity/scopes/Annotation.h>
 #include <unity/scopes/CategorisedResult.h>
@@ -73,6 +72,15 @@ const static string CURRENT_TEMPLATE =
         }
         )";
 
+template <typename T>
+sc::VariantArray vec_to_va(const vector<T>& vector)
+{
+    sc::VariantArray result;
+    for (auto it = vector.begin(); it != vector.end(); ++it)
+        result.push_back(sc::Variant(*it));
+    return result;
+}
+
 Query::Query(const sc::CannedQuery &query, const sc::SearchMetadata &metadata, Config::Ptr config) :
     sc::SearchQueryBase(query, metadata),
     //client_(config),
@@ -108,7 +116,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
 
         static ScopeImageCache* icache = nullptr;
         if (!icache)
-            icache = new ScopeImageCache();
+            icache = new ScopeImageCache(m_config->cache_dir);
 
         // Get query string and selected department.
         string queryString = query.query_string();
@@ -139,7 +147,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
             auto sourceCategory = reply->register_category(sourceCatName, sourceCatName, "", sc::CategoryRenderer(templ));
 
             //qCDebug(Qry) << "Processing source:" << sourceCatName;
-            int maxCacheSize = 8;
+            int maxCacheSize = queryString.empty() ? 8 : 0;
             int cacheUsage = 0;
 
             for (const auto &course : courseList)
@@ -157,7 +165,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 if (++cacheUsage <= maxCacheSize)
                 {
                     string cachedArt = icache->getCached(course.art);
-                    qCDebug(Qry) << "cachedArt" << cachedArt.c_str();
+                    //qCDebug(Qry) << "cachedArt" << cachedArt.c_str();
                     if (!cachedArt.empty())
                         art = cachedArt;
                 }
@@ -172,7 +180,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 res["extra"] = course.extra;
                 if (!course.video.empty())
                     res["video_url"] = course.video;
-                res["departments"] = utils::join(course.departments, ";");
+                res["departments"] = vec_to_va(course.departments);
 
                 // Add instructors to map.
                 if (course.instructors.size() > 0)
@@ -214,12 +222,13 @@ vector<BaseClient *> Query::enabledSources()
         sources.push_back(&m_udemy);
     if (settings().at("udacity").get_bool())
         sources.push_back(&m_udacity);
+    if (settings().at("edx").get_bool())
+        sources.push_back(&m_edx);
     if (settings().at("iversity").get_bool())
         sources.push_back(&m_iversity);
     if (settings().at("openLearning").get_bool())
         sources.push_back(&m_openLearning);
-    if (settings().at("edx").get_bool())
-        sources.push_back(&m_edx);
+
 
     return sources;
 }

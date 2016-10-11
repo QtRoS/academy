@@ -31,8 +31,7 @@ void Scope::start(string const&)
     config_ = make_shared<Config>();
 
     setlocale(LC_ALL, "");
-    string translation_directory = ScopeBase::scope_directory()
-            + "/../share/locale/";
+    string translation_directory = ScopeBase::scope_directory() + "/../share/locale/";
     bindtextdomain(GETTEXT_PACKAGE, translation_directory.c_str());
 
     config_->cache_dir = cache_directory();

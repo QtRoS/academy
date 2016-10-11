@@ -25,6 +25,8 @@
 
 #include <iostream>
 
+#include "thesuffering.h"
+
 Q_LOGGING_CATEGORY(Prv, "Preview")
 
 namespace sc = unity::scopes;
@@ -90,7 +92,7 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     summary.add_attribute_mapping("text", "description");
 
     sc::PreviewWidget departments("departments_widget", "text");
-    departments.add_attribute_value("text", sc::Variant(_("<b>Departments:</b> ") + decorate_departments(result["departments"].get_string())));
+    departments.add_attribute_value("text", sc::Variant(_("<b>Departments:</b> ") + decorate_departments(result["departments"].get_array())));
 
     sc::PreviewWidget extra("extra_widget", "text");
     extra.add_attribute_value("text", sc::Variant(_("<b>Extra:</b> ") + result["extra"].get_string()));
@@ -145,8 +147,23 @@ void Preview::run(sc::PreviewReplyProxy const& reply) {
     }
 }
 
-string Preview::decorate_departments(const string &deps)
+string Preview::decorate_departments(const sc::VariantArray &deps)
 {
-    return DepartmentManager::flatDescription(deps);
+    // return DepartmentManager::flatDescription(deps);
+    const auto& list = DepartmentManager::departments();
+    const auto& hash = DepartmentManager::mapping();
+
+    vector<string> names;
+    for (const auto& dep : deps)
+    {
+        string v = dep.get_string();
+        auto its = hash.equal_range(v);
+        for (int j = 0; j < list.size(); ++j)
+            for (auto iter = its.first; iter != its.second; ++iter)
+                if (list[j].id == iter->second && std::find(names.begin(), names.end(), list[j].label) == names.end())
+                    names.push_back(list[j].label);
+    }
+
+    return utils::join(names, ", ");
 }
 

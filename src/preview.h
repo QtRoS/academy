@@ -51,7 +51,7 @@ public:
     void run(unity::scopes::PreviewReplyProxy const& reply) override;
 
 private:
-    std::string decorate_departments(const std::string& deps);
+    std::string decorate_departments(const sc::VariantArray& deps);
 };
 
 #endif // PREVIEW_H_

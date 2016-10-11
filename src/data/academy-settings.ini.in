@@ -8,15 +8,15 @@ type = boolean
 defaultValue = true
 displayName = Udemy
 
-[edx]
-type = boolean
-defaultValue = false
-displayName = edX
-
 [udacity]
 type = boolean
 defaultValue = true
 displayName = Udacity
+
+[edx]
+type = boolean
+defaultValue = false
+displayName = edX
 
 [iversity]
 type = boolean

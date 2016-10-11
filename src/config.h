@@ -27,7 +27,7 @@ struct Config {
     std::string user_agent { "academy-scope 0.1; (foo)" };
 
     // Cache dir.
-    std::string cache_dir { "." };
+    std::string cache_dir { "." }; // Will be set in runtime.
 };
 
 #endif // CONFIG_H_

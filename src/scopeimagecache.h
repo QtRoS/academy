@@ -38,7 +38,7 @@ public:
 class ScopeImageCache
 {
 public:
-    ScopeImageCache();
+    ScopeImageCache(const string& cacheDir);
     ~ScopeImageCache();
 
     string getCached(const string& preview, bool downloadOnMiss = true);
@@ -53,6 +53,9 @@ private:
 private:
     CURL* m_curl;
     void downloadFile(const string& strurl , const string& fname) const;
+
+private:
+    QString m_cacheDir;
 
 private:
     QString cacheLocation() const;

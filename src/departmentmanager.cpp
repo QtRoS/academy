@@ -17,6 +17,8 @@
 #include "departmentmanager.h"
 #include <localization.h>
 
+#include <algorithm>
+
 DepartmentManager::DepartmentManager()
 {
 
@@ -172,26 +174,39 @@ bool DepartmentManager::isMatch(const Course &course, const string &department)
     return false;
 }
 
-string DepartmentManager::flatDescription(const string &deps)
-{
-    const auto& list = departments();
-    const auto& hash = mapping();
+//string DepartmentManager::flatDescription(const sc::VariantArray &deps)
+//{
+//    const auto& list = departments();
+//    const auto& hash = mapping();
 
-    // BUG
-    return deps;
-//    QStringList names;
-//    QStringList courseDeps = deps.split(';');
-//    for(int i = 0; i < courseDeps.length(); i++)
+//    vector<string> names;
+//    for (const auto& dep : deps)
 //    {
-//        QString dep = courseDeps[i];
-//        QList<QString> intCat = hash.values(dep);
-
+//        string v = dep.get_string();
+//        auto its = hash.equal_range(v);
 //        for (int j = 0; j < list.size(); ++j)
-//            for (int k = 0; k < intCat.size(); ++k)
-//                if (list[j].id == intCat[k] && !names.contains(list[j].label))
-//                    names << list[j].label;
+//            for (auto iter = its.first; iter != its.second; ++iter)
+//                if (list[j].id == iter->second && std::find(v.begin(), v.end(), list[j].label) == v.end())
+//                    names.push_back(list[j].label);
 //    }
 
-    //return names.join(", ");
-}
+//    return "";
+
+
+
+////    QStringList names;
+////    QStringList courseDeps = deps.split(';');
+////    for(int i = 0; i < courseDeps.length(); i++)
+////    {
+////        QString dep = courseDeps[i];
+////        QList<QString> intCat = hash.values(dep);
+
+////        for (int j = 0; j < list.size(); ++j)
+////            for (int k = 0; k < intCat.size(); ++k)
+////                if (list[j].id == intCat[k] && !names.contains(list[j].label))
+////                    names << list[j].label;
+////    }
+
+//    //return names.join(", ");
+//}
 

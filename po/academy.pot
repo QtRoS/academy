@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-10 20:43+0000\n"
+"POT-Creation-Date: 2016-10-11 19:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,27 +21,27 @@ msgstr ""
 msgid "price - "
 msgstr ""
 
-#: ../src/preview.cpp:87
+#: ../src/preview.cpp:89
 msgid "Details"
 msgstr ""
 
-#: ../src/preview.cpp:93
+#: ../src/preview.cpp:95
 msgid "<b>Departments:</b> "
 msgstr ""
 
-#: ../src/preview.cpp:96
+#: ../src/preview.cpp:98
 msgid "<b>Extra:</b> "
 msgstr ""
 
-#: ../src/preview.cpp:99
+#: ../src/preview.cpp:101
 msgid "<b>Source:</b> "
 msgstr ""
 
-#: ../src/preview.cpp:111
+#: ../src/preview.cpp:113
 msgid "Open"
 msgstr ""
 
-#: ../src/preview.cpp:128
+#: ../src/preview.cpp:130
 msgid "<b>Instructors:</b>"
 msgstr ""
 
@@ -54,44 +54,44 @@ msgstr ""
 msgid "duration - "
 msgstr ""
 
-#: ../src/departmentmanager.cpp:31
+#: ../src/departmentmanager.cpp:33
 msgid "Art and Design"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:32
+#: ../src/departmentmanager.cpp:34
 msgid "Business"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:33
+#: ../src/departmentmanager.cpp:35
 msgid "Music"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:34
+#: ../src/departmentmanager.cpp:36
 msgid "Languages"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:35
+#: ../src/departmentmanager.cpp:37
 msgid "IT and Tech"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:36
+#: ../src/departmentmanager.cpp:38
 msgid "Science"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:37
+#: ../src/departmentmanager.cpp:39
 msgid "Humanities"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:38
+#: ../src/departmentmanager.cpp:40
 msgid "Personal"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:39
+#: ../src/departmentmanager.cpp:41
 msgid "Other"
 msgstr ""
 
 #. Create and register departments.
-#: ../src/query.cpp:124
+#: ../src/query.cpp:132
 msgid "All"
 msgstr ""
 

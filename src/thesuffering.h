@@ -25,11 +25,21 @@
 
 namespace utils
 {
-    std::string join(const std::vector<std::string>& vec, const char* delim)
+    std::string join( std::vector<string>& elements, std::string delimiter )
     {
-        std::stringstream res;
-        copy(vec.begin(), vec.end(), std::ostream_iterator<std::string>(res, delim));
-        return res.str();
+        std::stringstream ss;
+        size_t length = elements.size();
+        size_t last = length - 1;
+
+        for( size_t i = 0; i < length; ++i )
+        {
+            ss << elements[i];
+
+            if( i != last )
+                ss << delimiter;
+        }
+
+        return ss.str();
     }
 
 //    void split(const std::string &s, char delim, std::vector<std::string> &elems) {
