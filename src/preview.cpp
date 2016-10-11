@@ -158,7 +158,7 @@ string Preview::decorate_departments(const sc::VariantArray &deps)
     {
         string v = dep.get_string();
         auto its = hash.equal_range(v);
-        for (int j = 0; j < list.size(); ++j)
+        for (size_t j = 0; j < list.size(); ++j)
             for (auto iter = its.first; iter != its.second; ++iter)
                 if (list[j].id == iter->second && std::find(names.begin(), names.end(), list[j].label) == names.end())
                     names.push_back(list[j].label);

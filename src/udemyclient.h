@@ -20,10 +20,7 @@
 #include <core/net/http/request.h>
 #include <core/net/uri.h>
 
-#include <QString>
-
 #include "config.h"
-#include "baseclient.h"
 #include "searchengine.h"
 #include "cachedclient.h"
 
@@ -39,7 +36,7 @@ public:
     virtual vector<Course> courses(const string& query) override;
     virtual const string baseApiUrl() const override;
     virtual const string name() const override;
-    virtual const QMap<QByteArray, QByteArray> customHeaders() const override;
+    virtual const header_list customHeaders() const override;
 };
 
 #endif // UDEMYCLIENT_H_

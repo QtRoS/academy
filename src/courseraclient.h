@@ -20,8 +20,6 @@
 #include <core/net/http/request.h>
 #include <core/net/uri.h>
 
-#include <QString>
-
 #include "config.h"
 #include "baseclient.h"
 #include "cachedclient.h"

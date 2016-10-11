@@ -41,9 +41,9 @@ vector<Course> OpenLearningClient::courses(const string &query)
 
     SearchEngine se(query);
 
-    QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
+    QByteArray data;
 
     qCDebug(OpenLearning) << "Download started...";
     get( path, params, data);

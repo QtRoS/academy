@@ -16,13 +16,8 @@
 
 #include <courseraclient.h>
 #include <localization.h>
-
-#include <core/net/error.h>
-#include <core/net/http/client.h>
-#include <core/net/http/content_type.h>
-#include <core/net/http/response.h>
-#include <QVariantMap>
 #include <json/json.h>
+
 namespace json = Json;
 
 Q_LOGGING_CATEGORY(Coursera, "Coursera")
@@ -40,9 +35,10 @@ vector<Course> CourseraClient::courses(const string &query)
 {
     vector<Course> list;
 
-    QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
+    QByteArray data;
+
     params.push_back({"includes", "instructorIds"});
     params.push_back({"limit", "80"});
     params.push_back({"fields", "instructors.v1(firstName,lastName,suffix,photo,photo150,bio),description,photoUrl,slug,workload,instructorIds,domainTypes" });

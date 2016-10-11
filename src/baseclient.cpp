@@ -38,9 +38,9 @@ BaseClient::BaseClient(Config::Ptr config) :
 
 }
 
-const QMap<QByteArray, QByteArray> BaseClient::customHeaders() const
+const BaseClient::header_list BaseClient::customHeaders() const
 {
-    return QMap<QByteArray, QByteArray>();
+    return header_list();
 }
 
 void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters &parameters, QByteArray &result)
@@ -58,9 +58,9 @@ void BaseClient::get(const net::Uri::Path &path, const net::Uri::QueryParameters
     // Give out a user agent string
     configuration.header.add("User-Agent", m_config->user_agent);
 
-    QMap<QByteArray, QByteArray> headers = customHeaders();
-    for(auto key : headers.keys())
-        configuration.header.add(key.toStdString(), headers.value(key).toStdString());
+    BaseClient::header_list headers = customHeaders();
+    for(auto header : headers)
+        configuration.header.add(header.first, header.second);
 
     // Build a HTTP request object from our configuration
     auto request = client->head(configuration);

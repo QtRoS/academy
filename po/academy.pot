@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-11 19:57+0000\n"
+"POT-Creation-Date: 2016-10-11 20:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "<b>Instructors:</b>"
 msgstr ""
 
-#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:94
+#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:90
 msgid "workload - "
 msgstr ""
 
@@ -54,39 +54,39 @@ msgstr ""
 msgid "duration - "
 msgstr ""
 
-#: ../src/departmentmanager.cpp:33
+#: ../src/departmentmanager.cpp:31
 msgid "Art and Design"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:34
+#: ../src/departmentmanager.cpp:32
 msgid "Business"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:35
+#: ../src/departmentmanager.cpp:33
 msgid "Music"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:36
+#: ../src/departmentmanager.cpp:34
 msgid "Languages"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:37
+#: ../src/departmentmanager.cpp:35
 msgid "IT and Tech"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:38
+#: ../src/departmentmanager.cpp:36
 msgid "Science"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:39
+#: ../src/departmentmanager.cpp:37
 msgid "Humanities"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:40
+#: ../src/departmentmanager.cpp:38
 msgid "Personal"
 msgstr ""
 
-#: ../src/departmentmanager.cpp:41
+#: ../src/departmentmanager.cpp:39
 msgid "Other"
 msgstr ""
 

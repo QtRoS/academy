@@ -57,7 +57,6 @@ private:
     vector<BaseClient*> enabledSources();
 
 private:
-    //Client client_;
     Config::Ptr m_config;
     CourseraClient m_coursera;
     UdemyClient m_udemy;

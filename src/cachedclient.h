@@ -20,9 +20,6 @@
 #include "baseclient.h"
 #include "localcache.h"
 
-
-#include <QString>
-
 /**
  * @brief The CachedClient class introduces caching capabilities.
  */

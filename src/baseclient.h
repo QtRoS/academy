@@ -25,11 +25,8 @@
 #include <core/net/http/request.h>
 #include <core/net/uri.h>
 
-#include <QJsonDocument>
 #include <QString>
-#include <QList>
 #include <QDebug>
-#include <QMap>
 #include <QByteArray>
 
 #include <QLoggingCategory>
@@ -48,6 +45,8 @@ public:
     BaseClient(Config::Ptr config);
 
     virtual ~BaseClient() = default;
+
+    typedef vector<pair<string, string>> header_list;
 
     /**
      * @brief main method of a client class, it is used when Query is trying to retrieve results
@@ -72,7 +71,7 @@ public:
      * @brief Some APIs require custom headers in HTTP request (for example for authorization)
      * @return map of headers
      */
-    virtual const QMap<QByteArray, QByteArray> customHeaders() const;
+    virtual const header_list customHeaders() const;
 
     /**
      * Cancel any pending queries (this method can be called from a different thread)

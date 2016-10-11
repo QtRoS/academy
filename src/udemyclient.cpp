@@ -40,9 +40,9 @@ vector<Course> UdemyClient::courses(const string &query)
 {
     vector<Course> list;
 
-    QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
+    QByteArray data;
 
     params.push_back({"fields[course]", "@default,description,headline,slug,primary_category"});
     params.push_back({"page_size", "80"});
@@ -113,9 +113,9 @@ const string UdemyClient::name() const
     return ("Udemy");
 }
 
-const QMap<QByteArray, QByteArray> UdemyClient::customHeaders() const
+const BaseClient::header_list UdemyClient::customHeaders() const
 {
-    QMap<QByteArray, QByteArray> res;
-    res.insert("Authorization", "Basic MlloUmZ1TXpUSjJLMjJmZWZoSldTeVoyanVtOWx0dkdoWFhFUWZQaTpiNGRIUXhmUDdsODVWa3RHQlM4dUFpdU5ZclpyOEZWY3E3cFpTaWRXbVNMSTBuNm5mWGFyRUxSQ2xqdEtDbjZPcTR3ZkZwWjlqM0RsdU13aUhDN0UxVW1zS1YyQzRtSUlvR2ZEYXpNYVhtbDZjRGtHcjJmOHVqVzVkQ2J5VThaaw==");
+    header_list res;
+    res.push_back({"Authorization", "Basic MlloUmZ1TXpUSjJLMjJmZWZoSldTeVoyanVtOWx0dkdoWFhFUWZQaTpiNGRIUXhmUDdsODVWa3RHQlM4dUFpdU5ZclpyOEZWY3E3cFpTaWRXbVNMSTBuNm5mWGFyRUxSQ2xqdEtDbjZPcTR3ZkZwWjlqM0RsdU13aUhDN0UxVW1zS1YyQzRtSUlvR2ZEYXpNYVhtbDZjRGtHcjJmOHVqVzVkQ2J5VThaaw=="});
     return res;
 }

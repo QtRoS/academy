@@ -39,9 +39,9 @@ vector<Course> EdxClient::courses(const string &query)
 {
     vector<Course> list;
 
-    QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
+    QByteArray data;
 
     qCDebug(Edx) << "Download started...";
     get(path, params, data);

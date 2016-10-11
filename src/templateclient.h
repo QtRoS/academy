@@ -45,7 +45,7 @@ public:
     virtual vector<Course> courses(const string& query) override;
     virtual const string baseApiUrl() const override;
     virtual const string name() const override;
-    virtual const QMap<QByteArray, QByteArray> customHeaders() const override;
+    virtual const BaseClient::header_list customHeaders() const override;
 
 private:
     QString grabExtra(const QVariantMap& map);

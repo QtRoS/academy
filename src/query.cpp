@@ -83,7 +83,6 @@ sc::VariantArray vec_to_va(const vector<T>& vector)
 
 Query::Query(const sc::CannedQuery &query, const sc::SearchMetadata &metadata, Config::Ptr config) :
     sc::SearchQueryBase(query, metadata),
-    //client_(config),
     m_config(config),
     m_coursera(config),
     m_udemy(config),
@@ -98,7 +97,6 @@ Query::Query(const sc::CannedQuery &query, const sc::SearchMetadata &metadata, C
 void Query::cancelled()
 {
     qCDebug(Qry) << "Cancelled";
-    //client_.cancel();
     m_coursera.cancel();
     m_udemy.cancel();
     m_edx.cancel();
@@ -132,13 +130,13 @@ void Query::run(sc::SearchReplyProxy const& reply)
         sc::Department::SPtr allDepts = sc::Department::create("", query, _("All"));
         sc::DepartmentList depList;
         vector<Department> list = DepartmentManager::departments();
-        for (int i = 0; i < list.size(); i++)
+        for (size_t i = 0; i < list.size(); i++)
             depList.push_back(sc::Department::create(list[i].id, query, list[i].label));
         allDepts->set_subdepartments(depList);
         reply->register_departments(allDepts);
 
         set<string> uniqueSet;
-        for(int i = 0; i < sources.size(); ++i)
+        for(size_t i = 0; i < sources.size(); ++i)
         {
             string sourceCatName = sources[i]->name();
             auto courseList = sources[i]->courses(queryString);

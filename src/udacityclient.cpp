@@ -42,9 +42,9 @@ vector<Course> UdacityClient::courses(const string &query)
 
     SearchEngine se(query);
 
-    QByteArray data;
     net::Uri::Path path;
     net::Uri::QueryParameters params;
+    QByteArray data;
 
     qCDebug(Udacity) << "Download started...";
     get( path, params, data);

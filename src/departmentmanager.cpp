@@ -20,9 +20,7 @@
 #include <algorithm>
 
 DepartmentManager::DepartmentManager()
-{
-
-}
+{ }
 
 vector<Department> DepartmentManager::departments()
 {
@@ -51,7 +49,7 @@ multimap<string, string> DepartmentManager::mapping()
     if (!hash.size())
     {
         // Coursera.
-        hash.insert(std::pair<string,string>("arts-and-humanities", "art")); // TODO Recheck
+        hash.insert(std::pair<string,string>("arts-and-humanities", "art"));
         hash.insert(std::pair<string,string>("arts-and-humanities", "humanities"));
         hash.insert(std::pair<string,string>("business", "business"));
         hash.insert(std::pair<string,string>("computer-science", "it"));
@@ -161,7 +159,7 @@ bool DepartmentManager::isMatch(const Course &course, const string &department)
 {
     const auto& hash = mapping();
 
-    for(auto i = 0; i < course.departments.size(); ++i)
+    for(uint i = 0; i < course.departments.size(); ++i)
     {
         auto its = hash.equal_range(course.departments[i]);
         for (auto iter = its.first; iter != its.second; ++iter)
@@ -173,40 +171,3 @@ bool DepartmentManager::isMatch(const Course &course, const string &department)
 
     return false;
 }
-
-//string DepartmentManager::flatDescription(const sc::VariantArray &deps)
-//{
-//    const auto& list = departments();
-//    const auto& hash = mapping();
-
-//    vector<string> names;
-//    for (const auto& dep : deps)
-//    {
-//        string v = dep.get_string();
-//        auto its = hash.equal_range(v);
-//        for (int j = 0; j < list.size(); ++j)
-//            for (auto iter = its.first; iter != its.second; ++iter)
-//                if (list[j].id == iter->second && std::find(v.begin(), v.end(), list[j].label) == v.end())
-//                    names.push_back(list[j].label);
-//    }
-
-//    return "";
-
-
-
-////    QStringList names;
-////    QStringList courseDeps = deps.split(';');
-////    for(int i = 0; i < courseDeps.length(); i++)
-////    {
-////        QString dep = courseDeps[i];
-////        QList<QString> intCat = hash.values(dep);
-
-////        for (int j = 0; j < list.size(); ++j)
-////            for (int k = 0; k < intCat.size(); ++k)
-////                if (list[j].id == intCat[k] && !names.contains(list[j].label))
-////                    names << list[j].label;
-////    }
-
-//    //return names.join(", ");
-//}
-
