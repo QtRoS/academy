@@ -40,9 +40,6 @@ public:
     virtual const string baseApiUrl() const override;
     virtual const string name() const override;
     virtual const QMap<QByteArray, QByteArray> customHeaders() const override;
-
-private:
-    QString grabExtra(const QVariantMap& map);
 };
 
 #endif // UDEMYCLIENT_H_

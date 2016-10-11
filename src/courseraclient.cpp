@@ -91,7 +91,7 @@ vector<Course> CourseraClient::courses(const string &query)
         course.headline = course.description.substr(0, 120) + ("...");
         course.art = map["photoUrl"].asString();
         course.link = ("http://www.coursera.org/learn/") + map["slug"].asString();
-        //course.extra = grabExtra(map); // TODO
+        course.extra = _("workload - ") + map["workload"].asString();
 
         json::Value instructorsIds = map["instructorIds"];
         for (json::ArrayIndex jj = 0; jj < instructorsIds.size(); ++jj)
@@ -125,9 +125,3 @@ const string CourseraClient::name() const
 {
     return ("Coursera");
 }
-
-QString CourseraClient::grabExtra(const QVariantMap &map)
-{
-    return _("workload - ") + map["workload"].toString();
-}
-

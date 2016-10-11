@@ -67,7 +67,7 @@ vector<Course> OpenLearningClient::courses(const string &query)
         course.headline = course.description.length() > 120 ? course.description.substr(120) + ("...") : course.description;
         course.art = map["image"].asString();
         course.link = map["courseUrl"].asString();
-        //course.extra = grabExtra(map);
+        course.extra = _("duration - ") + map["duration"].asString();
         course.video = grabVideo(map["promoMediaUrl"].asString());
 
         {
@@ -98,11 +98,6 @@ const string OpenLearningClient::baseApiUrl() const
 const string OpenLearningClient::name() const
 {
     return ("OpenLearning");
-}
-
-QString OpenLearningClient::grabExtra(const QVariantMap &map)
-{
-    return _("duration - ") + map["duration"].toString();
 }
 
 string OpenLearningClient::grabVideo(const string &promo)

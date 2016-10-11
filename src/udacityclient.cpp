@@ -71,7 +71,8 @@ vector<Course> UdacityClient::courses(const string &query)
         course.art = map["image"].asString();
         course.link = map["homepage"].asString();
         course.video = map["teaser_video"]["youtube_url"].asString();
-        //course.extra = grabExtra(map);
+        course.extra =  _("level - ") + map["level"].asString() +
+                        _("duration - ") + map["expected_duration"].asString() + " " + map["expected_duration_unit"].asString();
         //qCDebug(Udacity) << "VIDEO URL" << course.video;
 
         json::Value instructors = map["instructors"];
@@ -109,12 +110,4 @@ const string UdacityClient::baseApiUrl() const
 const string UdacityClient::name() const
 {
     return ("Udacity");
-}
-
-QString UdacityClient::grabExtra(const QVariantMap &map)
-{
-    QStringList extra;
-    extra << _("level - ") + map["level"].toString();
-    extra << _("duration - ") + map["expected_duration"].toString() + " " + map["expected_duration_unit"].toString();
-    return extra.join(", ");
 }

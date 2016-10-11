@@ -37,9 +37,6 @@ public:
     virtual vector<Course> courses(const string& query) override;
     virtual const string baseApiUrl() const override;
     virtual const string name() const override;
-
-private:
-    QString grabExtra(const QVariantMap& map);
 };
 
 #endif // COURSERACLIENT_H_

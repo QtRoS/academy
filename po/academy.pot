@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-11 19:49+0000\n"
+"POT-Creation-Date: 2016-10-11 19:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../src/udemyclient.cpp:125 ../src/templateclient.cpp:119
+#: ../src/udemyclient.cpp:80 ../src/templateclient.cpp:119
 msgid "price - "
 msgstr ""
 
@@ -45,12 +45,12 @@ msgstr ""
 msgid "<b>Instructors:</b>"
 msgstr ""
 
-#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:131
+#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:94
 msgid "workload - "
 msgstr ""
 
-#: ../src/edxclient.cpp:171 ../src/openlearningclient.cpp:105
-#: ../src/udacityclient.cpp:118
+#: ../src/edxclient.cpp:171 ../src/openlearningclient.cpp:70
+#: ../src/udacityclient.cpp:75
 msgid "duration - "
 msgstr ""
 
@@ -95,6 +95,6 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: ../src/iversityclient.cpp:111 ../src/udacityclient.cpp:117
+#: ../src/iversityclient.cpp:73 ../src/udacityclient.cpp:74
 msgid "level - "
 msgstr ""

@@ -97,7 +97,7 @@ vector<Course> EdxClient::courses(const string &query)
         if (!video.isNull())
             course.video = video.text().toStdString();
 
-        //course.extra = grabExtra(courseElem);
+        course.extra = grabExtra(courseElem).toStdString();
 
         // Instructors.
         QDomNodeList instrList = courseElem.elementsByTagName("course:staff");

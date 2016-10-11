@@ -70,7 +70,7 @@ vector<Course> IversityClient::courses(const string &query)
         course.headline = map["subtitle"].asString();
         course.art = map["cover"].asString();
         course.link = map["url"].asString();
-        //course.extra = grabExtra(map);
+        course.extra = _("level - ") + map["knowledge_level"].asString();
         course.video = map["trailer_video"].asString();
 
         json::Value instructors = map["instructors"];
@@ -104,12 +104,4 @@ const string IversityClient::baseApiUrl() const
 const string IversityClient::name() const
 {
     return ("iversity");
-}
-
-QString IversityClient::grabExtra(const QVariantMap &map)
-{
-    return _("level - ") + map["knowledge_level"].toString();
-    //    QStringList extra;
-    //    extra << QStringLiteral("price - ") + map["price"].toString();
-    //    return extra.join(", ");
 }

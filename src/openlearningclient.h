@@ -42,7 +42,6 @@ public:
     virtual const string name() const override;
 
 private:
-    QString grabExtra(const QVariantMap& map);
     string grabVideo(const string& promo);
 };
 
