@@ -55,13 +55,14 @@ vector<Course> CourseraClient::courses(const string &query)
 
     json::Value root;
     json::Reader reader;
-    reader.parse(data.data(), root); // TODO
+    reader.parse(data.data(), root);
 
     QMap<string, Instructor> instructorsMap;
 
     json::Value instrs = root["linked"]["instructors.v1"];
+    qCDebug(Coursera) << "Instrs count:" << instrs.size();
 
-    for (json::ArrayIndex index = 0; index < list.size(); ++index)
+    for (json::ArrayIndex index = 0; index < instrs.size(); ++index)
     {
         json::Value imap = instrs.get(index, json::Value());
 

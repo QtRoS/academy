@@ -52,11 +52,10 @@ vector<Course> UdacityClient::courses(const string &query)
 
     json::Value root;
     json::Reader reader;
-    reader.parse(data.data(), root); // TODO
+    reader.parse(data.data(), root);
 
     json::Value courses = root["courses"];
     qCDebug(Udacity) << "Element count:" << courses.size();
-
 
     for (json::ArrayIndex index = 0; index < courses.size(); ++index)
     {
@@ -88,7 +87,7 @@ vector<Course> UdacityClient::courses(const string &query)
         }
 
         json::Value tracks = map["tracks"];
-        for (json::ArrayIndex kk = 0; kk < instructors.size(); ++kk)
+        for (json::ArrayIndex kk = 0; kk < tracks.size(); ++kk)
         {
             json::Value kmap = tracks.get(kk, json::Value());
             course.departments.push_back(kmap.asString());
