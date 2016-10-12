@@ -65,6 +65,7 @@ qt5_use_modules(
   scope
   Core
   Xml
+  Gui
 )
 
 # Set the correct library output name to conform to the securiry policy 

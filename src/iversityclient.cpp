@@ -52,11 +52,10 @@ vector<Course> IversityClient::courses(const string &query)
 
     json::Value root;
     json::Reader reader;
-    reader.parse(data.data(), root); // TODO
+    reader.parse(data.data(), root);
 
     json::Value courses = root["courses"];
     qCDebug(Iversity) << "Element count:" << courses.size();
-
 
     for (json::ArrayIndex index = 0; index < courses.size(); ++index)
     {

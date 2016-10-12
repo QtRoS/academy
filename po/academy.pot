@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-11 20:49+0000\n"
+"POT-Creation-Date: 2016-10-12 19:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgstr ""
 msgid "<b>Instructors:</b>"
 msgstr ""
 
-#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:90
+#: ../src/edxclient.cpp:167 ../src/courseraclient.cpp:91
 msgid "workload - "
 msgstr ""
 
@@ -91,7 +91,7 @@ msgid "Other"
 msgstr ""
 
 #. Create and register departments.
-#: ../src/query.cpp:132
+#: ../src/query.cpp:130
 msgid "All"
 msgstr ""
 

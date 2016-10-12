@@ -53,6 +53,7 @@ private:
 private:
     CURL* m_curl;
     void downloadFile(const string& strurl , const string& fname) const;
+    void downscaleImage(const QString &fname) const;
 
 private:
     QString m_cacheDir;

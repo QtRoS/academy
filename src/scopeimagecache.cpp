@@ -1,4 +1,5 @@
 ﻿#include <QStandardPaths>
+#include <QtGui/QImage>
 #include "scopeimagecache.h"
 
 #include <chrono>
@@ -116,6 +117,7 @@ void ScopeImageCache::threadProc()
         QueueItem item = m_queue.dequeue();
         lock.unlock();
         downloadFile(item.url.toStdString(), item.localPath.toStdString());
+        downscaleImage(item.localPath);
     }
 }
 
@@ -130,4 +132,12 @@ void ScopeImageCache::downloadFile(const string &strurl, const string &fname) co
         /*CURLcode res = */ curl_easy_perform(m_curl);
         fclose(fp);
     }
+}
+
+void ScopeImageCache::downscaleImage(const QString &fname) const
+{
+    QString fileName = fname; // QString::fromStdString(fname);
+    QImage source(fileName);
+    QImage scaled = source.width() > 500 ? source.scaledToWidth(500) : source; // TODO
+    scaled.save(fileName, "PNG");
 }

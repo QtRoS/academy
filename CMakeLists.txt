@@ -25,6 +25,7 @@ include(GNUInstallDirs)
 find_package(PkgConfig)
 find_package(Intltool)
 find_package(Qt5Core REQUIRED)
+find_package(Qt5Gui REQUIRED)
 find_package(Qt5Xml REQUIRED)
 
 
@@ -41,6 +42,7 @@ include_directories(
   "${CMAKE_SOURCE_DIR}/src"
   ${SCOPE_INCLUDE_DIRS}
   ${Qt5Core_INCLUDE_DIRS}
+  ${Qt5Gui_INCLUDE_DIRS}
 )
 
 

@@ -60,7 +60,7 @@ vector<Course> UdemyClient::courses(const string &query)
 
     json::Value root;
     json::Reader reader;
-    reader.parse(data.data(), root); // TODO
+    reader.parse(data.data(), root);
 
     json::Value courses = root["results"];
     qCDebug(Udemy) << "Element count:" << courses.size();

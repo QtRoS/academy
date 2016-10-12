@@ -145,7 +145,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
             auto sourceCategory = reply->register_category(sourceCatName, sourceCatName, "", sc::CategoryRenderer(templ));
 
             //qCDebug(Qry) << "Processing source:" << sourceCatName;
-            int maxCacheSize = queryString.empty() ? 8 : 0;
+            int maxCacheSize = queryString.empty() ? 4 : 0;
             int cacheUsage = 0;
 
             for (const auto &course : courseList)
@@ -160,7 +160,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
                 uniqueSet.insert(course.link);
 
                 string art = course.art;
-                if (++cacheUsage <= maxCacheSize)
+                //if (++cacheUsage <= maxCacheSize) // TODO BUG
                 {
                     string cachedArt = icache->getCached(course.art);
                     //qCDebug(Qry) << "cachedArt" << cachedArt.c_str();
