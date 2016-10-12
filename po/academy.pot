@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-12 19:13+0000\n"
+"POT-Creation-Date: 2016-10-12 20:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -50,7 +50,7 @@ msgid "workload - "
 msgstr ""
 
 #: ../src/edxclient.cpp:171 ../src/openlearningclient.cpp:70
-#: ../src/udacityclient.cpp:75
+#: ../src/udacityclient.cpp:74
 msgid "duration - "
 msgstr ""
 
@@ -95,6 +95,6 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: ../src/iversityclient.cpp:73 ../src/udacityclient.cpp:74
+#: ../src/iversityclient.cpp:72 ../src/udacityclient.cpp:73
 msgid "level - "
 msgstr ""
