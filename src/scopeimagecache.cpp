@@ -20,7 +20,8 @@ using namespace std;
 Q_LOGGING_CATEGORY(ImgCache, "ScopeImageCache")
 
 ScopeImageCache::ScopeImageCache(const string &cacheDir):
-    m_thread(&ScopeImageCache::threadProc, this)
+    m_thread(&ScopeImageCache::threadProc, this),
+    m_isTerminated(false)
 {
     m_curl = curl_easy_init();
     m_cacheDir = QString::fromStdString(cacheDir);
@@ -40,7 +41,7 @@ string ScopeImageCache::getCached(const string &previewUrl, bool downloadOnMiss)
 {
     lock_guard<mutex> lock(m_mutex);
 
-    // --------------- First (and fastest) way - hash ---------------- //
+    // --------------- First (and the fastest) way - hash   ---------------- //
     QString preview = QString::fromStdString(previewUrl);
 
     if (preview.isEmpty())

@@ -135,6 +135,9 @@ void Query::run(sc::SearchReplyProxy const& reply)
         allDepts->set_subdepartments(depList);
         reply->register_departments(allDepts);
 
+        const int maxCacheUsagePerSouce = settings().at("imageCaching").get_bool() && queryString.empty() ? 8 : 0;
+        //qCDebug(Qry) << "maxCacheUsagePerSouce:" << maxCacheUsagePerSouce;
+
         set<string> uniqueSet;
         for(size_t i = 0; i < sources.size(); ++i)
         {
@@ -145,7 +148,6 @@ void Query::run(sc::SearchReplyProxy const& reply)
             auto sourceCategory = reply->register_category(sourceCatName, sourceCatName, "", sc::CategoryRenderer(templ));
 
             //qCDebug(Qry) << "Processing source:" << sourceCatName;
-            int maxCacheUsagePerSouce = queryString.empty() ? 8 : 0;
             int cacheMisses = 0;
 
             for (const auto &course : courseList)
@@ -161,7 +163,7 @@ void Query::run(sc::SearchReplyProxy const& reply)
 
                 string art = course.art;
                 string cachedArt = icache->getCached(course.art, cacheMisses < maxCacheUsagePerSouce);
-                if (cachedArt.empty())
+                if (!art.empty() && cachedArt.empty())
                     cacheMisses++;
                 else art = cachedArt;
 

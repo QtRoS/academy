@@ -43,3 +43,9 @@ displayValues[sl] = Spodaj;Čez
 displayValues[de] = Unten;Überdeckend
 displayValues[fr] = En bas;Superposé
 displayValues[ua] = Знизу;Поверх
+
+[imageCaching]
+type = boolean
+defaultValue = true
+displayName = Image caching
+displayName[ru] = Кэширование изображений
