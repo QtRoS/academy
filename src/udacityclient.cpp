@@ -70,7 +70,7 @@ vector<Course> UdacityClient::courses(const string &query)
         course.art = map["image"].asString();
         course.link = map["homepage"].asString();
         course.video = map["teaser_video"]["youtube_url"].asString();
-        course.extra =  _("level - ") + map["level"].asString() +
+        course.extra =  _("level - ") + map["level"].asString() + ", " +
                         _("duration - ") + map["expected_duration"].asString() + " " + map["expected_duration_unit"].asString();
         //qCDebug(Udacity) << "VIDEO URL" << course.video;
 
